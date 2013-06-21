@@ -60,7 +60,7 @@ class bootstrap
             'massage-calendar',
             new Zend_Controller_Router_Route('calendar/*',
                 array(
-                    'controller' => 'massagecalendar',
+                    'controller' => 'staffcalendar',
                     'action'=>'index'
                 ))
         );

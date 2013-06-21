@@ -1,5 +1,5 @@
 <?php
-class MassagecalendarController extends CalendarchooseController
+class StaffcalendarController extends CalendarchooseController
 {
     function indexAction()
     {
@@ -41,13 +41,10 @@ class MassagecalendarController extends CalendarchooseController
 
     function therapistsForCondo()
     {
-        $condition = 'therapist_condos.therapist_userid = user.id';
-
         $db = Zend_Registry::get('db');
         $therapistsResult = $db->select()
             ->from('user')
             ->where('type=?', 'massage-therapist')
-            ->joinRight('therapist_condos', $condition, array())
             ->query()->fetchAll();
 
         $therapists = array();

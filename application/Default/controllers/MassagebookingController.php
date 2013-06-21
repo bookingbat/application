@@ -4,21 +4,6 @@ class MassagebookingController extends Controller
     function preDispatch()
     {
         $user = bootstrap::getInstance()->getUser();
-        if (!$userid = $user['id']) {
-            return $this->_redirect('/');
-        }
-
-        $user = $this->userObjectForBillingCalculations();
-
-        $massageUsed = $this->massageAppointmentsTotalDuration($userid);
-
-        if ($user->isAtMaximum(array('massage' => $massageUsed))) {
-            $this->_forward('massage', 'payment', null, array());
-        }
-
-        if ($this->_getParam('appointment_duration') && ($user->massageAllowed() < $massageUsed + $this->_getParam('appointment_duration'))) {
-            $this->_redirect('/payment/massage');
-        }
     }
 
     function bookingAction()
@@ -46,14 +31,8 @@ class MassagebookingController extends Controller
 
     function booking2Action()
     {
-        $user = bootstrap::getInstance()->getUser();
-        if (!$user['id']) {
-            return $this->_redirect('/');
-        }
-
         $form = new MassageBookingForm2;
         $form->getElement('appointment_duration')->setValue($this->_getParam('appointment_duration'));
-        //$form->getElement('therapist')->setValue($this->_getParam('therapist'));
 
         $availability = $this->selectMassageAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
 
@@ -77,11 +56,6 @@ class MassagebookingController extends Controller
 
     function booking3Action()
     {
-        $user = bootstrap::getInstance()->getUser();
-        if (!$user['id']) {
-            return $this->_redirect('/');
-        }
-
         $form = new MassageBookingForm3;
         $availabilityArray = $this->selectMassageAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
         $availabilityModel = $this->removeMassageBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('therapist'));
@@ -122,7 +96,7 @@ class MassagebookingController extends Controller
             $db = Zend_Registry::get('db');
             $db->insert('therapist_appointments', array(
                 'therapist_userid' => $this->_getParam('therapist'),
-                'user_id' => $user['id'],
+                'user_id' =>0,
                 'date' => $this->_getParam('day'),
                 'time' => $form->getValue('time'),
                 'duration' => $form->getValue('appointment_duration'),
@@ -135,14 +109,14 @@ class MassagebookingController extends Controller
             $this->view->time = $form->getValue('time');
             $this->view->duration = $form->getValue('appointment_duration');
             $html = $this->view->render('massage/appointment-confirmation.phtml');
-
+/*
             $mail = new Zend_Mail;
             $mail->addTo($user['email']);
             $mail->addTo($therapistData['email']);
             $mail->setBodyText($html);
             $this->queueMail($mail);
             echo $html;
-
+*/
             $this->_helper->viewRenderer->setNoRender(true);
             return;
         }
