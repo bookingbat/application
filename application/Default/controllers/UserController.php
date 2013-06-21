@@ -82,12 +82,6 @@ class UserController extends Controller
             $form->populate($userBeingEdited);
             $form->populate(array('condo_id' => $this->condoIdsForTherapist($userBeingEdited)));
         } else {
-            // clients reside at a  single condo
-            $form->addElement('select', 'condo_id', array(
-                'label' => 'Assigned Condo',
-                'multiOptions' => array(0 => '') + $this->listCondos()
-            ));
-
             $form->populate($userBeingEdited);
         }
 
@@ -102,8 +96,6 @@ class UserController extends Controller
                 'email' => $form->getValue('email'),
                 'type' => $form->getValue('type'),
                 'phone' => $form->getValue('phone'),
-                'assigned_trainer_userid' => $userBeingEdited['type'] == 'massage-therapist' ? 0 : $form->getValue('assigned_trainer_userid'),
-                'condo_id' => $form->getValue('condo_id')
             ), 'id=' . (int)$this->_getParam('id'));
 
             if ($userBeingEdited['type'] == 'massage-therapist') {
@@ -174,24 +166,9 @@ class UserController extends Controller
     {
         $db = Zend_Registry::get('db');
         $select = $db->select()
-            ->from('user')
-            ->joinLeft('user as trainer', 'trainer.id = user.assigned_trainer_userid', array('trainer.username as trainer'))
-            ->joinLeft('condo', 'condo.id = user.condo_id', array('condo.name as condo'));
+            ->from('user');
 
         return $select;
-    }
-
-    function listCondos()
-    {
-        $db = Zend_Registry::get('db');
-        $select = $db->select(array('id', 'name'))
-            ->from('condo')
-            ->where('active=1');
-        $condos = array();
-        foreach ($select->query()->fetchAll() as $condo) {
-            $condos[$condo['id']] = $condo['name'];
-        }
-        return $condos;
     }
 
 }

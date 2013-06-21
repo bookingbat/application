@@ -134,8 +134,16 @@ class bootstrap
 
     function setupDatabaseConfig()
     {
-        $environment = preg_match('#local#',$_SERVER['HTTP_HOST']) ? 'localhost':'production';
-        $config = new Zend_Config_Ini(FAMEFIT_BASE_PATH . '/database-config.ini', $environment);
+        if(preg_match('#^([0-9]+)\.bookingbat#',$_SERVER['HTTP_HOST'],$matches)) {
+            $id = $matches[1];
+            $file = '../website/var/website_configs/'.$id;
+            $environment = 'production';
+        } else {
+            $environment = 'localhost';
+            $file = 'database-config.ini';
+        }
+
+        $config = new Zend_Config_Ini($file, $environment);
         Zend_Registry::set('database_config', $config);
         Zend_Registry::set('mysql_command', $config->mysql_command);
     }

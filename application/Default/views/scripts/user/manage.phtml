@@ -17,8 +17,6 @@ echo $this->paginationControl($this->paginator,
         <th>Last Name</th>
         <th>Email</th>
         <th>User Type</th>
-        <th>Assigned Personal Trainer</th>
-        <th>Assigned Condo</th>
     </thead>
     <?php
     foreach ($this->paginator as $user) {
@@ -31,34 +29,6 @@ echo $this->paginationControl($this->paginator,
         <tr>
             <td>
                 <a class="btn" href="<?=$edit_url?>"><i class="icon-pencil"></i></i></a>
-                <?php
-                if ($user['type'] == 'client') {
-                    ?>
-                    <div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a
-                                href="<?= $this->url(array('controller' => 'billing', 'action' => 'servicesused', 'id' => $user['id']), null, true) ?>">
-                                    Services Used</a></li>
-                            <li><a
-                                href="<?= $this->url(array('controller' => 'billing', 'action' => 'paymenthistory', 'id' => $user['id']), null, true) ?>">
-                                Payment History</a></li>
-                            <li><a
-                                href="<?= $this->url(array('controller' => 'billing', 'action' => 'plan', 'id' => $user['id']), null, true) ?>">
-                                Billing Plan</a></li><?php
-                            if ($user['member']) {
-                                ?><li><a
-                                    href="<?= $this->url(array('controller' => 'billing', 'action' => 'cancelplan', 'id' => $user['id']), null, true) ?>">
-                                    Cancel Plan</a></li><?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                    <?php
-                }
-                ?>
             </td>
             <td><?=$this->escape($user['id'])?></td>
             <td><?=$this->escape($user['username'])?></td>
@@ -66,8 +36,6 @@ echo $this->paginationControl($this->paginator,
             <td><?=$this->escape($user['last_name'])?></td>
             <td><?=$this->escape($user['email'])?></td>
             <td><div class="badge"><?=$this->escape($user['type'])?></div></td>
-            <td><?=$this->escape($user['trainer'])?></td>
-            <td><?=$this->escape($user['condo'])?></td>
 
         </tr>
     <?php
