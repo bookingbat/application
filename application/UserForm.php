@@ -33,7 +33,7 @@ class UserForm extends Zend_Form
         ));
         $this->addElement('select', 'type', array(
             'label' => 'User Type',
-            'multiOptions' => array('client' => 'Client', 'trainer' => 'Personal Trainer', 'class-instructor' => 'Class Instructor', 'massage-therapist' => 'Massage Therapist')
+            'multiOptions' => array('massage-therapist' => 'Massage Therapist')
         ));
         $this->addElement('text', 'phone', array(
             'label' => 'Phone #',

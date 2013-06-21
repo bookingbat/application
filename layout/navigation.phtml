@@ -4,8 +4,8 @@ $user = bootstrap::getInstance()->getUser();
 switch ($user['type']) {
     default:
         ?>
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/calendar">Calendar</a></li>
         <?php
         break;
     case 'admin':

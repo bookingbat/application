@@ -109,14 +109,14 @@ class MassagebookingController extends Controller
             $this->view->time = $form->getValue('time');
             $this->view->duration = $form->getValue('appointment_duration');
             $html = $this->view->render('massage/appointment-confirmation.phtml');
-/*
+
             $mail = new Zend_Mail;
-            $mail->addTo($user['email']);
+            //$mail->addTo($user['email']);
             $mail->addTo($therapistData['email']);
             $mail->setBodyText($html);
             $this->queueMail($mail);
             echo $html;
-*/
+
             $this->_helper->viewRenderer->setNoRender(true);
             return;
         }

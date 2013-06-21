@@ -72,18 +72,7 @@ class UserController extends Controller
             ));
         }
 
-        if ($userBeingEdited['type'] == 'massage-therapist') {
-            // massage therapists work at multiple condos
-            $form->addElement('multiCheckbox', 'condo_id', array(
-                'label' => 'Assigned Condo',
-                'multiOptions' => $this->listCondos()
-            ));
-
-            $form->populate($userBeingEdited);
-            $form->populate(array('condo_id' => $this->condoIdsForTherapist($userBeingEdited)));
-        } else {
-            $form->populate($userBeingEdited);
-        }
+        $form->populate($userBeingEdited);
 
         $this->view->form = $form;
 
@@ -115,21 +104,6 @@ class UserController extends Controller
             return $this->_redirect('/user/manage');
         }
 
-    }
-
-    function condoIdsForTherapist($userBeingEdited)
-    {
-        $db = Zend_Registry::get('db');
-        $condo_ids = $db->select()
-            ->from('therapist_condos', array('condo_id'))
-            ->where('therapist_userid=?', $userBeingEdited['id'])
-            ->query()
-            ->fetchAll();
-        $return = array();
-        foreach ($condo_ids as $condo_id) {
-            $return[] = $condo_id['condo_id'];
-        }
-        return $return;
     }
 
     function registerAction()
