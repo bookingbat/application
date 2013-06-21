@@ -55,68 +55,10 @@ class bootstrap
 
     function addRoutes()
     {
-        /**
-         * Simple 'CMS' type pages
-         */
-        $this->router->addRoute(
-            'about',
-            new Zend_Controller_Router_Route('about/',
-                array(
-                    'controller' => 'cms',
-                    'action' => 'index',
-                    'page'=>'about'
-                ))
-        );
-        $this->router->addRoute(
-            'training',
-            new Zend_Controller_Router_Route('training/',
-                array(
-                    'controller' => 'cms',
-                    'action' => 'index',
-                    'page'=>'training'
-                ))
-        );
-        $this->router->addRoute(
-            'classes',
-            new Zend_Controller_Router_Route('classes/',
-                array(
-                    'controller' => 'cms',
-                    'action' => 'index',
-                    'page'=>'classes'
-                ))
-        );
-        $this->router->addRoute(
-            'contact',
-            new Zend_Controller_Router_Route('contact/',
-                array(
-                    'controller' => 'contact',
-                    'action' => 'index'
-                ))
-        );
-        $this->router->addRoute(
-            'exercise',
-            new Zend_Controller_Router_Route('exercise/',
-                array(
-                    'controller' => 'cms',
-                    'action'=>'index',
-                    'page' => 'exercise'
-                ))
-        );
 
-        /**
-         * Calendar to book an appointment
-         */
-        $this->router->addRoute(
-            'trainer-calendar',
-            new Zend_Controller_Router_Route('trainer-calendar/*',
-                array(
-                    'controller' => 'trainercalendar',
-                    'action'=>'index'
-                ))
-        );
         $this->router->addRoute(
             'massage-calendar',
-            new Zend_Controller_Router_Route('massage-calendar/*',
+            new Zend_Controller_Router_Route('calendar/*',
                 array(
                     'controller' => 'massagecalendar',
                     'action'=>'index'

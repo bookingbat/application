@@ -7,9 +7,6 @@ class CalendarController extends Controller
     function init()
     {
         $user = bootstrap::getInstance()->getUser();
-        if (!$user['id']) {
-            return $this->_redirect('/');
-        }
 
         if ($this->requestedCalendarOutOfRange()) {
             $this->view->limitMonths = $this->limitMonths;

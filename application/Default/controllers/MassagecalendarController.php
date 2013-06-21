@@ -4,9 +4,6 @@ class MassagecalendarController extends CalendarchooseController
     function indexAction()
     {
         $user = bootstrap::getInstance()->getUser();
-        if(!count($this->therapistsForCondo($user['condo_id']))) {
-            return $this->render('noone-assigned-to-condo');
-        }
 
         $therapistSelector = $this->therapistSelector($user['condo_id']);
 
