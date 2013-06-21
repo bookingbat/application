@@ -1,0 +1,202 @@
+.week-column {
+    position: relative;
+    margin:0;
+}
+.week-column li {
+    position: absolute;
+    display: block;
+    width:100%;
+}
+.week-chooser table td {
+    padding:0;
+    width:13%;
+}
+.week-chooser table td.hours-column {
+    height:2400px;
+    width:100px;
+}
+.week-chooser ul.legend,
+.week-chooser form,
+.week-chooser form *,
+.week-chooser .legend li,
+.week-chooser  h2 {
+    display:inline;
+}
+
+.hours-column ul {
+    position: relative;
+    margin:0;
+}
+.hours-column ul li {
+    display: block;
+    border-bottom:1px #000 solid;
+    width:100px;
+    height:46px;
+    margin:0;
+    position: absolute;
+    line-height:50px;
+}
+
+/**
+ * Calendar styling
+ */
+.calendar {
+    width:100%;
+    margin-bottom:5px;
+}
+.calendar td {
+    height:150px;
+    border: 1px solid rgb(221, 221, 221);
+    vertical-align: top;
+}
+.calendar td strong {
+    margin-bottom:15px;
+    display:block;
+}
+.calendar td p {
+    margin-left:10px;
+}
+th {
+    background-color:#D3643B;
+    color:white;
+}
+.calendar td.disabled {
+    background-color: #ccc;
+}
+.calendar td.available,
+.week-chooser .available{
+    cursor:pointer;
+    background-color: #a9dba9;
+}
+.calendar th {
+    border:none;
+    padding:5px;
+}
+.calendar td.available:hover {
+    background-color:#a9FFa9;
+}
+.calendar td.unavailable {
+    background-color: #f2dede;
+}
+.calendar td.booked,
+.week-chooser .booked {
+    background-color: #bce8f1;
+}
+
+/**
+ * Calendar Legend
+ */
+.legend .indicator {
+    border-radius: 3px;
+    display: inline-block;
+    width:25px;
+    height:25px;
+    border:1px black solid;
+}
+.legend .disabled {
+    background-color: #ccc;
+}
+.legend .available {
+    background-color: #a9dba9;
+}
+.legend .booked {
+    background-color: #bce8f1;
+}
+.legend .unavailable {
+    background-color: #f2dede;
+}
+.legend {
+    list-style-type: none;
+    margin:0;
+}
+.legend li {
+    padding-bottom:10px;
+}
+
+/**
+ * Massage therapist dropdown box
+ */
+#submitbutton-element {
+    margin:0;
+}
+dt#submitbutton-label {
+    display: none;
+}
+dd#therapist-element {
+    margin:0;
+}
+select#therapist {
+    width:150px;
+}
+
+
+.active-plan td {
+    background-color:#FFE5B1!important;
+}
+.error {
+    color: red;
+}
+.hero-unit {
+    background: #FFE5B1;
+    background-image: linear-gradient(to bottom, #FFCC66, #FFE5B1);
+    margin:0;
+    padding:10px;
+    /*background-image: url('/img/headerPicMask.png');*/
+}
+.hero-unit h1 {
+    font-size:30px;
+}
+.container {
+    position:fixed;
+}
+.nav-collapse, .nav-collapse.collapse {
+    height: auto;
+    overflow: auto;
+}
+.user-area {
+    margin-top:5px;
+}
+ul.errors li {
+    background-color: rgb(185, 74, 72);
+    border-radius: 3px 3px 3px 3px;
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 11.844px;
+    font-weight: bold;
+    line-height: 14px;
+    color: rgb(255, 255, 255);
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+footer {
+    background-color:#FAFAFA;
+    padding:10px;
+    border: 1px solid rgb(212, 212, 212);
+}
+footer p {
+    color:#ccc;
+    font-size:smaller;
+}
+#terms-element p.description {
+    display:inline;
+}
+
+h1 {
+    font-size:17.5px;
+    line-height:20px;
+}
+h2 {
+    font-size:15px;
+    line-height:15.5px;
+}
+.service-menu {
+    background: #FAFAFA;
+    border-radius: 3px;
+    margin-bottom:5px;
+    padding:15px;
+    border: 1px solid rgb(212, 212, 212);
+}
+.right {
+    text-align: right;
+}

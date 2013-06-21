@@ -1,0 +1,108 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Booking Bat</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
+
+    <?=$this->headLink()?>
+
+    <script src="/jquery-1.7.1.min.js"></script>
+    <script src="/jquery.metadata.pack.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log('ready');
+            $('.calendar td.enabled').hover(function () {
+                $(this).addClass('calendar-hover');
+            }, function () {
+                $(this).removeClass('calendar-hover');
+            });
+            $('.calendar td.enabled').click(function () {
+                window.location.href = $(this).metadata().url;
+            });
+            $('.calendar-switcher').change(function(){
+                document.location = $(this).val();
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+
+<div class="navbar" navbar-inverse navbar-fixed-top>
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="#">Booking Bat</a>
+            <div class="nav-collapse collapse">
+
+
+                <ul class="nav nav-pills">
+                    <?=$this->partial('navigation.phtml')?>
+                </ul>
+                <p class="pull-right">
+                    <?php
+                    $user = bootstrap::getInstance()->getUser();
+                    if ($user) {
+                        ?>
+                        <a class="btn btn-primary" href="<?= $this->url(
+                            array('controller' => 'user', 'action' => 'logout'),
+                            null,
+                            true
+                        ) ?>">Log
+                            Out</a>
+                    <?php
+                    } else {
+                        ?>
+                        <a class="btn" href="<?= $this->url(array('controller' => 'user', 'action' => 'login'), null, true) ?>">Log In</a>
+                        <a class="btn btn-primary" href="<?= $this->url(array('controller' => 'user', 'action' => 'register'), null, true) ?>">Register</a>
+                    <?php
+                    }
+                    ?>
+                </p>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+
+<?php
+$flashMessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+
+if ($flashMessenger->hasMessages()) {
+    ?>
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php foreach ($flashMessenger->getMessages() as $msg): ?>
+            <?php echo $msg ?>
+        <?php endforeach; ?>
+    </div>
+<?php
+}
+?>
+<div class="container-fluid">
+
+    <?=$this->layout()->content?>
+
+    <script src="/js/bootstrap.js"></script>
+
+</div>
+
+<footer>
+    &copy; 2013 BookingBat
+</footer>
+</body>
+</html>

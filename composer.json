@@ -1,0 +1,13 @@
+{
+    "require":{
+        "bookingbat/availability":"*",
+        "zendframework/zendframework1":"*"
+    },
+    "minimum-stability":"dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:bookingbat/availability.git"
+        }
+    ]
+}

@@ -1,0 +1,102 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "af8b5c71c6da511b72d4de949177441f",
+    "packages": [
+        {
+            "name": "bookingbat/availability",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:bookingbat/availability.git",
+                "reference": "c1a9be981308903d40e88a6a3054524a7ac25ae4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bookingbat/availability/zipball/c1a9be981308903d40e88a6a3054524a7ac25ae4",
+                "reference": "c1a9be981308903d40e88a6a3054524a7ac25ae4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Ribakoff"
+                }
+            ],
+            "description": "A framework for defining recurring windows of availability, and \"subtracting\" bookings/appointments from them.",
+            "homepage": "https://github.com/bookingbat/availability",
+            "support": {
+                "source": "https://github.com/bookingbat/availability/tree/master",
+                "issues": "https://github.com/bookingbat/availability/issues"
+            },
+            "time": "2013-06-19 04:13:14"
+        },
+        {
+            "name": "zendframework/zendframework1",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zf1.git",
+                "reference": "f3b04713b48b98e563021ca36b6f72e451137900"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zf1/zipball/f3b04713b48b98e563021ca36b6f72e451137900",
+                "reference": "f3b04713b48b98e563021ca36b6f72e451137900",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.11"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.12.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "library/"
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Zend Framework 1",
+            "homepage": "http://framework.zend.com/",
+            "keywords": [
+                "ZF1",
+                "framework"
+            ],
+            "time": "2013-05-20 13:09:53"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ],
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

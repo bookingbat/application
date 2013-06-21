@@ -1,0 +1,47 @@
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#training_credits">Credits</a></li>
+    <li><a href="#training_booked">Booked</a></li>
+    <li><a href="#training_cancelled">Cancelled (Not Lost)</a></li>
+    <li><a href="#training_lost">Lost</a></li>
+    <li><a href="#training_completed">Completed</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="training_credits">
+        <?= $this->partial('billing/training_credits.phtml', array(
+            'user' => $this->user,
+            'trainer_appointments_total_duration' => $this->trainer_appointments_total_duration
+        )) ?>
+    </div>
+    <div class="tab-pane" id="training_booked">
+        <?= $this->partial('trainer/appointments-client.phtml', array(
+            'appointments' => $this->trainer_appointments,
+            'filter'=>'booked'
+        )) ?>
+    </div>
+    <div class="tab-pane" id="training_cancelled">
+        <?= $this->partial('trainer/appointments-client.phtml', array(
+            'appointments' => $this->trainer_appointments,
+            'filter'=>'cancelled_not_lost'
+        )) ?>
+    </div>
+    <div class="tab-pane" id="training_lost">
+        <?= $this->partial('trainer/appointments-client.phtml', array(
+            'appointments' => $this->trainer_appointments,
+            'filter'=>'cancelled_lost'
+        )) ?>
+    </div>
+    <div class="tab-pane" id="training_completed">
+        <?= $this->partial('trainer/appointments-client.phtml', array(
+            'appointments' => $this->trainer_appointments,
+            'filter'=>'completed'
+        )) ?>
+    </div>
+</div>
+
+<script>
+    $('#myTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+</script>

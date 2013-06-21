@@ -1,0 +1,197 @@
+<?php
+class UserController extends Controller
+{
+
+    function loginAction()
+    {
+        $user = bootstrap::getInstance()->getUser();
+        if ($user) {
+            return $this->_redirect('/');
+        }
+
+        $form = new LoginForm;
+
+        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
+            $db = Zend_Registry::get('db');
+            $select = $db->select()
+                ->from('user')
+                ->where('username=?', $this->getParam('username'));
+
+            $user = $select->query()->fetch();
+
+            if (sha1($form->getValue('password')) == $user['password']) {
+                $this->updateUserDataIntoSession($user['username']);
+                $this->_forward('index', 'Index');
+            } else {
+                $form->getElement('password')->markAsError()->addError('Invalid password or username not found');
+            }
+        }
+
+        $this->view->form = $form;
+    }
+
+    function logoutAction()
+    {
+        bootstrap::getInstance()->userLogout();
+        $this->_redirect('/');
+    }
+
+    function manageAction()
+    {
+        $user = bootstrap::getInstance()->getUser();
+        if (!$user['id'] || $user['type'] != 'admin') {
+            return $this->_redirect('/');
+        }
+
+        $paginationAdapter = new Zend_Paginator_Adapter_DbSelect($this->selectUsers());
+        $this->view->paginator = new Zend_Paginator($paginationAdapter);
+        $this->view->paginator->setCurrentPageNumber($this->getParam('page'));
+    }
+
+    function editAction()
+    {
+        $user = bootstrap::getInstance()->getUser();
+        if (!$user['id'] || $user['type'] != 'admin') {
+            return $this->_redirect('/');
+        }
+
+        $db = Zend_Registry::get('db');
+        $select = $db->select()
+            ->from('user')
+            ->where('id=?', $this->_getParam('id'));
+        $userBeingEdited = $select->query()->fetch();
+
+        $form = new UserForm;
+        $form->removeElement('password');
+        $form->removeElement('verifypassword');
+
+        if($userBeingEdited['type'] == 'client') {
+            $form->addElement('select', 'assigned_trainer_userid', array(
+                'label' => 'Assigned Personal Trainer',
+                'multiOptions' => array(0 => '') + $this->listTrainers()
+            ));
+        }
+
+        if ($userBeingEdited['type'] == 'massage-therapist') {
+            // massage therapists work at multiple condos
+            $form->addElement('multiCheckbox', 'condo_id', array(
+                'label' => 'Assigned Condo',
+                'multiOptions' => $this->listCondos()
+            ));
+
+            $form->populate($userBeingEdited);
+            $form->populate(array('condo_id' => $this->condoIdsForTherapist($userBeingEdited)));
+        } else {
+            // clients reside at a  single condo
+            $form->addElement('select', 'condo_id', array(
+                'label' => 'Assigned Condo',
+                'multiOptions' => array(0 => '') + $this->listCondos()
+            ));
+
+            $form->populate($userBeingEdited);
+        }
+
+        $this->view->form = $form;
+
+        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
+            $db = Zend_Registry::get('db');
+            $db->update('user', array(
+                'username' => $form->getValue('username'),
+                'first_name' => $form->getValue('first_name'),
+                'last_name' => $form->getValue('last_name'),
+                'email' => $form->getValue('email'),
+                'type' => $form->getValue('type'),
+                'phone' => $form->getValue('phone'),
+                'assigned_trainer_userid' => $userBeingEdited['type'] == 'massage-therapist' ? 0 : $form->getValue('assigned_trainer_userid'),
+                'condo_id' => $form->getValue('condo_id')
+            ), 'id=' . (int)$this->_getParam('id'));
+
+            if ($userBeingEdited['type'] == 'massage-therapist') {
+                $db->delete('therapist_condos', 'therapist_userid=' . (int)$userBeingEdited['id']);
+                foreach ($form->getValue('condo_id') as $condo_id) {
+                    $db->insert('therapist_condos', array(
+                        'therapist_userid' => $userBeingEdited['id'],
+                        'condo_id' => $condo_id
+                    ));
+                }
+            }
+
+            $this->view->type = $form->getValue('type');
+            $this->view->email = $form->getValue('email');
+            $this->view->username = $form->getValue('username');
+            $this->_helper->FlashMessenger->addMessage('User Updated');
+            return $this->_redirect('/user/manage');
+        }
+
+    }
+
+    function condoIdsForTherapist($userBeingEdited)
+    {
+        $db = Zend_Registry::get('db');
+        $condo_ids = $db->select()
+            ->from('therapist_condos', array('condo_id'))
+            ->where('therapist_userid=?', $userBeingEdited['id'])
+            ->query()
+            ->fetchAll();
+        $return = array();
+        foreach ($condo_ids as $condo_id) {
+            $return[] = $condo_id['condo_id'];
+        }
+        return $return;
+    }
+
+    function registerAction()
+    {
+        $user = bootstrap::getInstance()->getUser();
+        $form = new UserForm;
+        $this->view->form = $form;
+
+        if($user['type']!='admin') {
+            $form->removeElement('type');
+        }
+
+        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
+            $db = Zend_Registry::get('db');
+            $data = array(
+                'username' => $form->getValue('username'),
+                'email' => $form->getValue('email'),
+                'password' => sha1($form->getValue('password')),
+                'type' => $user['type'] == 'admin' ? $form->getValue('type') : 'client',
+                'phone' => $form->getValue('phone'),
+                'first_name' => $form->getValue('first_name'),
+                'last_name' => $form->getValue('last_name'),
+            );
+            $db->insert('user', $data);
+
+            $this->view->type = $form->getValue('type');
+            $this->view->email = $form->getValue('email');
+            $this->view->username = $form->getValue('username');
+            return $this->render('success');
+        }
+    }
+
+    function selectUsers()
+    {
+        $db = Zend_Registry::get('db');
+        $select = $db->select()
+            ->from('user')
+            ->joinLeft('user as trainer', 'trainer.id = user.assigned_trainer_userid', array('trainer.username as trainer'))
+            ->joinLeft('condo', 'condo.id = user.condo_id', array('condo.name as condo'));
+
+        return $select;
+    }
+
+    function listCondos()
+    {
+        $db = Zend_Registry::get('db');
+        $select = $db->select(array('id', 'name'))
+            ->from('condo')
+            ->where('active=1');
+        $condos = array();
+        foreach ($select->query()->fetchAll() as $condo) {
+            $condos[$condo['id']] = $condo['name'];
+        }
+        return $condos;
+    }
+
+}

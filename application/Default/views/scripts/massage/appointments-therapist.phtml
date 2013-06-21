@@ -1,0 +1,44 @@
+<?php
+if ($this->paginator) {
+    echo $this->paginationControl($this->paginator,
+        'Sliding',
+        'pagination_control.phtml');
+}
+
+?>
+<table class="table table-striped">
+    <thead>
+        <th></th>
+        <th>Date &amp; Time</th>
+        <th>Duration</th>
+        <th>Client</th>
+    </tr>
+    <?php
+    foreach ($this->paginator ? $this->paginator : $this->appointments as $appointment) {
+        ?>
+        <tr>
+            <?php
+            if ($appointment['canceled']) {
+                echo '<td>Canceled</td>';
+            } else {
+                ?>
+                <td>
+                    <a href="<?= $this->url(array('controller' => 'massage', 'action' => 'cancel', 'id' => $appointment['id'])) ?>">Cancel</a>
+                </td>
+            <?php
+            }
+            ?>
+
+            <td><?=$this->datetime($appointment['date'], $appointment['time'])?></td>
+            <td><?=$this->duration($appointment['duration'])?></td>
+            <td>
+                <?=$this->escape($appointment['first_name'] . ' ' . $appointment['last_name'])?>
+                <br />
+                <?=$this->email($appointment['email'])?><br />
+                <?=$this->phone($appointment['phone'])?><br />
+            </td>
+        </tr>
+    <?php
+    }
+    ?>
+</table>

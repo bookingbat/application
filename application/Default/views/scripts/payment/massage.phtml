@@ -1,0 +1,10 @@
+You need to buy more massages to do that.
+
+<?php
+if ($this->form->isErrors()) {
+    foreach ($this->form->getErrorMessages() as $errormessage) {
+        echo '<span class="error">' . $this->escape($errormessage) . '</span>';
+    }
+}
+echo $this->form;
+?>

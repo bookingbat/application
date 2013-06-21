@@ -1,0 +1,42 @@
+<?php
+if ($this->form->isErrors()) {
+    foreach ($this->form->getErrorMessages() as $errormessage) {
+        echo '<span class="error">' . $this->escape($errormessage) . '</span>';
+    }
+}
+?>
+<h1>Food Delivery Form</h1>
+<form action="?" method="post">
+    <div class="row-fluid">
+        <div class="span3">
+            <?= $this->form->cardNumber ?>
+            <?= $this->form->expirationDate ?>
+            <?= $this->form->firstName ?>
+            <?= $this->form->lastName ?>
+            <?= $this->form->address ?>
+        </div>
+        <div class="span3">
+            <?= $this->form->city ?>
+            <?= $this->form->state ?>
+            <?= $this->form->zip ?>
+            <?= $this->form->email ?>
+            <?= $this->form->delivery_type ?>
+        </div>
+        <div class="span3">
+            <?= $this->form->company_name ?>
+            <?= $this->form->community_building ?>
+            <?= $this->form->apt_suite ?>
+            <?= $this->form->phone ?>
+            <?= $this->form->meals_per_day ?>
+        </div>
+        <div class="span3">
+            <?= $this->form->days_per_week ?>
+            <?= $this->form->allergies ?>
+            <?= $this->form->food_dislikes ?>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <?= $this->form->terms ?>
+        <?= $this->form->send ?>
+    </div>
+</form>

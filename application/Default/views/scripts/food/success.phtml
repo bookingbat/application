@@ -1,0 +1,13 @@
+Food request submitted!
+<table>
+    <?php
+    foreach($this->values as $field=>$value) {
+        ?>
+        <tr>
+            <th><?=$this->escape($field)?></th>
+            <td><?=$this->escape($value)?></td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>

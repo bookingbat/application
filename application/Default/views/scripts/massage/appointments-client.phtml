@@ -1,0 +1,57 @@
+<?php
+if ($this->paginator) {
+    echo $this->paginationControl($this->paginator,
+        'Sliding',
+        'pagination_control.phtml');
+}
+
+?>
+<table class="table table-striped">
+    <thead>
+        <th>Status</th>
+        <th>Date &amp; Time</th>
+        <th>Duration</th>
+        <th>Therapist</th>
+    </thead>
+    <?php
+    foreach ($this->paginator ? $this->paginator : $this->appointments as $appointment) {
+        $class = '';
+        if($appointment['canceled']) {
+            $class = ' class="error"';
+        }
+        ?>
+        <tr<?=$class?>>
+            <?php
+            if ($appointment['canceled']) {
+                echo '<td>Canceled</td>';
+            } else {
+                $booking = new Booking(array(
+                    'today' => date('Y-m-d'),
+                    'date' => $appointment['date']
+                ));
+                if ($booking->allowCancelByUser()) {
+                    ?>
+                    <td>
+                        <a href="<?= $this->url(array('controller' => 'massage', 'action' => 'cancel', 'id' => $appointment['id'])) ?>">Cancel</a>
+                    </td>
+                <?php
+                } else {
+                    echo '<td>Cannot Cancel</td>';
+                }
+            }
+            ?>
+
+            <td><?=$this->datetime($appointment['date'], $appointment['time'])?></td>
+            <td><?=$this->duration($appointment['duration'])?></td>
+            <td>
+                <?=$this->escape($appointment['first_name'] . ' ' . $appointment['last_name'])?>
+                <br />
+                <?=$this->email($appointment['email'])?>
+                <br /d>
+                <?=$this->phone($appointment['phone'])?>
+            </td>
+        </tr>
+    <?php
+    }
+    ?>
+</table>

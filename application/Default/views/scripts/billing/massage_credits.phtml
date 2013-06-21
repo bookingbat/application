@@ -1,0 +1,21 @@
+<?php
+if($this->user->massageAllowed()) {
+    ?>
+    Credits: <?= $this->escape($this->massage_appointments_total_duration) ?>/<?= $this->escape($this->user->massageAllowed()) ?> minutes used.
+    <?php
+} else {
+    ?>
+    <div class="alert">
+        <strong>No appointments!</strong> You have booked no appointments
+    </div>
+    <?php
+}
+
+if($this->user->massageAllowed()) {
+    $percent = $this->massage_appointments_total_duration/$this->user->massageAllowed()*100;
+    ?>
+    <div class="progress progress-striped">
+        <div class="bar" style="width: <?=$percent?>%;"></div>
+    </div>
+    <?php
+}

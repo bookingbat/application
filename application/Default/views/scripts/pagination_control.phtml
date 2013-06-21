@@ -1,0 +1,53 @@
+<?php if ($this->pageCount): ?>
+    <div class="pagination pull-right">
+        <ul>
+            <!-- Previous page link -->
+            <?php
+            if (isset($this->previous)) {
+                ?>
+                <li><a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+                        <i class="icon-backward"></i>
+                    </a></li>
+            <?php
+            } else {
+                ?>
+                <li class="disabled"><a href="#"><i class="icon-backward"></i></a></li>
+            <?php
+            }
+            ?>
+
+            <!-- Numbered page links -->
+            <?php
+            foreach ($this->pagesInRange as $page) {
+                if ($page != $this->current) {
+                    ?>
+                    <li class="current"><a href="<?php echo $this->url(array('page' => $page)); ?>">
+                            <?php echo $page; ?>
+                        </a></li>
+                <?php
+                } else {
+                    ?>
+                    <li class="disabled"><a href="#"><?php echo $page; ?></a></li>
+                <?php
+                }
+            }
+            ?>
+
+            <!-- Next page link -->
+            <?php
+            if (isset($this->next)) {
+                ?>
+                <li><a href="<?php echo $this->url(array('page' => $this->next)); ?>"><i class="icon-forward"></i></a></li>
+            <?php
+            } else {
+                ?>
+                <li class="disabled"><a href="#"><i class="icon-forward"></i></a></li>
+            <?php
+            }
+            ?>
+
+        </ul>
+        <br />
+        <strong>Found about <?=number_format($this->totalItemCount);?> items</strong>
+    </div>
+<?php endif; ?>

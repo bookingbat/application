@@ -1,0 +1,50 @@
+<h1>Condos</h1>
+<a class="btn" href="<?= $this->url(array('action' => 'new')) ?>">Add Condo <i class="icon-expand-alt icon-large"></i></a>
+<?php
+echo $this->paginationControl($this->paginator,
+    'Sliding',
+    'pagination_control.phtml');
+?>
+<table class="table table-striped">
+    <thead>
+        <th></th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Master Trainer</th>
+    </thead>
+    <?php
+    foreach ($this->paginator as $condo) {
+        $class = '';
+        if(!$condo['active']) {
+            $class=' class="error"';
+        }
+        ?>
+        <tr<?=$class?>>
+            <td>
+                <a class="btn" href="<?= $this->url(array('controller' => 'condo', 'action' => 'edit', 'id' => $condo['id']), null, true) ?>">Edit</a>
+                <?php
+                if ($condo['active']) {
+                    ?>
+                    <a class="btn btn-danger" href="<?= $this->url(array('controller' => 'condo', 'action' => 'deactivate', 'id' => $condo['id']), null, true) ?>">Deactivate</a>
+                <?php
+                } else {
+                    ?>
+                    <a class="btn btn-success" href="<?= $this->url(array('controller' => 'condo', 'action' => 'activate', 'id' => $condo['id']), null, true) ?>">Activate</a>
+                <?php
+                }
+                ?>
+            </td>
+            <td><?=$this->escape($condo['id'])?></td>
+            <td><?=$this->escape($condo['name'])?></td>
+            <td><?=$this->escape($condo['first_name'] . ' ' . $condo['last_name'] . '(' . $condo['username'] . ')')?></td>
+
+        </tr>
+    <?php
+    }
+    ?>
+</table>
+<?php
+echo $this->paginationControl($this->paginator,
+    'Sliding',
+    'pagination_control.phtml');
+?>

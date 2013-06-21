@@ -1,0 +1,16 @@
+<?php
+if($this->user->trainingAllowed()) {
+    $percent = $this->trainer_appointments_total_duration / $this->user->trainingAllowed() * 100;
+    ?>
+    Credits: <?= $this->escape($this->trainer_appointments_total_duration) ?>/<?= $this->escape($this->user->trainingAllowed()) ?> minutes used.
+    <div class="progress progress-striped">
+        <div class="bar" style="width: <?=$percent?>%;"></div>
+    </div>
+    <?php
+} else {
+    ?>
+    <div class="alert">
+        <strong>No credits!</strong> You have no credits
+    </div>
+    <?php
+}

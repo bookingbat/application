@@ -1,0 +1,21 @@
+<p>You have used <span class="text-info"><?= $this->training_used ?>/<?= $this->training_allowed ?></span> minutes.
+<?php
+if($this->training_used >= $this->training_allowed) {
+    ?>
+    You have reached your maximum training for the month, if you wish to schedule more appointments you must pay an overage charge.
+    <?php
+}
+?>
+</p>
+
+<p>For a <span class="text-info"><?= $this->usertype ?></span> user the charge for more training appointments is <span class="text-info">$<?= $this->hourlyOverageCharge ?></span>
+    for an hour or <span class="text-info">$<?= $this->halfhourOverageCharge ?></span> for a half hour. Here is a payment form:</p>
+
+<?php
+if ($this->form->isErrors()) {
+    foreach ($this->form->getErrorMessages() as $errormessage) {
+        echo '<span class="error">' . $this->escape($errormessage) . '</span>';
+    }
+}
+echo $this->form;
+?>

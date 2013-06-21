@@ -1,0 +1,45 @@
+<h1>Services Used</h1>
+<div class="row-fluid">
+    <div class="span6">
+        <h2>Training</h2>
+        <?=$this->partial('billing/training.phtml', array(
+            'user' => $this->user,
+            'trainer_appointments' => $this->trainer_appointments,
+            'trainer_appointments_total_duration' => $this->trainer_appointments_total_duration
+        ))?>
+
+    </div>
+    <div class="span6">
+        <h2>Massage</h2>
+        <?=$this->partial('billing/massage.phtml', array(
+            'user' => $this->user,
+            'massage_appointments' => $this->massage_appointments,
+            'massage_appointments_total_duration' => $this->massage_appointments_total_duration
+        ))?>
+    </div>
+</div>
+
+<?php
+if ($this->user->planName() == 'guest') {
+    ?>
+    <h2>Classes Enrolled</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Class</th>
+            <th>Date</th>
+        </tr>
+        <?php
+        foreach ($this->class_enrollments as $class_enrolled) {
+            ?>
+            <tr>
+                <td><?=$this->escape($class_enrolled['name'])?></td>
+                <td><?=$this->escape($class_enrolled['date'])?></td>
+            </tr>
+        <?php
+        }
+        ?>
+    </table>
+    You have enrolled in <?= count($this->class_enrollments) ?> class, you have 0 class enrollments this month.
+<?php
+}
+?>

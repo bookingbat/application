@@ -1,0 +1,20 @@
+<div class="pull-right">
+    <a class="btn btn-primary" href="<?= $this->url(
+        array('controller' => 'bookings', 'action' => 'services'),
+        null,
+        true
+    ) ?>">Make A Booking</a>
+    <?php
+    if($this->mode == 'list') {
+        ?>
+        <a class="btn disabled">List</a>
+        <a href="?mode=calendar" class="btn">Calendar</a>
+        <?php
+    } else {
+        ?>
+        <a href="?mode=list" class="btn">List</a>
+        <a class="btn disabled">Calendar</a>
+        <?php
+    }
+    ?>
+</div>

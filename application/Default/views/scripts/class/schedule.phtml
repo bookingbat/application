@@ -1,0 +1,47 @@
+<div class="row-fluid">
+    <div class="span3 well">
+        <strong>Schedule New Class:</strong>
+        <?= $this->form ?>
+    </div>
+    <div class="span9">
+        <table class="table table-striped">
+            <thead>
+                <th>ID</th>
+                <th>Instructor</th>
+                <th>Condo</th>
+                <th>Name</th>
+                <th>Day Of Week</th>
+                <th>Time</th>
+            </thead>
+            <?php
+            foreach ($this->schedule as $class) {
+                $css_class = '';
+                if(!$class['active']) {
+                    $css_class = ' class="error"';
+                }
+                ?>
+                <tr<?=$css_class?>>
+                    <?php
+                    if($class['active']) {
+                        ?>
+                        <td><a class="btn btn-danger" href="deactivate?id=<?=$this->escape($class['id'])?>">Deactivate</a></td>
+                        <?php
+                    } else {
+                        ?>
+                        <td><a class="btn btn-success" href="activate?id=<?=$this->escape($class['id'])?>">Activate</a></td>
+                        <?php
+                    }
+                    ?>
+
+                    <td><?=$this->escape($class['instructor'])?></td>
+                    <td><?=$this->escape($class['condo'])?></td>
+                    <td><?=$this->escape($class['name'])?></td>
+                    <td><?=$this->escape($this->dayofweek($class['day_of_week']))?></td>
+                    <td><?=$this->escape($this->time($class['time']))?></td>
+                </tr>
+            <?php
+            }
+            ?>
+        </table>
+    </div>
+</div>

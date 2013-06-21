@@ -1,0 +1,16 @@
+<?php
+$this->placeholder('calendar_sidebar')->captureStart();
+$this->therapistSelector->setAction('?');
+echo $this->therapistSelector;
+?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#therapist').change(function () {
+            $(this).closest('form')
+                .trigger('submit')
+
+        });
+    });
+</script>
+<?php
+$this->placeholder('calendar_sidebar')->captureEnd();

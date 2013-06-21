@@ -1,0 +1,154 @@
+<div class="row-fluid">
+    <div class="span2  well well-small">
+        <?=$this->placeholder('calendar_sidebar')?>
+        <h2>Legend</h2>
+        <ul class="legend">
+            <li><span class="indicator available">&nbsp;</span> Available</li>
+            <li><span class="indicator booked">&nbsp;</span> Booked</li>
+            <li><span class="indicator unavailable">&nbsp;</span> Unavailable</li>
+            <li><span class="indicator disabled">&nbsp;</span> Invalid</li>
+        </ul>
+    </div>
+    <div class="span10">
+        <table class="calendar table-bordered">
+            <thead>
+                <th colspan="7">
+                    <a class="btn btn-mini" href="<?php
+                    if ($this->month == 1) {
+                        echo $this->url(array('month' => 12, 'year' => $this->year - 1));
+                    } else {
+                        echo $this->url(array('month' => $this->month - 1));
+                    }
+                    ?>"><i class="icon-arrow-left"></i></a>
+
+                    <?php
+                    $options = array();
+
+                    for($month=date('m'); $month<=date("m")+2; $month++) {
+                        $url = $this->url(array(
+                            'month'=>$month,
+                            'year'=>$this->year
+                        ));
+                        $options[$url] = date("F", mktime(0, 0, 0, $month, 10)) . ' ' . $this->year;
+                    }
+
+                    $val = $this->url(array(
+                        'month'=>$this->month,
+                        'year'=>$this->year
+                    ));
+                    echo $this->formSelect('name',$val,array('class'=>'calendar-switcher'),$options);
+                    ?>
+
+                    <a class="btn btn-mini" href="<?php
+                    if ($this->month == 12) {
+                        echo $this->url(array('month' => 1, 'year' => $this->year + 1));
+                    } else {
+                        echo $this->url(array('month' => $this->month + 1));
+                    }
+                    ?>"><i class="icon-arrow-right"></i></a>
+                </th>
+            </thead>
+            <thead>
+                <th width="14%">Sunday</th>
+                <th width="14%">Monday</th>
+                <th width="14%">Tuesday</th>
+                <th width="14%">Wednesday</th>
+                <th width="14%">Thursday</th>
+                <th width="14%">Friday</th>
+                <th width="14%">Saturday</th>
+            </thead>
+            <tr>
+                <?php
+                for ($day = 1; $day <= $this->number_of_days_in_month; $day++) {
+                    $dayString = sprintf('%s-%s-%s', $day, $this->month, $this->year);
+
+                    if (1 == $day) {
+                        switch (strtolower(date('l', strtotime($dayString)))) {
+                            case 'sunday':
+                                break;
+                            case 'monday':
+                                $colspan = 1;
+                                break;
+                            case 'tuesday':
+                                $colspan = 2;
+                                break;
+                            case 'wednesday':
+                                $colspan = 3;
+                                break;
+                            case 'thursday':
+                                $colspan = 4;
+                                break;
+                            case 'friday':
+                                $colspan = 5;
+                                break;
+                            case 'saturday':
+                                $colspan = 6;
+                                break;
+                        }
+                    }
+
+                    if (isset($colspan)) {
+                        echo sprintf('<td colspan="%s"></td>', $colspan);
+                        unset($colspan);
+                    }
+
+
+                    $url = $this->url(array(
+                        'controller' => $this->controller . 'booking',
+                        'action' => 'booking',
+                        'day' => date('Y-m-d', strtotime($dayString)),
+                        'trainer' => $this->trainer_id,
+                        'therapist' => $this->therapist_id,
+                        'consultation' => $this->consultation
+                    ), 'default', true);
+
+                    if( strtotime($dayString) < strtotime('today') ){
+                        ?>
+                        <td class="disabled"><strong><?=date('d', strtotime($dayString))?></strong></td>
+                        <?php
+                    } else {
+                        if(count($this->availability[$day])) {
+                            $class = 'class="available enabled {url:\'' . $url . '\'}"';
+                        } elseif(count($this->booked[$day])) {
+                            $class = 'class="booked"';
+                        } else {
+                            $class='class="unavailable"';
+                        }
+                        ?>
+                        <td <?=$class?>>
+                            <?php
+                            ?>
+                            <strong><?=date('d', strtotime($dayString))?></strong>
+                            <br/>
+                            <?php
+                            if (count($this->availability[$day])) {
+                                echo '<p>';
+
+                                foreach ($this->availability[$day] as $availability) {
+                                    $start = new DateTime($availability['start']);
+                                    $end = new DateTime($availability['end']);
+                                    ?>
+                                    <?= $start->format('h:i a') ?> to <?= $end->format('h:i a') ?>
+                                    <br/>
+                                    <?php
+                                }
+                                ?>
+                                <a class="btn btn-mini btn-success" href="<?= $url ?>">Book an appointment!</a>
+                                </p>
+                            <?php
+                            }
+                            ?>
+                        </td>
+                        <?php
+                    }
+
+                    if (date('l', strtotime($dayString)) == 'Saturday') {
+                        echo '</tr><tr>';
+                    }
+
+                }
+                ?>
+            </tr>
+        </table>
+    </div>
+</div>

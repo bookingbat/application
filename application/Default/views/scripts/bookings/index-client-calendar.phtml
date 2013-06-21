@@ -1,0 +1,117 @@
+<table class="calendar table-bordered">
+    <thead>
+    <th colspan="7">
+        <a class="btn btn-mini" href="<?php
+        if ($this->month == 1) {
+            echo $this->url(array('month' => 12, 'year' => $this->year - 1));
+        } else {
+            echo $this->url(array('month' => $this->month - 1));
+        }
+        ?>"><i class="icon-arrow-left"></i></a>
+
+        <?php
+        $options = array();
+
+        $monthTo = date("m")+2;
+        for($month=date('m'); $month<=$monthTo; $month++) {
+            $url = $this->url(array(
+                'month'=>$month,
+                'year'=>$this->year
+            ));
+            $options[$url] = date("F", mktime(0, 0, 0, $month, 10)) . ' ' . $this->year;
+        }
+
+        $val = $this->url(array(
+            'month'=>$this->month,
+            'year'=>$this->year
+        ));
+        echo $this->formSelect('name',$val,array('class'=>'calendar-switcher'),$options);
+        ?>
+
+        <a class="btn btn-mini" href="<?php
+        if ($this->month == 12) {
+            echo $this->url(array('month' => 1, 'year' => $this->year + 1));
+        } else {
+            echo $this->url(array('month' => $this->month + 1));
+        }
+        ?>"><i class="icon-arrow-right"></i></a>
+    </th>
+    </thead>
+    <thead>
+    <th width="14%">Sunday</th>
+    <th width="14%">Monday</th>
+    <th width="14%">Tuesday</th>
+    <th width="14%">Wednesday</th>
+    <th width="14%">Thursday</th>
+    <th width="14%">Friday</th>
+    <th width="14%">Saturday</th>
+    </thead>
+    <tr>
+        <?php
+        for ($day = 1; $day <= $this->number_of_days_in_month; $day++) {
+            $dayString = sprintf('%s-%s-%s', $day, $this->month, $this->year);
+
+            if (1 == $day) {
+                switch (strtolower(date('l', strtotime($dayString)))) {
+                    case 'sunday':
+                        break;
+                    case 'monday':
+                        $colspan = 1;
+                        break;
+                    case 'tuesday':
+                        $colspan = 2;
+                        break;
+                    case 'wednesday':
+                        $colspan = 3;
+                        break;
+                    case 'thursday':
+                        $colspan = 4;
+                        break;
+                    case 'friday':
+                        $colspan = 5;
+                        break;
+                    case 'saturday':
+                        $colspan = 6;
+                        break;
+                }
+            }
+
+            if (isset($colspan)) {
+                echo sprintf('<td colspan="%s"></td>', $colspan);
+                unset($colspan);
+            }
+
+            if(count($this->booked[$day])) {
+                $class = 'class="booked"';
+            } else {
+                $class='';
+            }
+            ?>
+            <td <?=$class?>>
+                <?php
+                ?>
+                <strong><?=date('d', strtotime($dayString))?></strong>
+                <br/>
+                <?php
+                foreach($this->trainer_appointments as $appointment) {
+                    if(strtotime($dayString) == strtotime($appointment['date'])) {
+                        echo $this->time($appointment['time']) . ' training<br />';
+                    }
+                }
+                foreach($this->massage_appointments as $appointment) {
+                    if(strtotime($dayString) == strtotime($appointment['date'])) {
+                        echo $this->time($appointment['time']) . ' massage<br />';
+                    }
+                }
+                ?>
+            </td>
+            <?php
+
+            if (date('l', strtotime($dayString)) == 'Saturday') {
+                echo '</tr><tr>';
+            }
+
+        }
+        ?>
+    </tr>
+</table>

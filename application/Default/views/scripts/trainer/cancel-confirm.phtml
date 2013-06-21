@@ -1,0 +1,9 @@
+Appointment on <span class="text-info"><?=$this->date?></span>
+
+with trainer <span class="text-info"><?=$this->escape($this->trainer_data['first_name'] . ' ' . $this->trainer_data['last_name'])?></span>
+
+for client <span class="text-info"><?=$this->escape($this->user_data['first_name'] . ' ' . $this->user_data['last_name'])?></span>
+
+<p>Are you sure you want to cancel?</p>
+<a class="btn btn-danger" href="?confirm=1">Yes</a>
+<a class="btn" href="/">No</a>

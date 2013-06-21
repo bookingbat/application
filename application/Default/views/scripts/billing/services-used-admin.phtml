@@ -1,0 +1,36 @@
+<h1>Billing For '<?=$this->escape($this->user_data['username'])?>'
+    <a href="<?php
+    if ($this->month == 1) {
+        echo $this->url(array('month' => 12, 'year' => $this->year - 1));
+    } else {
+        echo $this->url(array('month' => $this->month - 1));
+    }
+    ?>">&Lt;</a>
+
+    <strong><?=$this->month_name?> <?=$this->year?></strong>
+
+    <a href="<?php
+    if ($this->month == 12) {
+        echo $this->url(array('month' => 1, 'year' => $this->year + 1));
+    } else {
+        echo $this->url(array('month' => $this->month + 1));
+    }
+    ?>">&Gt;</a>
+</h1>
+
+<div class="well">
+    <h1>User Data</h1>
+    <?php
+    foreach ($this->user_data as $key => $value) {
+        if ($key == 'password') continue;
+        if ($key == 'master_trainer') continue;
+        echo '<strong>' . $this->escape($key) . ':</strong> ' . $this->escape($value) . '<br />';
+    }
+    ?>
+</div>
+<h2>
+    Total Bill:
+    $<?=$this->escape($this->user->billing(array(
+        'training' => $this->trainer_appointments_total_duration,
+        'massage' => $this->massage_appointments_total_duration
+    )))?></h2>
