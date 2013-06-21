@@ -137,6 +137,9 @@ class bootstrap
         if(preg_match('#^([0-9]+)\.bookingbat#',$_SERVER['HTTP_HOST'],$matches)) {
             $id = $matches[1];
             $file = '../website/var/website_configs/'.$id;
+            if(!file_exists($file)) {
+                throw new Exception('Unkown client');
+            }
             $environment = 'production';
         } else {
             $environment = 'localhost';
