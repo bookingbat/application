@@ -5,7 +5,7 @@ class MassagecalendarController extends CalendarchooseController
     {
         $user = bootstrap::getInstance()->getUser();
 
-        $therapistSelector = $this->therapistSelector($user['condo_id']);
+        $therapistSelector = $this->therapistSelector();
 
         if(!is_null($therapistSelector->getValue('therapist'))) {
             $this->therapist_selection = $therapistSelector->getValue('therapist');
@@ -21,9 +21,9 @@ class MassagecalendarController extends CalendarchooseController
         $this->renderCalendar();
     }
 
-    function therapistSelector($clientsCondoID)
+    function therapistSelector()
     {
-        $therapists = $this->therapistsForCondo($clientsCondoID);
+        $therapists = $this->therapistsForCondo();
 
         $form = new Zend_Form;
         $form->setMethod("GET");
@@ -39,9 +39,9 @@ class MassagecalendarController extends CalendarchooseController
         return $form;
     }
 
-    function therapistsForCondo($clientsCondoID)
+    function therapistsForCondo()
     {
-        $condition = 'therapist_condos.therapist_userid = user.id && therapist_condos.condo_id = '.(int)$clientsCondoID;
+        $condition = 'therapist_condos.therapist_userid = user.id';
 
         $db = Zend_Registry::get('db');
         $therapistsResult = $db->select()

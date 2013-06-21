@@ -17,7 +17,7 @@ switch ($user['type']) {
             ) ?>">Manage Users</a></li>
         <?php
         break;
-    case 'trainer':
+    case 'massage-therapist':
         ?>
         <li><a href="<?= $this->url(
                 array('controller' => 'user', 'action' => 'register'),
@@ -26,12 +26,12 @@ switch ($user['type']) {
             ) ?>">New User</a></li>
 
         <li><a href="<?= $this->url(
-                array('controller' => 'trainer', 'action' => 'appointments'),
+                array('controller' => 'massage', 'action' => 'appointments'),
                 'default',
                 true
             ) ?>">My Appointments</a></li>
         <li><a href="<?= $this->url(
-                array('controller' => 'trainer', 'action' => 'availability'),
+                array('controller' => 'massage', 'action' => 'availability'),
                 'default',
                 true
             ) ?>">My Availability</a></li>
