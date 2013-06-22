@@ -15,12 +15,8 @@ if('admin'==$user['type']) {
 
 if($user['id'] && $user['type'] != 'client') {
     ?>
-    <li><a href="<?= $this->url(array(), 'appointments',true)?>"><?=$user['type']=='admin'?'':'My'?> Appointments</a></li>
-    <li><a href="<?= $this->url(
-            array('controller' => 'massage', 'action' => 'availability'),
-            'default',
-            true
-        ) ?>"><?=$user['type']=='admin'?'Staff':'My'?> Availability</a></li>
+    <li><a href="<?= $this->url(array(),'appointments',true)?>"><?=$user['type']=='admin'?'':'My'?> Appointments</a></li>
+    <li><a href="<?= $this->url(array(),'availability',true)?>"><?=$user['type']=='admin'?'Staff':'My'?> Availability</a></li>
     <?php
 }
 
