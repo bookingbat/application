@@ -6,7 +6,8 @@ class UserController extends Controller
     {
         $user = bootstrap::getInstance()->getUser();
         if ($user) {
-            return $this->_redirect('/');
+            $url = $this->view->url(array(),'calendar',true);
+            return $this->_redirect($url);
         }
 
         $form = new LoginForm;
@@ -21,7 +22,8 @@ class UserController extends Controller
 
             if (sha1($form->getValue('password')) == $user['password']) {
                 $this->updateUserDataIntoSession($user['username']);
-                $this->_forward('index', 'Index');
+                $url = $this->view->url(array(),'calendar',true);
+                return $this->_redirect($url);
             } else {
                 $form->getElement('password')->markAsError()->addError('Invalid password or username not found');
             }
