@@ -36,7 +36,7 @@ class MassagebookingController extends Controller
 
         $availability = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
 
-        $availabilityModel = $this->removeMassageBookingsFrom($availability, $this->_getParam('day'), $this->_getParam('therapist'));
+        $availabilityModel = $this->removeBookingsFrom($availability, $this->_getParam('day'), $this->_getParam('therapist'));
         $availabilityModel->mergeOverlappingRanges();
 
         $form->setAvailability($availabilityModel->availability);
@@ -58,7 +58,7 @@ class MassagebookingController extends Controller
     {
         $form = new MassageBookingForm3;
         $availabilityArray = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
-        $availabilityModel = $this->removeMassageBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('therapist'));
+        $availabilityModel = $this->removeBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('therapist'));
 
         $form->setAvailability($availabilityModel->availability);
         $form->populate($this->getRequest()->getParams());

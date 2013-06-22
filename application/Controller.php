@@ -132,7 +132,7 @@ abstract class Controller extends Zend_Controller_Action
         return $db->query($select)->fetchAll();
     }
 
-    function removeMassageBookingsFrom($availability, $dayString, $filterByTherapist = null)
+    function removeBookingsFrom($availability, $dayString, $filterByTherapist = null)
     {
         $availabilityModel = new MassageAvailability($availability);
 

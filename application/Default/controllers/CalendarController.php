@@ -75,6 +75,6 @@ class CalendarController extends AbstractCalendarController
      */
     function removeBookingsFrom($availability, $dayString)
     {
-        return $this->removeMassageBookingsFrom($availability, $dayString, $this->_getParam('therapist'));
+        return $this->removeBookingsFrom($availability, $dayString, $this->_getParam('therapist'));
     }
 }
