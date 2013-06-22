@@ -1,9 +1,9 @@
 {
     "require":{
-        "bookingbat/availability":"*",
-        "zendframework/zendframework1":"*"
+        "bookingbat/availability":"0.1.0",
+        "zendframework/zendframework1":"1.12.*"
     },
-    "minimum-stability":"dev",
+
     "repositories": [
         {
             "type": "vcs",

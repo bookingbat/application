@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "af8b5c71c6da511b72d4de949177441f",
+    "hash": "ec94559ccb196b3e961216fca5a5da2e",
     "packages": [
         {
             "name": "bookingbat/availability",
-            "version": "dev-master",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:bookingbat/availability.git",
-                "reference": "c1a9be981308903d40e88a6a3054524a7ac25ae4"
+                "reference": "0.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bookingbat/availability/zipball/c1a9be981308903d40e88a6a3054524a7ac25ae4",
-                "reference": "c1a9be981308903d40e88a6a3054524a7ac25ae4",
+                "url": "https://api.github.com/repos/bookingbat/availability/zipball/0.1.0",
+                "reference": "0.1.0",
                 "shasum": ""
             },
             "require": {
@@ -34,23 +34,23 @@
             "description": "A framework for defining recurring windows of availability, and \"subtracting\" bookings/appointments from them.",
             "homepage": "https://github.com/bookingbat/availability",
             "support": {
-                "source": "https://github.com/bookingbat/availability/tree/master",
+                "source": "https://github.com/bookingbat/availability/tree/0.1.0",
                 "issues": "https://github.com/bookingbat/availability/issues"
             },
-            "time": "2013-06-19 04:13:14"
+            "time": "2013-06-19 03:37:20"
         },
         {
             "name": "zendframework/zendframework1",
-            "version": "dev-master",
+            "version": "1.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf1.git",
-                "reference": "f3b04713b48b98e563021ca36b6f72e451137900"
+                "reference": "release-1.12.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf1/zipball/f3b04713b48b98e563021ca36b6f72e451137900",
-                "reference": "f3b04713b48b98e563021ca36b6f72e451137900",
+                "url": "https://api.github.com/repos/zendframework/zf1/zipball/release-1.12.3",
+                "reference": "release-1.12.3",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,15 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12.x-dev"
+                    "dev-trunk": "1.12.x-dev",
+                    "dev-release-1.0": "1.0.x-dev",
+                    "dev-release-1.5": "1.5.x-dev",
+                    "dev-release-1.6": "1.6.x-dev",
+                    "dev-release-1.7": "1.7.x-dev",
+                    "dev-release-1.8": "1.8.x-dev",
+                    "dev-release-1.9": "1.9.x-dev",
+                    "dev-release-1.10": "1.10.x-dev",
+                    "dev-release-1.11": "1.11.x-dev"
                 }
             },
             "autoload": {
@@ -80,7 +88,7 @@
                 "ZF1",
                 "framework"
             ],
-            "time": "2013-05-20 13:09:53"
+            "time": "2013-03-13 16:53:12"
         }
     ],
     "packages-dev": [
@@ -89,7 +97,7 @@
     "aliases": [
 
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": [
 
     ],
