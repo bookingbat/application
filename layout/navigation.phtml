@@ -35,6 +35,16 @@ if($user['id'] && $user['type'] != 'client') {
             array('controller' => 'massage', 'action' => 'availability'),
             'default',
             true
-        ) ?>">Availability</a></li>
+        ) ?>"><?=$user['type']=='admin'?'Staff':'My'?> Availability</a></li>
+    <?php
+}
+
+if('admin'==$user['type']) {
+    ?>
+    <li><a href="<?= $this->url(
+            array('controller' => 'settings', 'action' => 'index'),
+            'default',
+            true
+        ) ?>">Settings</a></li>
     <?php
 }
