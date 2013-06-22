@@ -92,4 +92,4 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `type`, `phone`, `assigned_trainer_userid`, `condo_id`, `member`, `first_name`, `last_name`) VALUES
-(6, 'admin', 'admin@example.com', '', 'admin', '', 0, 0, 0, '', '');
+(6, 'admin', 'admin@example.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', '', 0, 0, 0, '', '');
