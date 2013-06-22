@@ -1,0 +1,16 @@
+<?php
+$user = bootstrap::getInstance()->getUser();
+if ($user) {
+    ?>
+    <a class="btn btn-primary" href="<?= $this->url(
+        array('controller' => 'user', 'action' => 'logout'),
+        'default',
+        true
+    ) ?>">Log Out</a>
+<?php
+} else {
+    ?>
+    <a class="btn" href="<?= $this->url(array('controller' => 'user', 'action' => 'login'), 'default', true) ?>">Log In</a>
+    <a class="btn btn-primary" href="<?= $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true) ?>">Register</a>
+<?php
+}

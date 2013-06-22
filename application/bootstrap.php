@@ -64,6 +64,14 @@ class bootstrap
                     'action'=>'index'
                 ))
         );
+        $this->router->addRoute(
+            'appointments',
+            new Zend_Controller_Router_Route('appointments/*',
+                array(
+                    'controller' => 'massage',
+                    'action'=>'appointments'
+                ))
+        );
     }
 
     function setupViewHelperPaths()
