@@ -205,3 +205,13 @@ h2 {
 .right {
     text-align: right;
 }
+
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    .calendar td {
+        height:50px;
+        width:50px;
+
+    }
+}

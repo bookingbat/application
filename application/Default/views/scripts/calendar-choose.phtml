@@ -49,13 +49,13 @@
                 </th>
             </thead>
             <thead>
-                <th width="14%">Sunday</th>
-                <th width="14%">Monday</th>
-                <th width="14%">Tuesday</th>
-                <th width="14%">Wednesday</th>
-                <th width="14%">Thursday</th>
-                <th width="14%">Friday</th>
-                <th width="14%">Saturday</th>
+                <th width="14%"><span class="visible-phone">S</span><span class="hidden-phone">Sunday</span></th>
+                <th width="14%"><span class="visible-phone">M</span><span class="hidden-phone">Monday</span></th>
+                <th width="14%"><span class="visible-phone">T</span><span class="hidden-phone">Tuesday</span></th>
+                <th width="14%"><span class="visible-phone">W</span><span class="hidden-phone">Wednesday</span></th>
+                <th width="14%"><span class="visible-phone">T</span><span class="hidden-phone">Thursday</span></th>
+                <th width="14%"><span class="visible-phone">F</span><span class="hidden-phone">Friday</span></th>
+                <th width="14%"><span class="visible-phone">S</span><span class="hidden-phone">Saturday</span></th>
             </thead>
             <tr>
                 <?php
@@ -119,10 +119,9 @@
                             <?php
                             ?>
                             <strong><?=date('d', strtotime($dayString))?></strong>
-                            <br/>
                             <?php
                             if (count($this->availability[$day])) {
-                                echo '<p>';
+                                echo '<p class="hidden-phone">';
 
                                 foreach ($this->availability[$day] as $availability) {
                                     $start = new DateTime($availability['start']);
