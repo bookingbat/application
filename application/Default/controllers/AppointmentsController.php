@@ -11,11 +11,26 @@ class AppointmentsController extends Controller
         $db = Zend_Registry::get('db');
         $select = $db->select()
             ->from('appointments')
-            ->joinLeft('user', 'user.id=appointments.user_id', array('first_name', 'last_name', 'email', 'phone'))
-            ->where('staff_userid=?', $user['id']);
+            ->joinLeft('user', 'user.id=appointments.user_id', array(
+                'first_name',
+                'last_name',
+                'email',
+                'phone'
+            ))
+            ->joinLeft(array('staff'=>'user'), 'staff.id=appointments.staff_userid', array(
+                'staff_first_name'=>'first_name',
+                'staff_last_name'=>'last_name'
+            ))
+            ->order('id DESC');
+
+        if($user['type'] != 'admin') {
+            $select->where('staff_userid=?', $user['id']);
+        }
 
         $paginationAdapter = new Zend_Paginator_Adapter_DbSelect($select);
+
         $this->view->show_delete_button = true;
+        $this->view->user_type = $user['type'];
         $this->view->paginator = new Zend_Paginator($paginationAdapter);
         $this->view->paginator->setCurrentPageNumber($this->getParam('page'));
 

@@ -11,6 +11,11 @@ if ($this->paginator) {
         <th></th>
         <th>Date &amp; Time</th>
         <th>Duration</th>
+        <?php
+        if($this->user_type=='admin') {
+            ?><th>Staff</th><?php
+        }
+        ?>
         <th>Client</th>
     </tr>
     <?php
@@ -31,6 +36,11 @@ if ($this->paginator) {
 
             <td><?=$this->datetime($appointment['date'], $appointment['time'])?></td>
             <td><?=$this->duration($appointment['duration'])?></td>
+            <?php
+            if($this->user_type=='admin') {
+                ?><td><?=$this->escape($appointment['staff_first_name'] . ' ' . $appointment['staff_last_name'])?></td><?php
+            }
+            ?>
             <td>
                 <?=$this->escape($appointment['first_name'] . ' ' . $appointment['last_name'])?>
                 <br />
