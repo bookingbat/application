@@ -56,8 +56,8 @@ class bootstrap
     function addRoutes()
     {
         $this->router->addRoute(
-            'massage-calendar',
-            new Zend_Controller_Router_Route('calendar/*',
+            'calendar',
+            new Zend_Controller_Router_Route('/*',
                 array(
                     'controller' => 'calendar',
                     'action'=>'index'

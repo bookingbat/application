@@ -17,7 +17,12 @@
 }
 .week-chooser ul.legend,
 .week-chooser form,
-.week-chooser form *,
+.week-chooser form dd,
+.week-chooser form dt,
+.week-chooser form dl,
+.week-chooser form label,
+.week-chooser form select,
+.week-chooser form input,
 .week-chooser .legend li,
 .week-chooser  h2 {
     display:inline;
