@@ -95,7 +95,7 @@ class MassagebookingController extends Controller
 
             $db = Zend_Registry::get('db');
             $db->insert('appointments', array(
-                'therapist_userid' => $this->_getParam('therapist'),
+                'staff_userid' => $this->_getParam('therapist'),
                 'user_id' =>0,
                 'date' => $this->_getParam('day'),
                 'time' => $form->getValue('time'),

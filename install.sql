@@ -13,7 +13,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `appointments` (
   `id` int(50) NOT NULL AUTO_INCREMENT,
-  `therapist_userid` int(50) NOT NULL,
+  `staff_userid` int(50) NOT NULL,
   `user_id` int(50) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `appointments` (
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`id`, `therapist_userid`, `user_id`, `date`, `time`, `duration`, `canceled`) VALUES
+INSERT INTO `appointments` (`id`, `staff_userid`, `user_id`, `date`, `time`, `duration`, `canceled`) VALUES
 (1, 15, 9, '2013-04-29', '19:00:00', 60, 1),
 (2, 15, 9, '2013-04-29', '21:30:00', 60, 0),
 (3, 14, 9, '2013-04-07', '00:30:00', 60, 0),
@@ -43,7 +43,7 @@ INSERT INTO `appointments` (`id`, `therapist_userid`, `user_id`, `date`, `time`,
 
 CREATE TABLE IF NOT EXISTS `availability` (
   `id` int(50) NOT NULL AUTO_INCREMENT,
-  `therapist_userid` int(50) NOT NULL,
+  `staff_userid` int(50) NOT NULL,
   `day_of_week` int(11) NOT NULL,
   `start` time NOT NULL,
   `end` time NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `availability` (
 -- Dumping data for table `availability`
 --
 
-INSERT INTO `availability` (`id`, `therapist_userid`, `day_of_week`, `start`, `end`) VALUES
+INSERT INTO `availability` (`id`, `staff_userid`, `day_of_week`, `start`, `end`) VALUES
 (40, 19, 2, '00:30:00', '19:00:00'),
 (41, 19, 4, '00:30:00', '22:30:00');
 

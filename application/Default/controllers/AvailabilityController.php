@@ -27,7 +27,7 @@ class AvailabilityController extends Controller
         $form = new AvailabilityForm;
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
             $db->insert('availability', array(
-                'therapist_userid' => $user['id'],
+                'staff_userid' => $user['id'],
                 'day_of_week' => $form->getValue('day'),
                 'start' => $form->getValue('start'),
                 'end' => $form->getValue('end'),

@@ -91,7 +91,7 @@ class AppointmentsLister
     {
         $select = $this->db()->select()
             ->from('therapist_appointments')
-            ->joinLeft('user', 'user.id=therapist_appointments.therapist_userid', array('first_name', 'last_name', 'email', 'phone'))
+            ->joinLeft('user', 'user.id=therapist_appointments.staff_userid', array('first_name', 'last_name', 'email', 'phone'))
             ->where('user_id=?', $this->userId())
             ->order('date DESC')
             ->order('time DESC');

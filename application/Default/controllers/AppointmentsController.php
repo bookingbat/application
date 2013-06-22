@@ -12,7 +12,7 @@ class AppointmentsController extends Controller
         $select = $db->select()
             ->from('appointments')
             ->joinLeft('user', 'user.id=appointments.user_id', array('first_name', 'last_name', 'email', 'phone'))
-            ->where('therapist_userid=?', $user['id']);
+            ->where('staff_userid=?', $user['id']);
 
         $paginationAdapter = new Zend_Paginator_Adapter_DbSelect($select);
         $this->view->show_delete_button = true;
@@ -51,7 +51,7 @@ class AppointmentsController extends Controller
             }
             $condition .= ' && user_id = ' . (int)$user['id'];
         } else if ($user['type'] == 'staff') {
-            $condition .= ' && therapist_userid = ' . (int)$user['id'];
+            $condition .= ' && staff_userid = ' . (int)$user['id'];
         } else if ($user['type'] !== 'admin') {
             return $this->_redirect('/');
         }

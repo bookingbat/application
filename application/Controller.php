@@ -84,16 +84,16 @@ abstract class Controller extends Zend_Controller_Action
         $select = $db->select()
             ->from('availability', array(
                 'id',
-                'user_id' => 'therapist_userid',
+                'user_id' => 'staff_userid',
                 'day_of_week',
                 'start',
                 'end'
             ))
             ->where('day_of_week=?', $dayOfWeek);
         if (is_array($staff)) {
-            $select->where('therapist_userid IN ('. implode(',', $staff).')');
+            $select->where('staff_userid IN ('. implode(',', $staff).')');
         }else if ($staff) {
-            $select->where('therapist_userid=?', $staff);
+            $select->where('staff_userid=?', $staff);
         }
 
         return $db->query($select)->fetchAll();
@@ -110,14 +110,14 @@ abstract class Controller extends Zend_Controller_Action
             ->where('date=?', date('Y-m-d', strtotime($dayString)))
             ->where('canceled=0');
         if ($filterByTherapist) {
-            $select->where('therapist_userid=?', $filterByTherapist);
+            $select->where('staff_userid=?', $filterByTherapist);
         }
         $bookings = $select->query()->fetchAll();
 
         foreach ($bookings as $bookingArray) {
             $booking = new Booking(array(
                 'start' => $bookingArray['time'],
-                'user_id' => $bookingArray['therapist_userid'],
+                'user_id' => $bookingArray['staff_userid'],
                 'duration' => $bookingArray['duration']
             ));
             $availabilityModel->addBooking($booking);
