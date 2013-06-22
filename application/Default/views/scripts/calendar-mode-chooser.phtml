@@ -3,11 +3,11 @@ $this->placeholder('calendar_sidebar')->captureStart();
 if($this->mode == 'week') {
     ?>
     <a class="btn disabled">Week</a>
-    <a href="<?=$this->url(array('mode'=>'calendar'))?>" class="btn">Calendar</a>
+    <a href="<?=$this->url(array())?>?mode=calendar" class="btn">Calendar</a>
 <?php
 } else {
     ?>
-    <a href="<?=$this->url(array('mode'=>'week'))?>" class="btn">Week</a>
+    <a href="<?=$this->url(array())?>?mode=week" class="btn">Week</a>
     <a class="btn disabled">Calendar</a>
 <?php
 }

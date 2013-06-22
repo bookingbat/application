@@ -56,8 +56,16 @@ class bootstrap
     function addRoutes()
     {
         $this->router->addRoute(
+            'default',
+            new Zend_Controller_Router_Route('/:controller/:action/*',
+                array(
+                    'controller' => 'calendar',
+                    'action'=>'index'
+                ))
+        );
+        $this->router->addRoute(
             'calendar',
-            new Zend_Controller_Router_Route('/*',
+            new Zend_Controller_Router_Route('/calendar/*',
                 array(
                     'controller' => 'calendar',
                     'action'=>'index'
