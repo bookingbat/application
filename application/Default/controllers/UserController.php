@@ -131,7 +131,8 @@ class UserController extends Controller
     {
         $db = Zend_Registry::get('db');
         $select = $db->select()
-            ->from('user');
+            ->from('user')
+            ->where('type=?','staff');
 
         return $select;
     }

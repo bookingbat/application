@@ -69,17 +69,25 @@ abstract class Controller extends Zend_Controller_Action
         return $this->_getParam('year') ? $this->_getParam('year') : date('Y');
     }
 
-    function staffSelector()
+    function staffSelector($allOption=true)
     {
-        $therapists = $this->listStaff();
+        $staff = $this->listStaff();
 
         $form = new Zend_Form;
         $form->setMethod("GET");
-        $form->addElement('select', 'staff', array(
-            'label' => 'Staff',
-            'multiOptions' => array('All' => 'All') + $therapists,
-            'value' => $this->_getParam('staff') == 'All' ? null : $this->_getParam('staff')
-        ));
+        if($allOption) {
+            $form->addElement('select', 'staff', array(
+                'label' => 'Staff',
+                'multiOptions' => array('All' => 'All') + $staff,
+                'value' => $this->_getParam('staff') == 'All' ? null : $this->_getParam('staff')
+            ));
+        } else {
+            $form->addElement('select', 'staff', array(
+                'label' => 'Staff',
+                'multiOptions' => $staff,
+                'value' => $this->_getParam('staff')
+            ));
+        }
         $form->addElement('submit', 'submitbutton', array(
             'label' => 'Go',
             'class'=>'btn'

@@ -8,14 +8,19 @@ if('admin'==$user['type']) {
             array('controller' => 'user', 'action' => 'manage'),
             'default',
             true
-        ) ?>">Manage Users</a></li>
+        ) ?>">Manage Staff</a></li>
     <?php
 }
 
 if($user['id'] && $user['type'] != 'client') {
     ?>
     <li><a href="<?= $this->url(array(),'appointments',true)?>"><?=$user['type']=='admin'?'':'My'?> Appointments</a></li>
-    <li><a href="<?= $this->url(array(),'availability',true)?>"><?=$user['type']=='admin'?'Staff':'My'?> Availability</a></li>
+    <?php
+}
+
+if('staff'==$user['type']) {
+    ?>
+    <li><a href="<?= $this->url(array(),'availability',true)?>">My Availability</a></li>
     <?php
 }
 
