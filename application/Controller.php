@@ -159,7 +159,7 @@ abstract class Controller extends Zend_Controller_Action
         return $availabilityModel;
     }
 
-    function therapistData($therapistID)
+    function staffData($therapistID)
     {
         return $this->db()->select()
             ->from('user')

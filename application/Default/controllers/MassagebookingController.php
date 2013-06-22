@@ -102,7 +102,7 @@ class MassagebookingController extends Controller
                 'duration' => $form->getValue('appointment_duration'),
             ));
 
-            $therapistData = $this->therapistData($this->_getParam('therapist'));
+            $therapistData = $this->staffData($this->_getParam('therapist'));
 
             $this->view->therapist = $therapistData;
             $this->view->date = $this->_getParam('day');
