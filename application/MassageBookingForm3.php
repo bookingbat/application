@@ -10,8 +10,8 @@ class MassageBookingForm3 extends MassageBookingForm2
             'disabled' => 'disabled'
         ));
 
-        $this->addElement('select', 'therapist', array(
-            'label' => 'Therapist',
+        $this->addElement('select', 'staff', array(
+            'label' => 'Staff',
             'required' => true
         ));
 

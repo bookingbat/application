@@ -34,9 +34,9 @@ class MassagebookingController extends Controller
         $form = new MassageBookingForm2;
         $form->getElement('appointment_duration')->setValue($this->_getParam('appointment_duration'));
 
-        $availability = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
+        $availability = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('staff'));
 
-        $availabilityModel = $this->removeBookingsFrom($availability, $this->_getParam('day'), $this->_getParam('therapist'));
+        $availabilityModel = $this->removeBookingsFrom($availability, $this->_getParam('day'), $this->_getParam('staff'));
         $availabilityModel->mergeOverlappingRanges();
 
         $form->setAvailability($availabilityModel->availability);
@@ -57,8 +57,8 @@ class MassagebookingController extends Controller
     function booking3Action()
     {
         $form = new MassageBookingForm3;
-        $availabilityArray = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
-        $availabilityModel = $this->removeBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('therapist'));
+        $availabilityArray = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('staff'));
+        $availabilityModel = $this->removeBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('staff'));
 
         $form->setAvailability($availabilityModel->availability);
         $form->populate($this->getRequest()->getParams());
@@ -73,7 +73,7 @@ class MassagebookingController extends Controller
         $possibleUserIdsForBooking = $availabilityObject->possibleUserIdsForBooking($booking);
 
         if(!$possibleUserIdsForBooking) {
-            throw new Exception('No therapists available to take this appointment');
+            throw new Exception('No staff available to take this appointment');
         }
 
         $db = Zend_Registry::get('db');
@@ -89,20 +89,20 @@ class MassagebookingController extends Controller
             $therapists[$therapistsResult['id']] = $therapistsResult['username'];
         }
 
-        $form->getElement('therapist')->setMultiOptions($therapists);
+        $form->getElement('staff')->setMultiOptions($therapists);
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 
             $db = Zend_Registry::get('db');
             $db->insert('appointments', array(
-                'staff_userid' => $this->_getParam('therapist'),
+                'staff_userid' => $this->_getParam('staff'),
                 'user_id' =>0,
                 'date' => $this->_getParam('day'),
                 'time' => $form->getValue('time'),
                 'duration' => $form->getValue('appointment_duration'),
             ));
 
-            $therapistData = $this->staffData($this->_getParam('therapist'));
+            $therapistData = $this->staffData($this->_getParam('staff'));
 
             $this->view->therapist = $therapistData;
             $this->view->date = $this->_getParam('day');
