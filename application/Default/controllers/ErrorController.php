@@ -30,7 +30,7 @@ class ErrorController extends Zend_Controller_Action
 
         // pass the environment to the view script so we can conditionally
         // display more/less information
-        $this->view->env = $this->getInvokeArg('env');
+        $this->view->env = APPLICATION_ENVIRONMENT;
 
         // pass the actual exception object to the view
         $this->view->exception = $errors->exception;
