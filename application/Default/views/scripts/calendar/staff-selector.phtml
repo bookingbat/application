@@ -1,11 +1,11 @@
 <?php
 $this->placeholder('calendar_sidebar')->captureStart();
-$this->therapistSelector->setAction('?');
-echo $this->therapistSelector;
+$this->staffSelector->setAction('?');
+echo $this->staffSelector;
 ?>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#therapist').change(function () {
+        $('#staff').change(function () {
             $(this).closest('form')
                 .trigger('submit')
 

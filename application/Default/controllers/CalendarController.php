@@ -1,21 +1,23 @@
 <?php
 class CalendarController extends AbstractCalendarController
 {
+    protected $staff_selection;
+
     function indexAction()
     {
         $user = bootstrap::getInstance()->getUser();
 
-        $therapistSelector = $this->therapistSelector();
+        $staffSelector = $this->staffSelector();
 
-        if(!is_null($therapistSelector->getValue('therapist'))) {
-            $this->therapist_selection = $therapistSelector->getValue('therapist');
+        if(!is_null($staffSelector->getValue('staff'))) {
+            $this->staff_selection = $staffSelector->getValue('staff');
         } else {
-            $this->therapist_selection = $this->therapistsForCondo($user['condo_id']);
+            $this->staff_selection = $this->listStaff();
         }
 
-        $this->view->therapistSelector = $therapistSelector;
-        $this->render('therapist-selector');
-        $this->view->therapist_id = $this->getParam('therapist');
+        $this->view->staffSelector = $staffSelector;
+        $this->render('staff-selector');
+        $this->view->therapist_id = $this->getParam('staff');
 
         $this->view->controller = 'massage';
         $this->renderCalendar();
@@ -57,16 +59,16 @@ class CalendarController extends AbstractCalendarController
         }
     }
 
-    function therapistSelector()
+    function staffSelector()
     {
-        $therapists = $this->therapistsForCondo();
+        $therapists = $this->listStaff();
 
         $form = new Zend_Form;
         $form->setMethod("GET");
-        $form->addElement('select', 'therapist', array(
-            'label' => 'Therapist',
+        $form->addElement('select', 'staff', array(
+            'label' => 'Staff',
             'multiOptions' => array('All' => 'All') + $therapists,
-            'value' => $this->_getParam('therapist') == 'All' ? null : $this->_getParam('therapist')
+            'value' => $this->_getParam('staff') == 'All' ? null : $this->_getParam('staff')
         ));
         $form->addElement('submit', 'submitbutton', array(
             'label' => 'Go',
@@ -75,25 +77,25 @@ class CalendarController extends AbstractCalendarController
         return $form;
     }
 
-    function therapistsForCondo()
+    function listStaff()
     {
         $db = Zend_Registry::get('db');
-        $therapistsResult = $db->select()
+        $staffResult = $db->select()
             ->from('user')
             ->where('type=?', 'staff')
             ->query()->fetchAll();
 
-        $therapists = array();
-        foreach ($therapistsResult as $therapistsResult) {
-            $therapists[$therapistsResult['id']] = $therapistsResult['username'];
+        $staff = array();
+        foreach ($staffResult as $staffResult) {
+            $staff[$staffResult['id']] = $staffResult['username'];
         }
-        return $therapists;
+        return $staff;
     }
 
     /** Select availability for either all massage therapists at the client's condo, or the selected therapist */
     function selectAvailability($dayNumber)
     {
-        $therapist = $this->therapist_selection;
+        $therapist = $this->staff_selection;
         if(is_array($therapist)) {
             $therapist = array_keys($therapist);
         }

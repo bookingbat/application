@@ -114,7 +114,7 @@ th {
 }
 
 /**
- * Massage therapist dropdown box
+ * Massage staff dropdown box
  */
 #submitbutton-element {
     margin:0;
@@ -122,10 +122,10 @@ th {
 dt#submitbutton-label {
     display: none;
 }
-dd#therapist-element {
+dd#staff-element {
     margin:0;
 }
-select#therapist {
+select#staff {
     width:150px;
 }
 
