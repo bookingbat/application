@@ -23,7 +23,7 @@ if ($this->paginator) {
             } else {
                 ?>
                 <td>
-                    <a href="<?= $this->url(array('controller' => 'massage', 'action' => 'cancel', 'id' => $appointment['id'])) ?>">Cancel</a>
+                    <a class="btn btn-warning" href="<?= $this->url(array('action' => 'cancel', 'id' => $appointment['id'])) ?>">Cancel</a>
                 </td>
             <?php
             }

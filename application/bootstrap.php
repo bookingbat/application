@@ -65,10 +65,10 @@ class bootstrap
         );
         $this->router->addRoute(
             'appointments',
-            new Zend_Controller_Router_Route('appointments/*',
+            new Zend_Controller_Router_Route('appointments/:action/*',
                 array(
-                    'controller' => 'massage',
-                    'action'=>'appointments'
+                    'controller' => 'appointments',
+                    'action'=>'index'
                 ))
         );
         $this->router->addRoute(
@@ -155,13 +155,13 @@ class bootstrap
             if(!file_exists($file)) {
                 throw new Exception('Unkown client');
             }
-            $environment = 'production';
+            define('APPLICATION_ENVIRONMENT','production');
         } else {
-            $environment = 'localhost';
+            define('APPLICATION_ENVIRONMENT','localhost');
             $file = 'database-config.ini';
         }
 
-        $config = new Zend_Config_Ini($file, $environment);
+        $config = new Zend_Config_Ini($file, APPLICATION_ENVIRONMENT);
         Zend_Registry::set('database_config', $config);
         Zend_Registry::set('mysql_command', $config->mysql_command);
     }

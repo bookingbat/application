@@ -1,9 +1,7 @@
 <?php
-class MassageController extends Controller
+class AppointmentsController extends Controller
 {
-
-
-    function appointmentsAction()
+    function indexAction()
     {
         $user = bootstrap::getInstance()->getUser();
         if (!$user['id'] || $user['type'] != 'staff') {
@@ -35,12 +33,13 @@ class MassageController extends Controller
         $newValues = array('canceled' => 1);
 
         $condition = 'id=' . (int)$this->_getParam('id');
-        if ($user['type'] == 'client') {
-            $appointment_date = $db->select()
-                ->from('therapist_appointments', array('date'))
-                ->where('id=?', $this->_getParam('id'))
-                ->query()->fetchColumn();
 
+        $appointment_date = $db->select()
+            ->from('therapist_appointments', array('date'))
+            ->where('id=?', $this->_getParam('id'))
+            ->query()->fetchColumn();
+
+        if ($user['type'] == 'client') {
             $booking = new Booking(array(
                 'today' => date('Y-m-d'),
                 'date' => $appointment_date
@@ -61,12 +60,11 @@ class MassageController extends Controller
 
         $logMessage = 'Therapist appointment #' . (int)$this->_getParam('id');
         $logMessage .= ' cancelled by user #' . $user['id'];
-        $this->logger()->log($logMessage, Zend_Log::INFO);
-
+        $this->cancelsLogger()->log($logMessage, Zend_Log::INFO);
 
         $this->view->date = $appointment_date;
 
-        $html = $this->view->render('massage/appointment-cancel.phtml');
+        $html = $this->view->render('appointments/cancel.phtml');
 
         $mail = new Zend_Mail;
         $mail->addTo($user['email']);

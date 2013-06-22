@@ -266,7 +266,7 @@ abstract class Controller extends Zend_Controller_Action
         return $trainers;
     }
 
-    function logger()
+    function cancelsLogger()
     {
         if (isset($this->logger)) {
             return $this->logger;
@@ -276,7 +276,7 @@ abstract class Controller extends Zend_Controller_Action
             array(
                 'writerName' => 'Stream',
                 'writerParams' => array(
-                    'stream' => FAMEFIT_BASE_PATH . '/famefit.log',
+                    'stream' => 'var/cancels.log',
                 ),
                 'formatterName' => 'Simple',
                 'formatterParams' => array(
