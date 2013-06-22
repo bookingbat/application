@@ -4,7 +4,7 @@ class AppointmentsController extends Controller
     function indexAction()
     {
         $user = bootstrap::getInstance()->getUser();
-        if (!$user['id'] || $user['type'] != 'staff') {
+        if (!$user['id'] || ($user['type'] != 'staff' && $user['type'] != 'admin')) {
             return $this->_redirect('/');
         }
 
