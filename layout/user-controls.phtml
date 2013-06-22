@@ -11,6 +11,5 @@ if ($user) {
 } else {
     ?>
     <a class="btn" href="<?= $this->url(array('controller' => 'user', 'action' => 'login'), 'default', true) ?>">Log In</a>
-    <a class="btn btn-primary" href="<?= $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true) ?>">Register</a>
 <?php
 }

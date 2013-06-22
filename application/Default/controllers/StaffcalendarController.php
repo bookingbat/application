@@ -44,7 +44,7 @@ class StaffcalendarController extends CalendarchooseController
         $db = Zend_Registry::get('db');
         $therapistsResult = $db->select()
             ->from('user')
-            ->where('type=?', 'massage-therapist')
+            ->where('type=?', 'staff')
             ->query()->fetchAll();
 
         $therapists = array();

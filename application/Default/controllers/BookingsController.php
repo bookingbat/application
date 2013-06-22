@@ -40,7 +40,7 @@ class BookingsController extends CalendarController
             case 'class-instructor':
                 return $this->render('index-instructor');
 
-            case 'massage-therapist':
+            case 'staff':
                 return $this->render('index-therapist');
 
             case 'admin':

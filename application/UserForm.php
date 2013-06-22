@@ -21,6 +21,15 @@ class UserForm extends Zend_Form
             'required' => true,
             'validators' => array('EmailAddress')
         ));
+        $this->addElement('text', 'phone', array(
+            'label' => 'Phone #',
+            'required' => true,
+            'validators' => array(
+                array('regex', false, array('pattern' => '/^[0-9 -]+$/', 'messages' => array('regexNotMatch' => 'Must not contain characters other than spaces, dashes & digits.'))),
+                array('stringLength', false, array('min' => 10, 'max' => 20))
+            )
+        ));
+
         $this->addElement('password', 'password', array(
             'label' => 'Password'
         ));
@@ -31,18 +40,7 @@ class UserForm extends Zend_Form
                 array('identical', true, array('password'))
             )
         ));
-        $this->addElement('select', 'type', array(
-            'label' => 'User Type',
-            'multiOptions' => array('massage-therapist' => 'Massage Therapist')
-        ));
-        $this->addElement('text', 'phone', array(
-            'label' => 'Phone #',
-            'required' => true,
-            'validators' => array(
-                array('regex', false, array('pattern' => '/^[0-9 -]+$/', 'messages' => array('regexNotMatch' => 'Must not contain characters other than spaces, dashes & digits.'))),
-                array('stringLength', false, array('min' => 10, 'max' => 20))
-            )
-        ));
+
         $this->addElement('submit', 'submit', array(
             'label' => 'Save',
             'class' => 'btn btn-primary',

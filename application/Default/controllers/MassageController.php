@@ -5,7 +5,7 @@ class MassageController extends Controller
     function availabilityAction()
     {
         $user = bootstrap::getInstance()->getUser();
-        if (!$user['id'] || $user['type'] != 'massage-therapist') {
+        if (!$user['id'] || $user['type'] != 'staff') {
             return $this->_redirect('/');
         }
 
@@ -43,7 +43,7 @@ class MassageController extends Controller
     function appointmentsAction()
     {
         $user = bootstrap::getInstance()->getUser();
-        if (!$user['id'] || $user['type'] != 'massage-therapist') {
+        if (!$user['id'] || $user['type'] != 'staff') {
             return $this->_redirect('/');
         }
 
@@ -88,7 +88,7 @@ class MassageController extends Controller
                 exit;
             }
             $condition .= ' && user_id = ' . (int)$user['id'];
-        } else if ($user['type'] == 'massage-therapist') {
+        } else if ($user['type'] == 'staff') {
             $condition .= ' && therapist_userid = ' . (int)$user['id'];
         } else if ($user['type'] !== 'admin') {
             return $this->_redirect('/');

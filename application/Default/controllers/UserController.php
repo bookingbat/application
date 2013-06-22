@@ -87,16 +87,6 @@ class UserController extends Controller
                 'phone' => $form->getValue('phone'),
             ), 'id=' . (int)$this->_getParam('id'));
 
-            if ($userBeingEdited['type'] == 'massage-therapist') {
-                $db->delete('therapist_condos', 'therapist_userid=' . (int)$userBeingEdited['id']);
-                foreach ($form->getValue('condo_id') as $condo_id) {
-                    $db->insert('therapist_condos', array(
-                        'therapist_userid' => $userBeingEdited['id'],
-                        'condo_id' => $condo_id
-                    ));
-                }
-            }
-
             $this->view->type = $form->getValue('type');
             $this->view->email = $form->getValue('email');
             $this->view->username = $form->getValue('username');
@@ -122,14 +112,13 @@ class UserController extends Controller
                 'username' => $form->getValue('username'),
                 'email' => $form->getValue('email'),
                 'password' => sha1($form->getValue('password')),
-                'type' => $user['type'] == 'admin' ? $form->getValue('type') : 'client',
+                'type' => 'staff',
                 'phone' => $form->getValue('phone'),
                 'first_name' => $form->getValue('first_name'),
                 'last_name' => $form->getValue('last_name'),
             );
             $db->insert('user', $data);
 
-            $this->view->type = $form->getValue('type');
             $this->view->email = $form->getValue('email');
             $this->view->username = $form->getValue('username');
             return $this->render('success');

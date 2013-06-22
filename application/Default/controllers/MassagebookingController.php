@@ -80,7 +80,7 @@ class MassagebookingController extends Controller
 
         $therapistsResult = $db->select()
             ->from('user')
-            ->where('type=?', 'massage-therapist')
+            ->where('type=?', 'staff')
             ->where('id IN(' . implode(',', $possibleUserIdsForBooking) . ')')
             ->query()->fetchAll();
 

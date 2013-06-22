@@ -13,19 +13,9 @@ if('admin'==$user['type']) {
     <?php
 }
 
-if('massage-therapist'==$user['type']) {
-    ?>
-    <li><a href="<?= $this->url(
-            array('controller' => 'user', 'action' => 'register'),
-            'default',
-            true
-        ) ?>">New User</a></li>
-    <?php
-}
-
 if($user['id'] && $user['type'] != 'client') {
     ?>
-    <li><a href="<?= $this->url(array(), 'appointments',true)?>">Appointments</a></li>
+    <li><a href="<?= $this->url(array(), 'appointments',true)?>"><?=$user['type']=='admin'?'':'My'?> Appointments</a></li>
     <li><a href="<?= $this->url(
             array('controller' => 'massage', 'action' => 'availability'),
             'default',
