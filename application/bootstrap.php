@@ -75,8 +75,8 @@ class bootstrap
             'availability',
             new Zend_Controller_Router_Route('availability/*',
                 array(
-                    'controller' => 'massage',
-                    'action'=>'availability'
+                    'controller' => 'availability',
+                    'action'=>'index'
                 ))
         );
     }
