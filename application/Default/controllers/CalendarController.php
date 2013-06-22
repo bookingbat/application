@@ -99,7 +99,7 @@ class CalendarController extends AbstractCalendarController
         if(is_array($therapist)) {
             $therapist = array_keys($therapist);
         }
-        return $this->selectMassageAvailability($dayNumber, $therapist);
+        return parent::selectAvailability($dayNumber, $therapist);
     }
 
     /**

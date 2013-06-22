@@ -10,8 +10,8 @@ class AppointmentsController extends Controller
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-            ->from('therapist_appointments')
-            ->joinLeft('user', 'user.id=therapist_appointments.user_id', array('first_name', 'last_name', 'email', 'phone'))
+            ->from('appointments')
+            ->joinLeft('user', 'user.id=appointments.user_id', array('first_name', 'last_name', 'email', 'phone'))
             ->where('therapist_userid=?', $user['id']);
 
         $paginationAdapter = new Zend_Paginator_Adapter_DbSelect($select);
@@ -19,7 +19,7 @@ class AppointmentsController extends Controller
         $this->view->paginator = new Zend_Paginator($paginationAdapter);
         $this->view->paginator->setCurrentPageNumber($this->getParam('page'));
 
-        $this->render('appointments-therapist');
+        $this->render('appointments-staff');
     }
 
     function cancelAction()
@@ -35,7 +35,7 @@ class AppointmentsController extends Controller
         $condition = 'id=' . (int)$this->_getParam('id');
 
         $appointment_date = $db->select()
-            ->from('therapist_appointments', array('date'))
+            ->from('appointments', array('date'))
             ->where('id=?', $this->_getParam('id'))
             ->query()->fetchColumn();
 
@@ -56,7 +56,7 @@ class AppointmentsController extends Controller
             return $this->_redirect('/');
         }
 
-        $db->update('therapist_appointments', $newValues, $condition);
+        $db->update('appointments', $newValues, $condition);
 
         $logMessage = 'Therapist appointment #' . (int)$this->_getParam('id');
         $logMessage .= ' cancelled by user #' . $user['id'];

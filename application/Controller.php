@@ -70,24 +70,30 @@ abstract class Controller extends Zend_Controller_Action
     }
 
     /**
-     * Get the availability for massages for a specific day [and optionally for specific therapist(s)]
+     * Get the availability for staff for a specific day [and optionally for specific staff(s)]
      * @param $dayOfWeek integer 1 (for Monday) through 7 (for Sunday)
-     * @param mixed $therapist - null for all, integer for specific therapist, array of therapist IDs for specific therapist(s).
+     * @param mixed $staff - null for all, integer for specific staff, array of user IDs for specific staff(s).
      * @return array database rows representing time(s) available for this day.
      */
-    function selectMassageAvailability($dayOfWeek, $therapist = null)
+    function selectAvailability($dayOfWeek, $staff = null)
     {
-        if(is_array($therapist) && !count($therapist)) {
+        if(is_array($staff) && !count($staff)) {
             return array();
         }
         $db = Zend_Registry::get('db');
         $select = $db->select()
-            ->from('therapist_availability', array('id', 'user_id' => 'therapist_userid', 'day_of_week', 'start', 'end'))
+            ->from('availability', array(
+                'id',
+                'user_id' => 'therapist_userid',
+                'day_of_week',
+                'start',
+                'end'
+            ))
             ->where('day_of_week=?', $dayOfWeek);
-        if (is_array($therapist)) {
-            $select->where('therapist_userid IN ('. implode(',', $therapist).')');
-        }else if ($therapist) {
-            $select->where('therapist_userid=?', $therapist);
+        if (is_array($staff)) {
+            $select->where('therapist_userid IN ('. implode(',', $staff).')');
+        }else if ($staff) {
+            $select->where('therapist_userid=?', $staff);
         }
 
         return $db->query($select)->fetchAll();
@@ -100,7 +106,7 @@ abstract class Controller extends Zend_Controller_Action
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-            ->from('therapist_appointments')
+            ->from('appointments')
             ->where('date=?', date('Y-m-d', strtotime($dayString)))
             ->where('canceled=0');
         if ($filterByTherapist) {
@@ -120,45 +126,6 @@ abstract class Controller extends Zend_Controller_Action
         return $availabilityModel;
     }
 
-    /** Get the trainer the admin assigned to this client. If none set, gets the master trainer for this client's condo */
-    function assignedTrainerForUser()
-    {
-        $user = bootstrap::getInstance()->getUser();
-        $db = Zend_Registry::get('db');
-        $trainerArray = $db->select()
-            ->from('user', array())
-            ->where('user.id=?', $user['id'])
-            ->joinLeft('user as t', 't.id = user.assigned_trainer_userid', array('trainer' => 't.username', 't.id'))
-            ->limit(1)
-            ->query()->fetch();
-        $trainer = $trainerArray['id'];
-        if ($trainer) {
-            return $trainer;
-        }
-        return $this->masterTrainerForUser();
-    }
-
-    /** Get the master trainer for the condo this client is at */
-    function masterTrainerForUser()
-    {
-        $user = bootstrap::getInstance()->getUser();
-
-        $trainer = $this->masterTrainer($user['condo_id']);
-        if (!$trainer) {
-            throw new Exception('No master trainer set!');
-        }
-        return $trainer;
-    }
-
-    function trainerData($trainerUserId)
-    {
-        return $this->db()->select()
-            ->from('user')
-            ->where('id=?',$trainerUserId)
-            ->query()
-            ->fetch();
-    }
-
     function therapistData($therapistID)
     {
         return $this->db()->select()
@@ -166,49 +133,6 @@ abstract class Controller extends Zend_Controller_Action
             ->where('id=?',$therapistID)
             ->query()
             ->fetch();
-    }
-
-    function masterTrainer($condo_id)
-    {
-        $db = Zend_Registry::get('db');
-        $select = $db->select()
-            ->from('condo', array('master_trainer_userid'))
-            ->where('id=?', $condo_id);
-        return $select->query()->fetchColumn();
-    }
-
-    function selectTrainerAvailability($dayOfWeek, $userID=null)
-    {
-        $db = Zend_Registry::get('db');
-        $select = $db->select()
-            ->from('trainer_availability')
-            ->where('day_of_week=?', $dayOfWeek)
-            ->where('trainer_userid=?', $userID ? $userID : $this->assignedTrainerForUser());
-
-        return $db->query($select)->fetchAll();
-    }
-
-    function removeTrainerBookingsFrom($availability, $dayString, $trainer)
-    {
-        $availabilityModel = new Availability($availability);
-        $db = Zend_Registry::get('db');
-
-        $bookings = $db->select()
-            ->from('trainer_appointments')
-            ->where('date=?', date('Y-m-d', strtotime($dayString)))
-            ->where('trainer_userid=?', $trainer)
-            ->where('canceled=0')
-            ->query()->fetchAll();
-
-        foreach ($bookings as $bookingArray) {
-            $booking = new Booking(array(
-                'start' => $bookingArray['time'],
-                'duration' => $bookingArray['duration']
-            ));
-
-            $availabilityModel->addBooking($booking);
-        }
-        return $availabilityModel;
     }
 
     function userObjectForBillingCalculations($userId = null)
@@ -251,19 +175,6 @@ abstract class Controller extends Zend_Controller_Action
         ));
 
         return $user;
-    }
-
-    function listTrainers()
-    {
-        $db = Zend_Registry::get('db');
-        $select = $db->select(array('id', 'first_name', 'last_name'))
-            ->from('user')
-            ->where('type=?', 'trainer');
-        $trainers = array();
-        foreach ($select->query()->fetchAll() as $trainer) {
-            $trainers[$trainer['id']] = $trainer['first_name'] . ' ' . $trainer['last_name'] . ' (' . $trainer['username'] . ')';
-        }
-        return $trainers;
     }
 
     function cancelsLogger()

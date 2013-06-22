@@ -34,7 +34,7 @@ class MassagebookingController extends Controller
         $form = new MassageBookingForm2;
         $form->getElement('appointment_duration')->setValue($this->_getParam('appointment_duration'));
 
-        $availability = $this->selectMassageAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
+        $availability = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
 
         $availabilityModel = $this->removeMassageBookingsFrom($availability, $this->_getParam('day'), $this->_getParam('therapist'));
         $availabilityModel->mergeOverlappingRanges();
@@ -57,7 +57,7 @@ class MassagebookingController extends Controller
     function booking3Action()
     {
         $form = new MassageBookingForm3;
-        $availabilityArray = $this->selectMassageAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
+        $availabilityArray = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('therapist'));
         $availabilityModel = $this->removeMassageBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('therapist'));
 
         $form->setAvailability($availabilityModel->availability);
@@ -94,7 +94,7 @@ class MassagebookingController extends Controller
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 
             $db = Zend_Registry::get('db');
-            $db->insert('therapist_appointments', array(
+            $db->insert('appointments', array(
                 'therapist_userid' => $this->_getParam('therapist'),
                 'user_id' =>0,
                 'date' => $this->_getParam('day'),
@@ -108,7 +108,7 @@ class MassagebookingController extends Controller
             $this->view->date = $this->_getParam('day');
             $this->view->time = $form->getValue('time');
             $this->view->duration = $form->getValue('appointment_duration');
-            $html = $this->view->render('massage/appointment-confirmation.phtml');
+            $html = $this->view->render('appointments/appointment-confirmation.phtml');
 
             $mail = new Zend_Mail;
             //$mail->addTo($user['email']);
