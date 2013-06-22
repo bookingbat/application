@@ -1,40 +1,40 @@
+<li><a href="/">Home</a></li>
+<li><a href="/calendar">Calendar</a></li>
 <?php
 $user = bootstrap::getInstance()->getUser();
 
-switch ($user['type']) {
-    default:
-        ?>
-        <li><a href="/">Home</a></li>
-        <li><a href="/calendar">Calendar</a></li>
-        <?php
-        break;
-    case 'admin':
-        ?>
-        <li><a href="<?= $this->url(
-                array('controller' => 'user', 'action' => 'manage'),
-                'default',
-                true
-            ) ?>">Manage Users</a></li>
-        <?php
-        break;
-    case 'massage-therapist':
-        ?>
+if('admin'==$user['type']) {
+    ?>
+    <li><a href="<?= $this->url(
+            array('controller' => 'user', 'action' => 'manage'),
+            'default',
+            true
+        ) ?>">Manage Users</a></li>
+    <?php
+}
+
+if('massage-therapist'==$user['type']) {
+    ?>
+
         <li><a href="<?= $this->url(
                 array('controller' => 'user', 'action' => 'register'),
                 'default',
                 true
             ) ?>">New User</a></li>
-
-        <li><a href="<?= $this->url(
-                array('controller' => 'massage', 'action' => 'appointments'),
-                'default',
-                true
-            ) ?>">My Appointments</a></li>
-        <li><a href="<?= $this->url(
-                array('controller' => 'massage', 'action' => 'availability'),
-                'default',
-                true
-            ) ?>">My Availability</a></li>
     <?php
 }
-?>
+
+if($user['id'] && $user['type'] != 'client') {
+    ?>
+    <li><a href="<?= $this->url(
+            array('controller' => 'massage', 'action' => 'appointments'),
+            'default',
+            true
+        ) ?>">Appointments</a></li>
+    <li><a href="<?= $this->url(
+            array('controller' => 'massage', 'action' => 'availability'),
+            'default',
+            true
+        ) ?>">Availability</a></li>
+    <?php
+}
