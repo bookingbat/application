@@ -1,5 +1,5 @@
 <?php
-class CalendarController extends Controller
+abstract class AbstractCalendarController extends Controller
 {
     protected $limitMonths = 3;
     protected $number_of_days_in_month;
