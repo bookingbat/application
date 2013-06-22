@@ -69,6 +69,39 @@ abstract class Controller extends Zend_Controller_Action
         return $this->_getParam('year') ? $this->_getParam('year') : date('Y');
     }
 
+    function staffSelector()
+    {
+        $therapists = $this->listStaff();
+
+        $form = new Zend_Form;
+        $form->setMethod("GET");
+        $form->addElement('select', 'staff', array(
+            'label' => 'Staff',
+            'multiOptions' => array('All' => 'All') + $therapists,
+            'value' => $this->_getParam('staff') == 'All' ? null : $this->_getParam('staff')
+        ));
+        $form->addElement('submit', 'submitbutton', array(
+            'label' => 'Go',
+            'class'=>'btn'
+        ));
+        return $form;
+    }
+
+    function listStaff()
+    {
+        $db = Zend_Registry::get('db');
+        $staffResult = $db->select()
+            ->from('user')
+            ->where('type=?', 'staff')
+            ->query()->fetchAll();
+
+        $staff = array();
+        foreach ($staffResult as $staffResult) {
+            $staff[$staffResult['id']] = $staffResult['username'];
+        }
+        return $staff;
+    }
+
     /**
      * Get the availability for staff for a specific day [and optionally for specific staff(s)]
      * @param $dayOfWeek integer 1 (for Monday) through 7 (for Sunday)

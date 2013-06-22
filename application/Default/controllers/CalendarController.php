@@ -59,39 +59,6 @@ class CalendarController extends AbstractCalendarController
         }
     }
 
-    function staffSelector()
-    {
-        $therapists = $this->listStaff();
-
-        $form = new Zend_Form;
-        $form->setMethod("GET");
-        $form->addElement('select', 'staff', array(
-            'label' => 'Staff',
-            'multiOptions' => array('All' => 'All') + $therapists,
-            'value' => $this->_getParam('staff') == 'All' ? null : $this->_getParam('staff')
-        ));
-        $form->addElement('submit', 'submitbutton', array(
-            'label' => 'Go',
-            'class'=>'btn'
-        ));
-        return $form;
-    }
-
-    function listStaff()
-    {
-        $db = Zend_Registry::get('db');
-        $staffResult = $db->select()
-            ->from('user')
-            ->where('type=?', 'staff')
-            ->query()->fetchAll();
-
-        $staff = array();
-        foreach ($staffResult as $staffResult) {
-            $staff[$staffResult['id']] = $staffResult['username'];
-        }
-        return $staff;
-    }
-
     /** Select availability for either all massage therapists at the client's condo, or the selected therapist */
     function selectAvailability($dayNumber)
     {
