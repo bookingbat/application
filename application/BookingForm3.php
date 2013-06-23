@@ -1,5 +1,5 @@
 <?php
-class MassageBookingForm3 extends MassageBookingForm2
+class BookingForm3 extends BookingForm2
 {
     function init()
     {

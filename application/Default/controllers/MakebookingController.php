@@ -34,7 +34,7 @@ class MakebookingController extends Controller
 
     function booking2Action()
     {
-        $form = new MassageBookingForm2;
+        $form = new BookingForm2;
         $form->getElement('appointment_duration')->setValue($this->_getParam('appointment_duration'));
 
         $availability = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('staff'));
@@ -59,7 +59,7 @@ class MakebookingController extends Controller
 
     function booking3Action()
     {
-        $form = new MassageBookingForm3;
+        $form = new BookingForm3;
         $availabilityArray = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('staff'));
         $availabilityModel = $this->removeBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('staff'));
 
