@@ -1,4 +1,4 @@
-<li><a href="<?=$this->url(array(),'calendar',true)?>">Calendar</a></li>
+<li><a href="<?=$this->url(array(),'services',true)?>">Book An Appointment</a></li>
 <?php
 $user = bootstrap::getInstance()->getUser();
 
@@ -9,6 +9,11 @@ if('admin'==$user['type']) {
             'default',
             true
         ) ?>">Manage Staff</a></li>
+    <li><a href="<?= $this->url(
+            array('action' => 'manage'),
+            'services',
+            true
+        ) ?>">Manage Services</a></li>
     <?php
 }
 

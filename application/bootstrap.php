@@ -64,6 +64,14 @@ class bootstrap
                 ))
         );
         $this->router->addRoute(
+            'services',
+            new Zend_Controller_Router_Route('/services/:action/*',
+                array(
+                    'controller' => 'services',
+                    'action'=>'choose'
+                ))
+        );
+        $this->router->addRoute(
             'calendar',
             new Zend_Controller_Router_Route('/calendar/*',
                 array(

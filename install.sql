@@ -71,14 +71,6 @@ CREATE TABLE IF NOT EXISTS `email_queue` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
---
--- Dumping data for table `email_queue`
---
-
-INSERT INTO `email_queue` (`id`, `data`, `sent`) VALUES
-(7, 'O:9:"Zend_Mail":18:{s:11:"\0*\0_charset";s:10:"iso-8859-1";s:11:"\0*\0_headers";a:2:{s:2:"To";a:2:{i:0;s:17:"staff@example.com";s:6:"append";b:1;}s:4:"From";a:2:{i:0;s:39:"Fame Fitness <no-reply@famefitness.com>";s:6:"append";b:1;}}s:18:"\0*\0_headerEncoding";s:16:"quoted-printable";s:8:"\0*\0_from";s:24:"no-reply@famefitness.com";s:6:"\0*\0_to";a:1:{i:0;s:17:"staff@example.com";}s:14:"\0*\0_recipients";a:1:{s:17:"staff@example.com";i:1;}s:11:"\0*\0_replyTo";N;s:14:"\0*\0_returnPath";N;s:11:"\0*\0_subject";N;s:8:"\0*\0_date";N;s:13:"\0*\0_messageId";N;s:12:"\0*\0_bodyText";O:14:"Zend_Mime_Part":12:{s:4:"type";s:10:"text/plain";s:8:"encoding";s:16:"quoted-printable";s:2:"id";N;s:11:"disposition";s:6:"inline";s:8:"filename";N;s:11:"description";N;s:7:"charset";s:10:"iso-8859-1";s:8:"boundary";N;s:8:"location";N;s:8:"language";N;s:11:"\0*\0_content";s:74:"This confirms your 1.5hr appointment with staff staff on 12:30am 6/27/2013";s:12:"\0*\0_isStream";b:0;}s:12:"\0*\0_bodyHtml";b:0;s:16:"\0*\0_mimeBoundary";N;s:8:"\0*\0_type";N;s:14:"hasAttachments";b:0;s:9:"\0*\0_parts";a:0:{}s:8:"\0*\0_mime";N;}', '0000-00-00 00:00:00'),
-(8, 'O:9:"Zend_Mail":18:{s:11:"\0*\0_charset";s:10:"iso-8859-1";s:11:"\0*\0_headers";a:2:{s:2:"To";a:2:{i:0;s:17:"staff@example.com";s:6:"append";b:1;}s:4:"From";a:2:{i:0;s:39:"Fame Fitness <no-reply@famefitness.com>";s:6:"append";b:1;}}s:18:"\0*\0_headerEncoding";s:16:"quoted-printable";s:8:"\0*\0_from";s:24:"no-reply@famefitness.com";s:6:"\0*\0_to";a:1:{i:0;s:17:"staff@example.com";}s:14:"\0*\0_recipients";a:1:{s:17:"staff@example.com";i:1;}s:11:"\0*\0_replyTo";N;s:14:"\0*\0_returnPath";N;s:11:"\0*\0_subject";N;s:8:"\0*\0_date";N;s:13:"\0*\0_messageId";N;s:12:"\0*\0_bodyText";O:14:"Zend_Mime_Part":12:{s:4:"type";s:10:"text/plain";s:8:"encoding";s:16:"quoted-printable";s:2:"id";N;s:11:"disposition";s:6:"inline";s:8:"filename";N;s:11:"description";N;s:7:"charset";s:10:"iso-8859-1";s:8:"boundary";N;s:8:"location";N;s:8:"language";N;s:11:"\0*\0_content";s:40:"The appointment on \nhas been cancelled .";s:12:"\0*\0_isStream";b:0;}s:12:"\0*\0_bodyHtml";b:0;s:16:"\0*\0_mimeBoundary";N;s:8:"\0*\0_type";N;s:14:"hasAttachments";b:0;s:9:"\0*\0_parts";a:0:{}s:8:"\0*\0_mime";N;}', '0000-00-00 00:00:00'),
-(9, 'O:9:"Zend_Mail":18:{s:11:"\0*\0_charset";s:10:"iso-8859-1";s:11:"\0*\0_headers";a:2:{s:2:"To";a:2:{i:0;s:17:"staff@example.com";s:6:"append";b:1;}s:4:"From";a:2:{i:0;s:39:"Fame Fitness <no-reply@famefitness.com>";s:6:"append";b:1;}}s:18:"\0*\0_headerEncoding";s:16:"quoted-printable";s:8:"\0*\0_from";s:24:"no-reply@famefitness.com";s:6:"\0*\0_to";a:1:{i:0;s:17:"staff@example.com";}s:14:"\0*\0_recipients";a:1:{s:17:"staff@example.com";i:1;}s:11:"\0*\0_replyTo";N;s:14:"\0*\0_returnPath";N;s:11:"\0*\0_subject";N;s:8:"\0*\0_date";N;s:13:"\0*\0_messageId";N;s:12:"\0*\0_bodyText";O:14:"Zend_Mime_Part":12:{s:4:"type";s:10:"text/plain";s:8:"encoding";s:16:"quoted-printable";s:2:"id";N;s:11:"disposition";s:6:"inline";s:8:"filename";N;s:11:"description";N;s:7:"charset";s:10:"iso-8859-1";s:8:"boundary";N;s:8:"location";N;s:8:"language";N;s:11:"\0*\0_content";s:50:"The appointment on 2013-06-27\nhas been cancelled .";s:12:"\0*\0_isStream";b:0;}s:12:"\0*\0_bodyHtml";b:0;s:16:"\0*\0_mimeBoundary";N;s:8:"\0*\0_type";N;s:14:"hasAttachments";b:0;s:9:"\0*\0_parts";a:0:{}s:8:"\0*\0_mime";N;}', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -106,3 +98,16 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `type`, `phone`, `first_name`, `last_name`) VALUES
 (6, 'admin', 'admin@example.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', '', '', ''),
 (19, 'staff', 'staff@example.com', '6ccb4b7c39a6e77f76ecfa935a855c6c46ad5611', 'staff', '7729244299', 'staff', 'staff');
+
+CREATE TABLE IF NOT EXISTS `services` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `staff_services` (
+  `staff_user_id` int(10) NOT NULL,
+  `service_id` int(10) NOT NULL,
+  PRIMARY KEY (`staff_user_id`,`service_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
