@@ -42,7 +42,7 @@ class MakebookingController extends Controller
         $availabilityModel = $this->removeBookingsFrom($availability, $this->_getParam('day'), $this->_getParam('staff'));
         $availabilityModel->mergeOverlappingRanges();
 
-        $form->setAvailability($availabilityModel->availability);
+        $form->setAvailability($availabilityModel->getAvailabilityTimes());
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
             return $this->_redirect($this->view->url(array(
@@ -63,7 +63,7 @@ class MakebookingController extends Controller
         $availabilityArray = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('staff'));
         $availabilityModel = $this->removeBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('staff'));
 
-        $form->setAvailability($availabilityModel->availability);
+        $form->setAvailability($availabilityModel->getAvailabilityTimes());
         $form->populate($this->getRequest()->getParams());
 
         $booking = new Booking(array(
@@ -72,7 +72,7 @@ class MakebookingController extends Controller
         ));
 
 
-        $availabilityObject = new MassageAvailability($availabilityModel->availability);
+        $availabilityObject = new \Bookingbat\Engine\Availability($availabilityModel->getAvailabilityTimes());
         $possibleUserIdsForBooking = $availabilityObject->possibleUserIdsForBooking($booking);
 
         if(!$possibleUserIdsForBooking) {

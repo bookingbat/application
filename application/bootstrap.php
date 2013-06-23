@@ -1,8 +1,6 @@
 <?php
 define('FAMEFIT_BASE_PATH', dirname(__FILE__) . '/..');
 require_once 'vendor/autoload.php';
-require_once('vendor/bookingbat/engine/Bookingbat/Availability/Availability.php');
-require_once('vendor/bookingbat/engine/Bookingbat/Availability/MassageAvailability.php');
 
 class bootstrap
 {

@@ -21,7 +21,7 @@ class MassageBookingForm2 extends BookingForm
 
     function setAvailability($availabilityTimes)
     {
-        $availability = new MassageAvailability($availabilityTimes);
+        $availability = new \Bookingbat\Engine\Availability($availabilityTimes);
 
         $availabilityTimes = $availability->incrementize($availabilityTimes, 30, $this->getElement('appointment_duration')->getValue());
         foreach ($availabilityTimes as $time) {

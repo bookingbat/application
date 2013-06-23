@@ -149,7 +149,7 @@ abstract class Controller extends Zend_Controller_Action
 
     function removeBookingsFrom($availability, $dayString, $filterByTherapist = null)
     {
-        $availabilityModel = new MassageAvailability($availability);
+        $availabilityModel = new \Bookingbat\Engine\Availability($availability);
 
         $db = Zend_Registry::get('db');
 

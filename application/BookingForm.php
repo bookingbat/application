@@ -22,17 +22,15 @@ class BookingForm extends Zend_Form
 
     function setAvailability($availabilityTimes)
     {
-        $availability = new Availability($availabilityTimes);
+        $availability = new \Bookingbat\Engine\Availability($availabilityTimes);
         $incrementDuration = $this->getElement('appointment_duration')->getValue();
         $availabilityTimes = $availability->incrementize($availabilityTimes, $incrementDuration);
         foreach ($availabilityTimes as $time) {
-            $start = new DateTime('2013-03-21 ' . $time['start']);
+            $start = new DateTime('2013-03-21 ' . $time);
             $start = $start->format('h:i a');
-            $end = new DateTime('2013-03-21 ' . $time['end']);
-            $end = $end->format('h:i a');
 
-            $label = sprintf('%s - %s', $start, $end);
-            $this->getElement('time')->addMultiOption($time['start'], $label);
+            $label = sprintf('%s', $start);
+            $this->getElement('time')->addMultiOption($time, $label);
         }
     }
 

@@ -1,5 +1,5 @@
 <?php
-class Booking extends \Bookingbat\Availability\Booking
+class Booking extends \Bookingbat\Engine\Booking
 {
     function allowCancelLostByUser()
     {
