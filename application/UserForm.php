@@ -30,6 +30,7 @@ class UserForm extends Zend_Form
             )
         ));
 
+        $this->addElement('hidden', 'type');
         $this->addElement('password', 'password', array(
             'label' => 'Password'
         ));

@@ -67,13 +67,6 @@ class UserController extends Controller
         $form->removeElement('password');
         $form->removeElement('verifypassword');
 
-        if($userBeingEdited['type'] == 'client') {
-            $form->addElement('select', 'assigned_trainer_userid', array(
-                'label' => 'Assigned Personal Trainer',
-                'multiOptions' => array(0 => '') + $this->listTrainers()
-            ));
-        }
-
         $form->populate($userBeingEdited);
 
         $this->view->form = $form;
