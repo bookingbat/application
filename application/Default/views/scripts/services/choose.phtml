@@ -1,1 +1,15 @@
-Services
+<h1>Pick A Service</h1>
+<ul>
+<?php
+foreach($this->services as $service) {
+    $url = $this->url(array(
+        'service'=>$service['id']
+    ),'calendar',true);
+    ?>
+    <li>
+        <a href="<?=$url?>"><?=$this->escape($service['name'])?></a>
+    </li>
+    <?php
+}
+?>
+</ul>

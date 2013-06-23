@@ -1,6 +1,11 @@
 <?php
 class ServicesController extends Controller
 {
+    function chooseAction()
+    {
+        $this->view->services = $this->listServices();
+    }
+
     function manageAction()
     {
         $this->view->services = $this->listServices();
@@ -63,11 +68,6 @@ class ServicesController extends Controller
 
         $this->view->staff = $staff;
         $this->view->form = $form;
-    }
-
-    function chooseAction()
-    {
-
     }
 
     function listServices()
