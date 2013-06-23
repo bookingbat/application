@@ -1,5 +1,5 @@
 <?php
-class MassagebookingController extends Controller
+class MakebookingController extends Controller
 {
     function preDispatch()
     {
@@ -16,13 +16,16 @@ class MassagebookingController extends Controller
                 '90' => '1.5 Hour'
             )
         ));
-        $form->addElement('submit', 'next', array('label' => 'Next'));
+        $form->addElement('submit', 'next', array(
+            'label' => 'Next',
+            'class'=>'btn btn-primary'
+        ));
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
             return $this->_redirect($this->view->url(array(
                 'action' => 'booking2',
                 'appointment_duration' => $this->_getParam('appointment_duration')
-            )));
+            ),'make-booking'));
         }
 
         $this->view->form = $form;

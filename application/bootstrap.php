@@ -87,6 +87,14 @@ class bootstrap
                     'action'=>'index'
                 ))
         );
+        $this->router->addRoute(
+            'make-booking',
+            new Zend_Controller_Router_Route('make-booking/:action/*',
+                array(
+                    'controller' => 'makebooking',
+                    'action'=>'booking'
+                ))
+        );
     }
 
     function setupViewHelperPaths()
