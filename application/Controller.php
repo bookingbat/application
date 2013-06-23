@@ -69,9 +69,9 @@ abstract class Controller extends Zend_Controller_Action
         return $this->_getParam('year') ? $this->_getParam('year') : date('Y');
     }
 
-    function staffSelector($allOption=true)
+    function staffSelector($allOption=true, $serviceId=null)
     {
-        $staff = $this->listStaff();
+        $staff = $this->listStaff($serviceId);
 
         $form = new Zend_Form;
         $form->setMethod("GET");
@@ -95,13 +95,20 @@ abstract class Controller extends Zend_Controller_Action
         return $form;
     }
 
-    function listStaff()
+    function listStaff($serviceId=null)
     {
         $db = Zend_Registry::get('db');
-        $staffResult = $db->select()
+        $select = $db->select()
             ->from('user')
-            ->where('type=?', 'staff')
-            ->query()->fetchAll();
+            ->where('type=?', 'staff');
+
+        if($serviceId) {
+            $condition = 'staff_services.staff_user_id = user.id && staff_services.service_id = '.(int)$serviceId;
+            $select->joinRight('staff_services', $condition, array());
+        }
+
+        $staffResult = $select->query()
+            ->fetchAll();
 
         $staff = array();
         foreach ($staffResult as $staffResult) {

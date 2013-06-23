@@ -7,12 +7,12 @@ class CalendarController extends AbstractCalendarController
     {
         $user = bootstrap::getInstance()->getUser();
 
-        $staffSelector = $this->staffSelector();
+        $staffSelector = $this->staffSelector(true,$this->getParam('service'));
 
         if(!is_null($staffSelector->getValue('staff'))) {
             $this->staff_selection = $staffSelector->getValue('staff');
         } else {
-            $this->staff_selection = $this->listStaff();
+            $this->staff_selection = $this->listStaff($this->getParam('service'));
         }
 
         $this->view->staffSelector = $staffSelector;
