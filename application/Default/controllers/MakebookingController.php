@@ -16,10 +16,6 @@ class MakebookingController extends Controller
                 '90' => '1.5 Hour'
             )
         ));
-        $form->addElement('submit', 'next', array(
-            'label' => 'Next',
-            'class'=>'btn btn-primary'
-        ));
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
             return $this->_redirect($this->view->url(array(
@@ -98,22 +94,40 @@ class MakebookingController extends Controller
         $form->getElement('staff')->setMultiOptions($staff);
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
+            return $this->_redirect($this->view->url(array(
+                'action' => 'booking4',
+                'staff' => $this->_getParam('staff'),
+            )));
+        }
+
+        $this->view->form = $form;
+        $this->render('booking', null, true);
+    }
+
+    function booking4Action()
+    {
+        $form = new BookingForm4;
+
+        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 
             $db = Zend_Registry::get('db');
             $db->insert('appointments', array(
                 'staff_userid' => $this->_getParam('staff'),
                 'user_id' =>0,
                 'date' => $this->_getParam('day'),
-                'time' => $form->getValue('time'),
-                'duration' => $form->getValue('appointment_duration'),
+                'time' => $this->getParam('time'),
+                'duration' => $this->getParam('appointment_duration'),
+                'guest_name' => $form->getValue('name'),
+                'guest_email' => $form->getValue('email'),
+                'guest_phone' => $form->getValue('phone'),
             ));
 
             $therapistData = $this->staffData($this->_getParam('staff'));
 
             $this->view->therapist = $therapistData;
-            $this->view->date = $this->_getParam('day');
-            $this->view->time = $form->getValue('time');
-            $this->view->duration = $form->getValue('appointment_duration');
+            $this->view->date = $this->getParam('day');
+            $this->view->time = $this->getParam('time');
+            $this->view->duration = $this->getParam('appointment_duration');
             $html = $this->view->render('appointments/appointment-confirmation.phtml');
 
             $mail = new Zend_Mail;

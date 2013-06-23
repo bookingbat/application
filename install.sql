@@ -9,8 +9,11 @@ CREATE TABLE IF NOT EXISTS `appointments` (
   `time` time NOT NULL,
   `duration` int(3) NOT NULL,
   `canceled` int(1) NOT NULL,
+  `guest_name` varchar(50) NOT NULL,
+  `guest_phone` int(10) NOT NULL,
+  `guest_email` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 CREATE TABLE IF NOT EXISTS `availability` (
   `id` int(50) NOT NULL AUTO_INCREMENT,

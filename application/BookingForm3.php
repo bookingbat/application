@@ -19,10 +19,6 @@ class BookingForm3 extends BookingForm2
 
         $this->addElement('hidden', 'day', array());
 
-        $this->addElement('submit', 'submit', array(
-            'label' => 'Submit'
-        ));
-
     }
 
 }

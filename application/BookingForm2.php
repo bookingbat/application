@@ -12,11 +12,6 @@ class BookingForm2 extends BookingForm
 
         $this->addElement('hidden', 'appointment_duration', array());
 
-
-        $this->addElement('submit', 'submit', array(
-            'label' => 'Submit'
-        ));
-
     }
 
     function setAvailability($availabilityTimes)

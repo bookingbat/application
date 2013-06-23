@@ -1,2 +1,7 @@
 <strong>Book An Appointment!</strong>
-<?= $this->form ?>
+<?php
+$this->form->addElement('submit','save',array(
+    'label'=>'Next',
+    'class'=>'btn'
+));
+echo $this->form;
