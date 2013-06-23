@@ -37,7 +37,8 @@ class MakebookingController extends Controller
         $form = new BookingForm2;
         $form->getElement('appointment_duration')->setValue($this->_getParam('appointment_duration'));
 
-        $availability = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('staff'));
+        $day = date('N', strtotime($this->_getParam('day')));
+        $availability = $this->selectAvailability($day, $this->getParam('service'), $this->getParam('staff'));
 
         $availabilityModel = $this->removeBookingsFrom($availability, $this->_getParam('day'), $this->_getParam('staff'));
         $availabilityModel->mergeOverlappingRanges();

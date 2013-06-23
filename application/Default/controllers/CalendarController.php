@@ -36,7 +36,7 @@ class CalendarController extends AbstractCalendarController
             $dayNumber = date('N', strtotime($dayString));
 
             /** Select the availability & bookings for this day */
-            $availability = $this->selectAvailability($dayNumber);
+            $availability = $this->selectAvailability($dayNumber, $this->getParam('service'));
             $availabilityModel = $this->removeBookingsFrom($availability, $dayString);
 
             $availability = $availabilityModel->mergeOverlappingRanges();
@@ -61,13 +61,13 @@ class CalendarController extends AbstractCalendarController
     }
 
     /** Select availability for either all massage therapists at the client's condo, or the selected therapist */
-    function selectAvailability($dayNumber)
+    function selectAvailability($dayNumber,$service)
     {
         $therapist = $this->staff_selection;
         if(is_array($therapist)) {
             $therapist = array_keys($therapist);
         }
-        return parent::selectAvailability($dayNumber, $therapist);
+        return parent::selectAvailability($dayNumber, $service, $therapist);
     }
 
     /**

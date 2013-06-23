@@ -94,12 +94,13 @@ abstract class Controller extends Zend_Controller_Action
     }
 
     /**
-     * Get the availability for staff for a specific day [and optionally for specific staff(s)]
+     * Get the availability for a service [optionally for specific staff(s)]
      * @param $dayOfWeek integer 1 (for Monday) through 7 (for Sunday)
+     * @param integer $service - service ID to get availability for
      * @param mixed $staff - null for all, integer for specific staff, array of user IDs for specific staff(s).
      * @return array database rows representing time(s) available for this day.
      */
-    function selectAvailability($dayOfWeek, $staff = null)
+    function selectAvailability($dayOfWeek, $service=null, $staff = null)
     {
         if(is_array($staff) && !count($staff)) {
             return array();
@@ -118,6 +119,11 @@ abstract class Controller extends Zend_Controller_Action
             $select->where('staff_userid IN ('. implode(',', $staff).')');
         }else if ($staff) {
             $select->where('staff_userid=?', $staff);
+        }
+
+        if($service) {
+            // get availability of only the staff that do this service
+            $select->where('staff_userid IN (?)', new Zend_Db_Expr('select staff_user_id from staff_services where service_id='.(int)$service));
         }
 
         return $db->query($select)->fetchAll();

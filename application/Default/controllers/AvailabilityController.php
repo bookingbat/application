@@ -16,7 +16,7 @@ class AvailabilityController extends Controller
         $this->view->availability = array();
         for ($day = 1; $day <= 7; $day++) {
             $staff = $user['type'] == 'admin' ? $this->getParam('staff') : $user['id'];
-            $this->view->availability[$day] = $this->selectAvailability($day, $staff);
+            $this->view->availability[$day] = $this->selectAvailability($day, null, $staff);
         }
 
         $db = Zend_Registry::get('db');
