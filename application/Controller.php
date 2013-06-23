@@ -30,30 +30,6 @@ abstract class Controller extends Zend_Controller_Action
         return $select->query()->fetch();
     }
 
-    function trainingAppointmentsTotalDuration($userID)
-    {
-        return $this->lister($userID)->trainingAppointmentsTotalDuration();
-    }
-
-    function trainingAppointments($userID)
-    {
-        return $this->lister($userID)->trainerAppointments();
-    }
-
-    function massageAppointmentsTotalDuration($userID)
-    {
-        return $this->lister($userID)->massageAppointmentsTotalDuration();
-    }
-
-    function lister($userId)
-    {
-        $lister = new AppointmentsLister;
-        $lister->month($this->month());
-        $lister->year($this->year());
-        $lister->userId($userId);
-        return $lister;
-    }
-
     function db()
     {
         return Zend_Registry::get('db');
@@ -183,48 +159,6 @@ abstract class Controller extends Zend_Controller_Action
             ->fetch();
     }
 
-    function userObjectForBillingCalculations($userId = null)
-    {
-        if($userId==null) {
-            $user = bootstrap::getInstance()->getUser();
-        } else {
-            $user = $this->userData($userId);
-        }
-
-        $additionalTraining = $this->db()->select()
-            ->from('user_payments', array(new Zend_Db_Expr('SUM(service_quantity)')))
-            ->where('user_id=?', $user['id'])
-            ->where('MONTH(datetime)=?', date('m'))
-            ->where('YEAR(datetime)=?', date('Y'))
-            ->where('service=?', 'training')
-            ->query()->fetchColumn();
-
-        $additionalMassage = $this->db()->select()
-            ->from('user_payments', array(new Zend_Db_Expr('SUM(service_quantity)')))
-            ->where('user_id=?', $user['id'])
-            ->where('MONTH(datetime)=?', date('m'))
-            ->where('YEAR(datetime)=?', date('Y'))
-            ->where('service=?', 'massage')
-            ->query()->fetchColumn();
-
-        $additionalClass = $this->db()->select()
-            ->from('user_payments', array(new Zend_Db_Expr('SUM(service_quantity)')))
-            ->where('user_id=?', $user['id'])
-            ->where('MONTH(datetime)=?', date('m'))
-            ->where('YEAR(datetime)=?', date('Y'))
-            ->where('service=?', 'class')
-            ->query()->fetchColumn();
-
-        $user = new User($user);
-        $user->paidForAdditional(array(
-            'class' => $additionalClass,
-            'training' => $additionalTraining,
-            'massage' => $additionalMassage
-        ));
-
-        return $user;
-    }
-
     function cancelsLogger()
     {
         if (isset($this->logger)) {
@@ -244,37 +178,6 @@ abstract class Controller extends Zend_Controller_Action
             ),
         ));
         return $this->logger;
-    }
-
-    function startSubscription($values)
-    {
-        try {
-            $subscription = new AuthnetARB(bootstrap::getInstance()->authorizenetLogin(), bootstrap::getInstance()->authorizenetKey(), AuthnetARB::USE_DEVELOPMENT_SERVER);
-
-            foreach ($values as $key => $value) {
-                $subscription->setParameter($key, $value);
-            }
-
-            $subscription->setParameter('amount', $values['amount']);
-            $subscription->setParameter('interval_length', 1);
-            $subscription->setParameter('startDate', date("Y-m-d"));
-
-            $subscription->createAccount();
-
-            // Check the results of our API call
-            if ($subscription->isSuccessful()) {
-                // Get the subscription ID
-                return $subscription->getSubscriberID();
-            } else {
-                // The subscription was not created!
-                $this->error_message = $subscription->getResponse();
-                return false;
-            }
-        } catch (AuthnetARBException $e) {
-            $this->error_message = 'There was a problem communicating with our billing API. Please contact us.';
-            $this->logger()->log($e->getMessage(), Zend_Log::CRIT);
-            return false;
-        }
     }
 
     function queueMail($mail)
