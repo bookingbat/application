@@ -1,13 +1,13 @@
 {
     "require":{
-        "bookingbat/availability":"0.1.0",
+        "bookingbat/engine":"0.1.0",
         "zendframework/zendframework1":"1.12.*"
     },
 
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:bookingbat/availability.git"
+            "url":  "git@github.com:bookingbat/engine.git"
         }
     ]
 }
