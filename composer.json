@@ -1,9 +1,10 @@
 {
+    "name": "bookingbat/application",
+    "homepage": "http://bookingbat.com",
     "require":{
         "bookingbat/engine":"0.2.0",
         "zendframework/zendframework1":"1.12.*"
     },
-    "homepage": "http://bookingbat.com",
     "autoload": {
         "classmap": [
             "application"
