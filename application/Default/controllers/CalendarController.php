@@ -18,6 +18,7 @@ class CalendarController extends AbstractCalendarController
         $this->view->staffSelector = $staffSelector;
         $this->render('staff-selector');
         $this->view->therapist_id = $this->getParam('staff');
+        $this->view->service = $this->getParam('service');
 
         $this->view->controller = 'massage';
         $this->renderCalendar();

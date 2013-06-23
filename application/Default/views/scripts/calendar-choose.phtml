@@ -95,7 +95,8 @@
 
                     $url = $this->url(array(
                         'day' => date('Y-m-d', strtotime($dayString)),
-                        'therapist' => $this->therapist_id
+                        'therapist' => $this->therapist_id,
+                        'service'=>$this->service
                     ), 'make-booking', true);
 
                     if( strtotime($dayString) < strtotime('today') ){
