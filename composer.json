@@ -2,12 +2,5 @@
     "require":{
         "bookingbat/engine":"0.1.0",
         "zendframework/zendframework1":"1.12.*"
-    },
-
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:bookingbat/engine.git"
-        }
-    ]
+    }
 }
