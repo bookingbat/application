@@ -188,7 +188,7 @@ abstract class Controller extends Zend_Controller_Action
 
     function queueMail($mail)
     {
-        $mail->setFrom('no-reply@famefitness.com','Fame Fitness');
+        $mail->setFrom('no-reply@bookingbat.com','Appointment Confirmation');
         $this->db()->insert('email_queue', array(
             'data'=>serialize($mail)
         ));
