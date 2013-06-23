@@ -61,7 +61,9 @@ class MakebookingController extends Controller
     function booking3Action()
     {
         $form = new BookingForm3;
-        $availabilityArray = $this->selectAvailability(date('N', strtotime($this->_getParam('day'))), $this->_getParam('staff'));
+
+        $day = date('N', strtotime($this->_getParam('day')));
+        $availabilityArray = $this->selectAvailability($day, $this->getParam('service'), $this->_getParam('staff'));
         $availabilityModel = $this->removeBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('staff'));
 
         $form->setAvailability($availabilityModel->getAvailabilityTimes());
