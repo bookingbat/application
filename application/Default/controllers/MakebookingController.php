@@ -82,18 +82,18 @@ class MakebookingController extends Controller
 
         $db = Zend_Registry::get('db');
 
-        $therapistsResult = $db->select()
+        $stafResult = $db->select()
             ->from('user')
             ->where('type=?', 'staff')
             ->where('id IN(' . implode(',', $possibleUserIdsForBooking) . ')')
             ->query()->fetchAll();
 
-        $therapists = array();
-        foreach ($therapistsResult as $therapistsResult) {
-            $therapists[$therapistsResult['id']] = $therapistsResult['username'];
+        $staff = array();
+        foreach ($stafResult as $stafResult) {
+            $staff[$stafResult['id']] = $stafResult['username'];
         }
 
-        $form->getElement('staff')->setMultiOptions($therapists);
+        $form->getElement('staff')->setMultiOptions($staff);
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 
