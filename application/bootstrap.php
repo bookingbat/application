@@ -201,16 +201,6 @@ class bootstrap
         return $this->frontController->getRequest();
     }
 
-    function authorizenetLogin()
-    {
-        return '2Scf4XP24';
-    }
-
-    function authorizenetKey()
-    {
-        return '7qq8j3Sz429D9Zdg';
-    }
-
 }
 
 $bootstrap = bootstrap::getInstance();
