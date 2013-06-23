@@ -30,6 +30,7 @@ echo $this->paginationControl($this->paginator,
             <td>
                 <a class="btn" href="<?=$edit_url?>"><i class="icon-pencil"></i></i></a>
                 <a class="btn" href="<?=$this->url(array('staff'=>$user['id']),'availability',true)?>">Availability</a>
+                <a class="btn" href="<?=$this->url(array('action'=>'assign','staff'=>$user['id']),'services',true)?>">Services</a>
             </td>
             <td><?=$this->escape($user['id'])?></td>
             <td><?=$this->escape($user['username'])?></td>
