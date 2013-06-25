@@ -19,5 +19,17 @@ use Behat\Gherkin\Node\PyStringNode,
  */
 class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
 {
+    /**
+     * @Given /^I have a user "([^"]*)" with password "([^"]*)"$/
+     */
+    public function iHaveAUserWithPassword($username, $password)
+    {
+        throw new PendingException();
+    }
 
+    public function clickLink($link)
+    {
+        var_dump($this->getSession()->getPage()->getContent());
+        return parent::clickLink($link);
+    }
 }
