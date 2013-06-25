@@ -7,8 +7,8 @@ php:
   - 5.4
 
 before_script:
-  - mysql -e 'create database bookingbat'
-  - mysql bookingbat < install.sql
+  - mysql -e 'create database bookingbat_phpunit'
+  - mysql bookingbat_phpunit < install.sql
   - php composer.phar install --dev
 
 script:

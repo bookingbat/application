@@ -11,7 +11,11 @@
         processIsolation="false"
         stopOnFailure="true"
         syntaxCheck="false"
-        bootstrap="vendor/autoload.php">
+        bootstrap="application/bootstrap.php">
+
+    <php>
+        <env name="PHP_IS_PHPUNIT" value="1"/>
+    </php>
 
     <testsuites>
         <testsuite name="all">
