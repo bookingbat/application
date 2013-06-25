@@ -1,0 +1,15 @@
+language: php
+
+services:
+  - mysql
+
+php:
+  - 5.4
+
+before_script:
+  - mysql -e 'create database bookingbat'
+  - mysql bookingbat < install.sql
+  - php composer.phar install --dev
+
+script:
+  - vendor/bin/phpunit
