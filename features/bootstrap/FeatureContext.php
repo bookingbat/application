@@ -23,7 +23,7 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
     public function after($event)
     {
         if(4==$event->getResult()) {
-            var_dump($this->getSession()->getPage()->getContent());
+            echo $this->getSession()->getPage()->getContent();
         }
     }
 
