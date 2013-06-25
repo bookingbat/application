@@ -3,8 +3,6 @@ ini_set('display_errors', 'on');
 chdir('..');
 try {
     require 'application/bootstrap.php';
-
-
     Zend_Controller_Front::getInstance()->dispatch();
 } catch (Exception $e) {
 

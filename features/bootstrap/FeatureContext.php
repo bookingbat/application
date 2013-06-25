@@ -24,12 +24,21 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
      */
     public function iHaveAUserWithPassword($username, $password)
     {
-        throw new PendingException();
+        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper->insert(array(
+            'username' => $username,
+            'password' => $password,
+        ));
     }
 
     public function clickLink($link)
     {
-        var_dump($this->getSession()->getPage()->getContent());
+ //       var_dump($this->getSession()->getPage()->getContent());
         return parent::clickLink($link);
+    }
+
+    function db()
+    {
+        return Zend_Registry::get('db');
     }
 }

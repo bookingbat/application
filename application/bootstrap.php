@@ -171,9 +171,9 @@ class bootstrap
 
     function setupDatabaseConfig()
     {
-        if(getenv('PHP_IS_PHPUNIT')) {
-            // If being run from PHPunit, use the database for testing
-            define('APPLICATION_ENVIRONMENT','phpunit');
+        if(!isset($_SERVER['HTTP_HOST'])) {
+            // If being run from tests, use the database for testing
+            define('APPLICATION_ENVIRONMENT','tests');
             $file = 'database-config.ini';
         } elseif(preg_match('#^([0-9]+)\.bookingbat#',$_SERVER['HTTP_HOST'],$matches)) {
             // If being run from sub-domain, load the hosted client's config

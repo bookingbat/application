@@ -45,9 +45,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `type`, `phone`, `first_name`, `last_name`) VALUES
-(6, 'admin', 'admin@example.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', '', '', '');
-
 CREATE TABLE IF NOT EXISTS `services` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
