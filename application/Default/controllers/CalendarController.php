@@ -61,20 +61,20 @@ class CalendarController extends AbstractCalendarController
     }
 
     /** Select availability for either all massage therapists at the client's condo, or the selected therapist */
-    function selectAvailability($dayNumber,$service)
+    function selectAvailability($dayNumber,$service=null, $filterByTherapist=null)
     {
-        $therapist = $this->staff_selection;
-        if(is_array($therapist)) {
-            $therapist = array_keys($therapist);
+        $filterByTherapist = $this->staff_selection;
+        if(is_array($filterByTherapist)) {
+            $filterByTherapist = array_keys($filterByTherapist);
         }
-        return parent::selectAvailability($dayNumber, $service, $therapist);
+        return parent::selectAvailability($dayNumber, $service, $filterByTherapist);
     }
 
     /**
      * Remove the bookings from the selected therapist, if none selected removes all therapists bookings
      * @todo Oops, it removes bookings from all therapists, even ones not at this user's condo!!
      */
-    function removeBookingsFrom($availability, $dayString)
+    function removeBookingsFrom($availability, $dayString, $filterByTherapist=null)
     {
         return parent::removeBookingsFrom($availability, $dayString, $this->_getParam('therapist'));
     }

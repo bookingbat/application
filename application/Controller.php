@@ -97,12 +97,12 @@ abstract class Controller extends Zend_Controller_Action
      * Get the availability for a service [optionally for specific staff(s)]
      * @param $dayOfWeek integer 1 (for Monday) through 7 (for Sunday)
      * @param integer $service - service ID to get availability for
-     * @param mixed $staff - null for all, integer for specific staff, array of user IDs for specific staff(s).
+     * @param mixed $filterByTherapist - null for all, integer for specific staff, array of user IDs for specific staff(s).
      * @return array database rows representing time(s) available for this day.
      */
-    function selectAvailability($dayOfWeek, $service=null, $staff = null)
+    function selectAvailability($dayOfWeek, $service=null, $filterByTherapist = null)
     {
-        if(is_array($staff) && !count($staff)) {
+        if(is_array($filterByTherapist) && !count($filterByTherapist)) {
             return array();
         }
         $db = Zend_Registry::get('db');
@@ -115,10 +115,10 @@ abstract class Controller extends Zend_Controller_Action
                 'end'
             ))
             ->where('day_of_week=?', $dayOfWeek);
-        if (is_array($staff)) {
-            $select->where('staff_userid IN ('. implode(',', $staff).')');
-        }else if ($staff) {
-            $select->where('staff_userid=?', $staff);
+        if (is_array($filterByTherapist)) {
+            $select->where('staff_userid IN ('. implode(',', $filterByTherapist).')');
+        }else if ($filterByTherapist) {
+            $select->where('staff_userid=?', $filterByTherapist);
         }
 
         if($service) {
