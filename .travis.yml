@@ -7,9 +7,10 @@ php:
   - 5.4
 
 before_script:
+  - php --server=localhost:8080 --docroot=html >> var/php-server.log 2>&1 &
   - mysql -e 'create database bookingbat_phpunit'
   - mysql bookingbat_phpunit < install.sql
   - php composer.phar install --dev
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit && vendor/bin/behat
