@@ -176,7 +176,7 @@ class bootstrap
             define('APPLICATION_ENVIRONMENT','phpunit');
             $file = 'database-config.ini';
         } elseif(preg_match('#^([0-9]+)\.bookingbat#',$_SERVER['HTTP_HOST'],$matches)) {
-            // If being run from subdomain, load the hosted client's config
+            // If being run from sub-domain, load the hosted client's config
             $id = $matches[1];
             $file = '../website/var/website_configs/'.$id;
             if(!file_exists($file)) {
@@ -187,6 +187,10 @@ class bootstrap
             // If being run on localhost
             define('APPLICATION_ENVIRONMENT','localhost');
             $file = 'database-config.ini';
+        }
+
+        if(!file_exists($file)) {
+            $file = 'database-config.ini.dist';
         }
 
         $config = new Zend_Config_Ini($file, APPLICATION_ENVIRONMENT);
