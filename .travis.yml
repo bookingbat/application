@@ -13,4 +13,4 @@ before_script:
   - php composer.phar install --dev
 
 script:
-  - vendor/bin/phpunit && vendor/bin/behat
+  - vendor/bin/phpunit && vendor/bin/behat --config=behat.yml.travis
