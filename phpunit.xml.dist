@@ -11,7 +11,7 @@
         processIsolation="false"
         stopOnFailure="true"
         syntaxCheck="false"
-        bootstrap="application/bootstrap.php">
+        bootstrap="vendor/autoload.php">
 
     <php>
         <env name="PHP_IS_PHPUNIT" value="1"/>
