@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bookingbat/application.png?branch=master)](https://travis-ci.org/bookingbat/application)
+
 Online Appointment Booking
 ===========
 Booking Bat allows you to take appointments from your website. Allow your customers to schedule appointments with Booking Bat!
