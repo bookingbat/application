@@ -19,5 +19,10 @@ use Behat\Gherkin\Node\PyStringNode,
  */
 class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
 {
-
+    
+    public function clickLink($link)
+    {
+        var_dump($this->getSession()->getPage()->getContent());
+        parent::clickLink($link);
+    }
 }
