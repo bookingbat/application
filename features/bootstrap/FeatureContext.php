@@ -19,6 +19,14 @@ use Behat\Gherkin\Node\PyStringNode,
  */
 class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
 {
+    /** @AfterScenario */
+    public function after($event)
+    {
+        if(4==$event->getResult()) {
+            var_dump($this->getSession()->getPage()->getContent());
+        }
+    }
+
     /**
      * @Given /^I have a user "([^"]*)" with password "([^"]*)"$/
      */
@@ -29,12 +37,6 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
             'username' => $username,
             'password' => $password,
         ));
-    }
-
-    public function clickLink($link)
-    {
- //       var_dump($this->getSession()->getPage()->getContent());
-        return parent::clickLink($link);
     }
 
     function db()
