@@ -1,7 +1,9 @@
 <?php
 
 use Behat\MinkExtension\Context\MinkContext,
-    Behat\Behat\Event\SuiteEvent;
+    Behat\Behat\Event\SuiteEvent,
+    Behat\Behat\Context\Step\Given,
+    Behat\Behat\Exception\PendingException;
 
 class FeatureContext extends MinkContext
 {
@@ -40,14 +42,45 @@ class FeatureContext extends MinkContext
     }
 
     /**
-     * @Given /^I have a user "([^"]*)" with password "([^"]*)"$/
+     * @Given /^I am logged in as admin$/
      */
-    public function iHaveAUserWithPassword($username, $password)
+    public function iAmLoggedInAsAdmin()
+    {
+        return array(
+            new Given('I have an admin "admin" with password "admin123"'),
+            new Given('I am on "/user/login"'),
+            new Given('I fill in "username" with "admin"'),
+            new Given('I fill in "password" with "admin123"'),
+            new Given('I press "login"')
+        );
+    }
+
+    /**
+     * @Then /^I should be on "\/user\/register$/
+     */
+    public function iShouldBeOnUserRegister()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When /^I click "([^"]*)"$/
+     */
+    public function iClick($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^I have an admin "([^"]*)" with password "([^"]*)"$/
+     */
+    public function iHaveAnAdminWithPassword($username, $password)
     {
         $userDataMapper = new User_DataMapper($this->db());
         $userDataMapper->insert(array(
             'username' => $username,
             'password' => $password,
+            'type'=>'admin'
         ));
     }
 

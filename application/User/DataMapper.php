@@ -12,7 +12,8 @@ class User_DataMapper
     {
         $this->db->insert('user', array(
             'username'=>$parameters['username'],
-            'password'=>sha1($parameters['password'])
+            'password'=>sha1($parameters['password']),
+            'type'=>$parameters['type']
         ));
     }
 }

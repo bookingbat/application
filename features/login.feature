@@ -9,7 +9,7 @@ Feature: It has a login system with admins & staff users
 
   Scenario: It should deny a wrong password
     Given I am on "/user/login"
-    And I have a user "admin" with password "admin123"
+    And I have an admin "admin" with password "admin123"
     When I fill in "username" with "admin"
     When I fill in "password" with "wrong-password"
     When I press "login"
@@ -17,7 +17,7 @@ Feature: It has a login system with admins & staff users
 
   Scenario: I should log in as admin
     Given I am on "/user/login"
-    And I have a user "admin" with password "admin123"
+    And I have an admin "admin" with password "admin123"
     When I fill in "username" with "admin"
     When I fill in "password" with "admin123"
     When I press "login"

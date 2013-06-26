@@ -4,8 +4,11 @@ $user = bootstrap::getInstance()->getUser();
 
 if('admin'==$user['type']) {
     ?>
-    <li><a href="<?= $this->url(
-            array('controller' => 'user', 'action' => 'manage'),
+    <li><a id="btn-manage-staff" href="<?= $this->url(
+            array(
+                'controller' => 'user',
+                'action' => 'manage'
+            ),
             'default',
             true
         ) ?>">Manage Staff</a></li>

@@ -116,7 +116,8 @@ class UserController extends Controller
 
             $this->view->email = $form->getValue('email');
             $this->view->username = $form->getValue('username');
-            return $this->render('success');
+            $this->_helper->FlashMessenger->addMessage('Created User');
+            return $this->_redirect('/user/manage');
         }
     }
 
