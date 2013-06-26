@@ -36,7 +36,7 @@ class FeatureContext extends MinkContext
     public function after($event)
     {
         if(4==$event->getResult()) {
-            echo $this->getSession()->getPage()->getContent();
+            //echo $this->getSession()->getPage()->getContent();
         }
         $this->db()->query('truncate `user`');
     }
@@ -56,6 +56,17 @@ class FeatureContext extends MinkContext
     }
 
     /**
+     * @When /^I follow "([^"]*)" for user "([^"]*)"$/
+     */
+    public function iFollowForUser($linkCSS, $username)
+    {
+        $page = $this->getMink()->getSession()->getPage();
+
+        $element = $page->find('css',".staff-user-$username a.$linkCSS");
+        $element->click();
+    }
+
+    /**
      * @Then /^I should be on "\/user\/register$/
      */
     public function iShouldBeOnUserRegister()
@@ -64,11 +75,16 @@ class FeatureContext extends MinkContext
     }
 
     /**
-     * @When /^I click "([^"]*)"$/
+     * @Given /^I have a staff "([^"]*)"$/
      */
-    public function iClick($arg1)
+    public function iHaveAStaff($username)
     {
-        throw new PendingException();
+        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper->insert(array(
+            'username' => $username,
+            'password' => '',
+            'type'=>'staff'
+        ));
     }
 
     /**
