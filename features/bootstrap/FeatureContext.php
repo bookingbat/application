@@ -13,7 +13,12 @@ class FeatureContext extends MinkContext
      */
     public static function prepare(SuiteEvent $event)
     {
+        `mysql --user=root -e "drop database IF EXISTS bookingbat_tests"`;
+        `mysql --user=root -e "create database bookingbat_tests"`;
+        `mysql --user=root bookingbat_tests < install.sql`;
+
         self::$pid = (int)`php --server=localhost:8888 --docroot="html" >> var/php-cli-server.log 2>&1 & echo $!`;
+        sleep(1);
     }
 
     /**

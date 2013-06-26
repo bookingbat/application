@@ -8,8 +8,6 @@ php:
 
 before_script:
   - php --server=localhost:8888 --docroot=html &
-  - mysql -e 'create database bookingbat_phpunit'
-  - mysql bookingbat_phpunit < install.sql
   - php composer.phar install --dev --prefer-source
 
 script:
