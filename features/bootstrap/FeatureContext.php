@@ -17,7 +17,7 @@ class FeatureContext extends MinkContext
         `mysql --user=root -e "create database bookingbat_tests"`;
         `mysql --user=root bookingbat_tests < install.sql`;
 
-        self::$pid = (int)`php --server=localhost:8888 --docroot="html" >> var/php-cli-server.log 2>&1 & echo $!`;
+        self::$pid = (int)`php --server=localhost:8000 --docroot="html" >> var/php-cli-server.log 2>&1 & echo $!`;
         sleep(1);
     }
 

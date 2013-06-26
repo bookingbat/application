@@ -7,8 +7,7 @@ php:
   - 5.4
 
 before_script:
-  - php --server=localhost:8888 --docroot=html &
   - php composer.phar install --dev --prefer-source
 
 script:
-  - vendor/bin/phpunit && vendor/bin/behat --config=behat.yml.travis
+  - vendor/bin/phpunit && vendor/bin/behat
