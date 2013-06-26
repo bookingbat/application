@@ -10,8 +10,8 @@ Feature: Logging in
 
   Scenario:
     Given I am on "/user/login"
-    And I have a user "admin" with password "admin"
+    And I have a user "admin" with password "admin123"
     When I fill in "username" with "admin"
-    When I fill in "password" with "admin"
+    When I fill in "password" with "admin123"
     When I press "login"
     Then I should be on "/calendar"

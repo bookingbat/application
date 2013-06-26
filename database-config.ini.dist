@@ -12,7 +12,7 @@ database.params.dbname = bookingbat
 database.params.username = root
 database.params.password = ""
 
-[tests : production]
+[tests : localhost]
 database.params.host =  localhost
 database.params.dbname = bookingbat_tests
 database.params.username = root

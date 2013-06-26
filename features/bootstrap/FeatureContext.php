@@ -1,24 +1,30 @@
 <?php
 
-use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
+use Behat\MinkExtension\Context\MinkContext,
+    Behat\Behat\Event\SuiteEvent;
 
-//
-// Require 3rd-party libraries here:
-//
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
-
-/**
- * Features context.
- */
-class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
+class FeatureContext extends MinkContext
 {
+    /** @var  The PID of the php-cli server */
+    static $pid;
+
+    /**
+     * @BeforeSuite
+     */
+    public static function prepare(SuiteEvent $event)
+    {
+        self::$pid = (int)`php --server=localhost:8888 --docroot="html" >> var/php-cli-server.log 2>&1 & echo $!`;
+    }
+
+    /**
+     * @AfterSuite
+     */
+    public static function tearDown(SuiteEvent $event)
+    {
+        $cmd = 'kill '.self::$pid;
+        exec($cmd);
+    }
+
     /** @AfterScenario */
     public function after($event)
     {
