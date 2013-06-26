@@ -36,6 +36,7 @@ class FeatureContext extends MinkContext
         if(4==$event->getResult()) {
             echo $this->getSession()->getPage()->getContent();
         }
+        $this->db()->query('truncate `user`');
     }
 
     /**
