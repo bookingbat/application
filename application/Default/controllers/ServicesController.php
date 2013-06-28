@@ -25,16 +25,14 @@ class ServicesController extends Controller
 
     function editAction()
     {
-        $service = $this->db()->select()
-            ->from('services')
-            ->where('id=?',$this->getParam('id'))
-            ->query()->fetch();
+        $service = $this->serviceDataMapper()->find($this->getParam('id'));
 
         $form = $this->form();
         $form->populate($service);
 
         if($this->getRequest()->isPost() && $form->isValid($this->_getAllParams())) {
-            $this->db()->update('services',$form->getValues(),'id='.$this->getParam('id'));
+            $this->serviceDataMapper()->update($this->getParam('id'), $form->getValues());
+
             $this->_helper->FlashMessenger->addMessage('Service Updated');
             $url = $this->view->url(array('action'=>'manage'),'services',true);
             return $this->_redirect($url);
@@ -72,9 +70,7 @@ class ServicesController extends Controller
 
     function listServices()
     {
-        $select = $this->db()->select()
-            ->from('services');
-        return $select->query()->fetchAll();
+        return $this->serviceDataMapper()->findAll();
     }
 
     function form()
@@ -121,6 +117,11 @@ class ServicesController extends Controller
         }
 
         return $services;
+    }
+
+    function serviceDataMapper()
+    {
+        return new Service_DataMapper($this->db());
     }
 
 }
