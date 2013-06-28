@@ -1,4 +1,6 @@
-Feature: As an admin I should be able to manage my staff
+Feature: As an admin
+  I need to be able to manage my staff, as well as set their availability & services
+  So that my clients can book appoinments
 
   Scenario: I create a staff
     Given I am logged in as admin
@@ -21,7 +23,7 @@ Feature: As an admin I should be able to manage my staff
     Given I have a staff "staff"
     Given I am logged in as admin
     Given I am on "/user/manage"
-    When I follow "btn-availability" for user "staff"
+    When I follow "btn-availability" for "staff"
     Then the url should match "/availability/staff/[0-9]+"
     Then I fill in "day" with "7"
     Then I fill in "start" with "01:00"

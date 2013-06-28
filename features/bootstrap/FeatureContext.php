@@ -56,9 +56,9 @@ class FeatureContext extends MinkContext
     }
 
     /**
-     * @When /^I follow "([^"]*)" for user "([^"]*)"$/
+     * @When /^I follow "([^"]*)" for "([^"]*)"$/
      */
-    public function iFollowForUser($linkCSS, $username)
+    public function iFollowFor($linkCSS, $username)
     {
         $page = $this->getMink()->getSession()->getPage();
 
