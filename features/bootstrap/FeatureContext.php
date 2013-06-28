@@ -58,11 +58,11 @@ class FeatureContext extends MinkContext
     /**
      * @When /^I follow "([^"]*)" for "([^"]*)"$/
      */
-    public function iFollowFor($linkCSS, $username)
+    public function iFollowFor($linkCSS, $recordName)
     {
         $page = $this->getMink()->getSession()->getPage();
 
-        $element = $page->find('css',".staff-user-$username a.$linkCSS");
+        $element = $page->find('css',".record-$recordName a.$linkCSS");
         $element->click();
     }
 
@@ -99,6 +99,18 @@ class FeatureContext extends MinkContext
             'type'=>'admin'
         ));
     }
+
+    /**
+     * @Given /^I have a service "([^"]*)"$/
+     */
+    public function iHaveAService($name)
+    {
+        $serviceDataMapper = new Service_DataMapper($this->db());
+        $serviceDataMapper->insert(array(
+            'name' => $name
+        ));
+    }
+
 
     function db()
     {

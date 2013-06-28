@@ -9,7 +9,7 @@
     <?php
     foreach($this->services as $service) {
         ?>
-        <tr>
+        <tr class="record-<?=$this->escape($service['name'])?>">
             <td>
                 <?php
                 $url = $this->url(array(
@@ -17,7 +17,7 @@
                     'id'=>$service['id']
                 ));
                 ?>
-                <a class="btn" href="<?=$url?>"><i class="icon-pencil"></i></td>
+                <a class="btn btn-edit" href="<?=$url?>"><i class="icon-pencil"></i></td>
             </td>
             <td><?=$this->escape($service['id'])?></td>
             <td><?=$this->escape($service['name'])?></td>

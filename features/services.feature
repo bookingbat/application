@@ -13,3 +13,14 @@ Feature: As an admin
     Then I should be on "/services/manage"
     And I should see "Service Created"
     And I should see "training"
+
+  Scenario:  I edit a service's name
+    Given I have a service "training"
+    And I am on "/services/manage"
+    Then I follow "btn-edit" for "training"
+    Then the url should match "/services/edit/id/[0-9]+"
+    When I fill in "name" with "training-renamed"
+    Then press "save"
+    Then I should be on "/services/manage"
+    And I should see "Service Updated"
+    And I should see "training-renamed"
