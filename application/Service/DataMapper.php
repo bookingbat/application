@@ -8,12 +8,23 @@ class Service_DataMapper
         $this->db = $db;
     }
 
-    function find($id)
+    function find($condition)
     {
-        return $this->db->select()
-            ->from('services')
-            ->where('id=?',$id)
-            ->query()->fetch();
+        if(is_numeric($condition)) {
+            return $this->db->select()
+                ->from('services')
+                ->where('id=?',$condition)
+                ->query()->fetch();
+        }
+
+        $select = $this->db->select()
+            ->from('services');
+
+        foreach($condition as $field=>$value) {
+            $select->where("$field=?",$value);
+        }
+
+        return $select->query()->fetch();
     }
 
     function findAll()

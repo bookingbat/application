@@ -132,7 +132,7 @@ class FeatureContext extends MinkContext
         $service = $serviceDataMapper->find(array(
             'name' => $service
         ));
-        var_dump($service);var_dump($staff);
+
         $userDataMapper->assign($service['id'],$staff['id']);
     }
 

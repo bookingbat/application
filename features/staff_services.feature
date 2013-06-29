@@ -36,3 +36,16 @@ Feature: As an admin
     Then the "services-1" checkbox should not be checked
     When I check "services-2"
     Then the "services-2" checkbox should be checked
+
+  Scenario: I unassign a service from a staff
+    Given I have a staff "staff"
+    And I am logged in as admin
+    And I am on "/user/manage"
+    And I have a service "training"
+    And the service "training" is assigned to "staff"
+    When I follow "btn-services" for "staff"
+    Then the "services-1" checkbox should be checked
+    When I uncheck "services-1"
+    And I press "save"
+    And I follow "btn-services" for "staff"
+    Then the "services-1" checkbox should not be checked
