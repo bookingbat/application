@@ -70,13 +70,7 @@ class ServicesController extends Controller
 
     function form()
     {
-        $form = new Zend_Form;
-        $form->addElement('text','name',array(
-            'label'=>'Service Name',
-            'required'=>true
-        ));
-
-        return $form;
+        return new Service_Form;
     }
 
     function servicesForm()
