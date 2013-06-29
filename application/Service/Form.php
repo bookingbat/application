@@ -1,13 +1,26 @@
 <?php
 class Service_Form extends Zend_Form
 {
-    function __construct($services)
+    function init()
     {
         $this->addElement('multiCheckbox','services',array(
             'label'=>'Services',
-            'multiOptions'=>$services,
             'separator'=>''
         ));
-        return parent::__construct();
+    }
+
+    function setPossibleServices($services)
+    {
+        $services = $this->servicesByID($services);
+        $this->getElement('services')->setMultiOptions($services);
+    }
+
+    function servicesByID($services)
+    {
+        $servicesByID = array();
+        foreach($services as $service) {
+            $servicesByID[$service['id']] = $service['name'];
+        }
+        return $servicesByID;
     }
 }

@@ -81,12 +81,9 @@ class ServicesController extends Controller
 
     function servicesForm()
     {
-        $services = array();
-        foreach($this->listServices() as $service) {
-            $services[$service['id']] = $service['name'];
-        }
+        $form = new Service_Form();
+        $form->setPossibleServices($this->listServices());
 
-        $form = new Service_Form($services);
         $form->populate(array(
             'services' => $this->servicesForStaff()
         ));
