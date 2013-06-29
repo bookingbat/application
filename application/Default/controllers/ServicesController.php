@@ -52,13 +52,8 @@ class ServicesController extends Controller
 
         if($this->getRequest()->isPost() && $form->isValid($this->_getAllParams())) {
 
-            $db->delete('staff_services', 'staff_user_id=' . (int)$staff['id']);
-            foreach ($form->getValue('services') as $service_id) {
-                $db->insert('staff_services', array(
-                    'staff_user_id' => $staff['id'],
-                    'service_id' => $service_id
-                ));
-            }
+            $this->userDataMapper()->unassignServices($staff['id']);
+            $this->userDataMapper()->assignMultiple($form->getValue('services'), $staff['id']);
 
             $this->_helper->FlashMessenger->addMessage('Staff\'s Services Updated');
             return $this->_redirect('/user/manage');
@@ -122,6 +117,11 @@ class ServicesController extends Controller
     function serviceDataMapper()
     {
         return new Service_DataMapper($this->db());
+    }
+
+    function userDataMapper()
+    {
+        return new User_DataMapper($this->db());
     }
 
 }

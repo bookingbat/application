@@ -27,11 +27,23 @@ class User_DataMapper
         ));
     }
 
+    function assignMultiple($services,$userID)
+    {
+        foreach($services as $serviceID) {
+            $this->assign($serviceID,$userID);
+        }
+    }
+
     function assign($serviceID,$userID)
     {
         $this->db->insert('staff_services', array(
             'staff_user_id' => $userID,
             'service_id' => $serviceID
         ));
+    }
+
+    function unassignServices($userID)
+    {
+        $this->db->delete('staff_services', 'staff_user_id=' . (int)$userID);
     }
 }
