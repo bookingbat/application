@@ -12,16 +12,22 @@ class FeatureContext extends MinkContext
     static $pid;
 
     /**
+     * @BeforeSuite
+     */
+    public static function startServer()
+    {
+        self::$pid = (int)`php --server=localhost:8000 --docroot="html" >> var/php-cli-server.log 2>&1 & echo $!`;
+        sleep(1);
+    }
+
+    /**
      * @BeforeScenario
      */
-    public static function prepare(ScenarioEvent $event)
+    public static function resetDB(ScenarioEvent $event)
     {
         `mysql --user=root -e "drop database IF EXISTS bookingbat_tests"`;
         `mysql --user=root -e "create database bookingbat_tests"`;
         `mysql --user=root bookingbat_tests < install.sql`;
-
-        self::$pid = (int)`php --server=localhost:8000 --docroot="html" >> var/php-cli-server.log 2>&1 & echo $!`;
-        sleep(1);
     }
 
     /**
@@ -110,6 +116,24 @@ class FeatureContext extends MinkContext
         $serviceDataMapper->insert(array(
             'name' => $name
         ));
+    }
+
+    /**
+     * @Given /^the service "([^"]*)" is assigned to "([^"]*)"$/
+     */
+    public function theServiceIsAssignedTo($service, $staff)
+    {
+        $userDataMapper = new User_DataMapper($this->db());
+        $staff = $userDataMapper->find(array(
+            'username'=>$staff
+        ));
+
+        $serviceDataMapper = new Service_DataMapper($this->db());
+        $service = $serviceDataMapper->find(array(
+            'name' => $service
+        ));
+        var_dump($service);var_dump($staff);
+        $userDataMapper->assign($service['id'],$staff['id']);
     }
 
     /**
