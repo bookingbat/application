@@ -31,13 +31,3 @@ if('staff'==$user['type']) {
     <li><a href="<?= $this->url(array(),'availability',true)?>">My Availability</a></li>
     <?php
 }
-
-if('admin'==$user['type']) {
-    ?>
-    <li><a href="<?= $this->url(
-            array('controller' => 'settings', 'action' => 'index'),
-            'default',
-            true
-        ) ?>">Settings</a></li>
-    <?php
-}
