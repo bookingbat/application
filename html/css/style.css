@@ -9,20 +9,16 @@
 }
 .week-chooser table td {
     padding:0;
-    width:13%;
+    width:12%;
+    background-image: url('/img/week-lines.png');
 }
 .week-chooser table td.hours-column {
-    height:2400px;
-    width:100px;
+    height:1200px;
+    width:150px;
 }
 .week-chooser ul.legend,
 .week-chooser form,
-.week-chooser form dd,
-.week-chooser form dt,
-.week-chooser form dl,
-.week-chooser form label,
-.week-chooser form select,
-.week-chooser form input,
+.week-chooser form *,
 .week-chooser .legend li,
 .week-chooser  h2 {
     display:inline;
@@ -34,13 +30,14 @@
 }
 .hours-column ul li {
     display: block;
-    border-bottom:1px #000 solid;
-    width:100px;
-    height:46px;
+    width:150px;
+    height:25px;
     margin:0;
     position: absolute;
-    line-height:50px;
+    line-height:25px;
 }
+
+
 
 /**
  * Calendar styling
