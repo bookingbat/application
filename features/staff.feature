@@ -4,12 +4,8 @@ Feature: As an admin
 
   Scenario: I create a staff
     Given I am logged in as admin
-    When I follow "Manage Staff"
-    Then I should be on "/user/manage"
-
-    When I follow "New User"
-    Then I should be on "/user/register"
-
+    And I follow "Manage Staff"
+    And I follow "New User"
     When I fill in the following:
       | username    | staff               |
       | first_name  | john                |
