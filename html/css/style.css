@@ -30,13 +30,21 @@
 }
 .hours-column ul li {
     display: block;
-    width:150px;
+    width:100%;
     height:25px;
     margin:0;
     position: absolute;
     line-height:25px;
+    background-image: url('/img/week-lines-white.png');
 }
 
+.week-chooser .available {
+    background-image: url('/img/week-lines-green.png');
+}
+
+.week-chooser .booked {
+    background-image: url('/img/week-lines-blue.png');
+}
 
 
 /**

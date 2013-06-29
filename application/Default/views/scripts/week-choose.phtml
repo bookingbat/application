@@ -63,7 +63,7 @@ $start = date('j',$start);
                         $style .= sprintf('height:%dpx',$hours_length*50);
                         ?>
                         <li class="available" style="<?=$style?>">
-                            <?=$this->time($opening['start'])?>-<?=$this->time($opening['end'])?>
+                            <!--<?=$this->time($opening['start'])?>-<?=$this->time($opening['end'])?>-->
                         </li>
                         <?php
                     }
@@ -82,7 +82,7 @@ $start = date('j',$start);
                         $style .= sprintf('height:%dpx',$hours_length*50);
                         ?>
                         <li class="booked" style="<?=$style?>">
-                            <?=$this->time($booking['start'])?>-<?=$this->time($booking['end'])?>
+                            <!--<?=$this->time($booking['start'])?>-<?=$this->time($booking['end'])?>-->
                         </li>
                     <?php
                     }
