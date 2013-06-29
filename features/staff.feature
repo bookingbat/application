@@ -4,10 +4,10 @@ Feature: As an admin
 
   Scenario: I create a staff
     Given I am logged in as admin
-    When I follow "btn-manage-staff"
+    When I follow "Manage Staff"
     Then I should be on "/user/manage"
 
-    When I follow "btn-new-user"
+    When I follow "New User"
     Then I should be on "/user/register"
 
     When I fill in the following:
