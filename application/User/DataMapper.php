@@ -1,6 +1,7 @@
 <?php
 class User_DataMapper
 {
+    /** @var  Zend_Db_Adapter_Abstract */
     protected $db;
 
     function __construct($db)

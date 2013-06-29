@@ -32,12 +32,15 @@ class AvailabilityController extends Controller
         $form = new AvailabilityForm;
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
-            $db->insert('availability', array(
-                'staff_userid' => $user['type'] == 'admin' ?  $this->getParam('staff'): $user['id'],
+            $staff_userid = $user['type'] == 'admin' ?  $this->getParam('staff'): $user['id'];
+            $parameters = array(
+                'staff_userid' => $staff_userid,
                 'day_of_week' => $form->getValue('day'),
                 'start' => $form->getValue('start'),
                 'end' => $form->getValue('end'),
-            ));
+            );
+            $this->availabilityDataMapper()->insert($parameters);
+
             $this->_helper->FlashMessenger->addMessage('Added Availability');
             return $this->_redirect($this->view->url(array(),'availability'));
         }
@@ -46,4 +49,8 @@ class AvailabilityController extends Controller
         $this->render('availability-manage', null, true);
     }
 
+    function availabilityDataMapper()
+    {
+        return new Availability_DataMapper($this->db());
+    }
 }
