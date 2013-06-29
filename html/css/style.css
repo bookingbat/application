@@ -7,6 +7,9 @@
     display: block;
     width:100%;
 }
+.week-chooser table th {
+    text-align:center;
+}
 .week-chooser table td {
     padding:0;
     width:12%;

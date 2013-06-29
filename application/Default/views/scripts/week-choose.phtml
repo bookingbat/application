@@ -53,6 +53,8 @@ $start = date('j',$start);
                     <?php
                     foreach($this->availability[$day] as $opening) {
 
+                        $dayString = sprintf('%s-%s-%s', $day, $this->month, $this->year);
+
                         $seconds_past_midnight_start = strtotime($opening['start']) - strtotime('midnight');
                         $hours_past_midnight_start = $seconds_past_midnight_start/60/60;
 
@@ -61,8 +63,13 @@ $start = date('j',$start);
 
                         $style = sprintf('top:%dpx;',$hours_past_midnight_start*50);
                         $style .= sprintf('height:%dpx',$hours_length*50);
+
+                        $url = $this->url(array(
+                            'day' => date('Y-m-d', strtotime($dayString)),
+                            'staff' => $this->staff,
+                        ), 'make-booking', true);
                         ?>
-                        <li class="available" style="<?=$style?>">
+                        <li class="available {url:'<?=$url?>'}" style="<?=$style?>">
                             <!--<?=$this->time($opening['start'])?>-<?=$this->time($opening['end'])?>-->
                         </li>
                         <?php
@@ -96,3 +103,16 @@ $start = date('j',$start);
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.week-chooser .available').hover(function () {
+            $(this).addClass('calendar-hover');
+        }, function () {
+            $(this).removeClass('calendar-hover');
+        });
+        $('.week-chooser .available').click(function () {
+            window.location.href = $(this).metadata().url;
+        });
+    });
+</script>
