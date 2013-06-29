@@ -111,6 +111,22 @@ class FeatureContext extends MinkContext
         ));
     }
 
+    /**
+     * @Then /^I dump the page$/
+     */
+    public function iDumpThePage()
+    {
+        echo $this->getMink()->getSession()->getPage()->getContent();
+    }
+
+    /** Patches bug https://github.com/Behat/Behat/issues/298 */
+    public function assertCheckboxChecked($checkbox)
+    {
+        $checked = $this->assertSession()->fieldExists($checkbox)->getAttribute('checked');
+        if(!$checked) {
+            throw new Exception('Checkbox should be checked');
+        }
+    }
 
     function db()
     {
