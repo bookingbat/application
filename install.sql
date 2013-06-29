@@ -56,3 +56,5 @@ CREATE TABLE IF NOT EXISTS `staff_services` (
   `service_id` int(10) NOT NULL,
   PRIMARY KEY (`staff_user_id`,`service_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE  `services` ADD  `padding` INT( 3 ) NOT NULL;

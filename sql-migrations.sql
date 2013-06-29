@@ -1,0 +1,1 @@
+ALTER TABLE  `services` ADD  `padding` INT( 3 ) NOT NULL;

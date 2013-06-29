@@ -184,6 +184,14 @@ class FeatureContext extends MinkContext
         }
     }
 
+    /**
+     * @Then /^field "([^"]*)" should have value "([^"]*)"$/
+     */
+    public function fieldShouldHaveValue($field, $value)
+    {
+        $this->assertSession()->fieldValueEquals($field, $value);
+    }
+
     function db()
     {
         return Zend_Registry::get('db');
