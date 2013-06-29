@@ -15,7 +15,7 @@ class ServicesController extends Controller
     {
         $form = $this->form();
         if($this->getRequest()->isPost() && $form->isValid($this->_getAllParams())) {
-            $this->db()->insert('services',$form->getValues());
+            $this->serviceDataMapper()->insert($form->getValues());
             $this->_helper->FlashMessenger->addMessage('Service Created');
             $url = $this->view->url(array('action'=>'manage'),'services',true);
             return $this->_redirect($url);

@@ -58,3 +58,4 @@ CREATE TABLE IF NOT EXISTS `staff_services` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE  `services` ADD  `padding` INT( 3 ) NOT NULL;
+ALTER TABLE  `services` ADD  `durations` VARCHAR( 50 ) NOT NULL;

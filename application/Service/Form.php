@@ -15,5 +15,16 @@ class Service_Form extends Zend_Form
                 '60'=>'1 Hour Padding',
             )
         ));
+
+        $this->addElement('multiCheckbox','durations',array(
+            'label'=>'Allowed Duration(s)',
+            'multiOptions'=>array(
+                '30'=>'30 minutes',
+                '60'=>'1 Hour',
+                '90'=>'1.5 Hour',
+                '120'=>'2 Hours',
+            ),
+            'separator'=>''
+        ));
     }
 }

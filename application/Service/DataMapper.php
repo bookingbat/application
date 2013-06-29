@@ -11,10 +11,11 @@ class Service_DataMapper
     function find($condition)
     {
         if(is_numeric($condition)) {
-            return $this->db->select()
+            $row = $this->db->select()
                 ->from('services')
                 ->where('id=?',$condition)
                 ->query()->fetch();
+            return $this->load($row);
         }
 
         $select = $this->db->select()
@@ -25,6 +26,12 @@ class Service_DataMapper
         }
 
         return $select->query()->fetch();
+    }
+
+    function load($row)
+    {
+        $row['durations'] = explode(',',$row['durations']);
+        return $row;
     }
 
     function findAll()
@@ -51,11 +58,23 @@ class Service_DataMapper
 
     function insert($parameters)
     {
+        $parameters = $this->durationsToString($parameters);
         $this->db->insert('services', $parameters);
     }
 
     function update($id,$parameters)
     {
+        $parameters = $this->durationsToString($parameters);
         $this->db->update('services',$parameters,'id='.$id);
+    }
+
+    function durationsToString($parameters)
+    {
+        if(isset($parameters['durations'])) {
+            $parameters['durations'] = implode(',',$parameters['durations']);
+        } else {
+            $parameters['durations'] = '';
+        }
+        return $parameters;
     }
 }
