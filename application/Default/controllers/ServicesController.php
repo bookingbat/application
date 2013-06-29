@@ -42,18 +42,18 @@ class ServicesController extends Controller
 
     function assignAction()
     {
-        $db = Zend_Registry::get('db');
-        $select = $db->select()
-            ->from('user')
-            ->where('id=?', $this->_getParam('staff'));
-        $staff = $select->query()->fetch();
+        $staff_id = $this->getParam('staff');
+        $staff = $this->userDataMapper()->find(array(
+            'id'=>$staff_id,
+            'type'=>'staff'
+        ));
 
         $form = $this->servicesForm();
 
         if($this->getRequest()->isPost() && $form->isValid($this->_getAllParams())) {
 
-            $this->userDataMapper()->unassignServices($staff['id']);
-            $this->userDataMapper()->assignMultiple($form->getValue('services'), $staff['id']);
+            $this->userDataMapper()->unassignServices($staff_id);
+            $this->userDataMapper()->assignMultiple($form->getValue('services'), $staff_id);
 
             $this->_helper->FlashMessenger->addMessage('Staff\'s Services Updated');
             return $this->_redirect('/user/manage');
