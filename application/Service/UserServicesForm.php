@@ -1,5 +1,5 @@
 <?php
-class Service_Form extends Zend_Form
+class Service_UserServicesForm extends Zend_Form
 {
     function init()
     {

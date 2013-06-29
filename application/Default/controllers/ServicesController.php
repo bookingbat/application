@@ -81,7 +81,7 @@ class ServicesController extends Controller
 
     function servicesForm()
     {
-        $form = new Service_Form();
+        $form = new Service_UserServicesForm();
         $form->setPossibleServices($this->listServices());
 
         $form->populate(array(
