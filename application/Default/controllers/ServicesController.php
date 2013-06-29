@@ -101,17 +101,7 @@ class ServicesController extends Controller
 
     function servicesForStaff()
     {
-        $services_for_staff = $this->db()->select()
-            ->from('staff_services')
-            ->where('staff_user_id=?',$this->getParam('staff'))
-            ->query()->fetchAll();
-
-        $services = array();
-        foreach($services_for_staff as $service) {
-            $services[] = $service['service_id'];
-        }
-
-        return $services;
+        return $this->serviceDataMapper()->servicesForStaff($this->getParam('staff'));
     }
 
     function serviceDataMapper()

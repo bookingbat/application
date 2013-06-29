@@ -34,6 +34,21 @@ class Service_DataMapper
         return $select->query()->fetchAll();
     }
 
+    function servicesForStaff($id)
+    {
+        $services_for_staff = $this->db->select()
+            ->from('staff_services')
+            ->where('staff_user_id=?',$id)
+            ->query()->fetchAll();
+
+        $services = array();
+        foreach($services_for_staff as $service) {
+            $services[] = $service['service_id'];
+        }
+
+        return $services;
+    }
+
     function insert($parameters)
     {
         $this->db->insert('services', $parameters);
