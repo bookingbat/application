@@ -13,7 +13,7 @@
         <table class="calendar table-bordered">
             <thead>
                 <th colspan="7">
-                    <a class="btn btn-mini" href="<?php
+                    <a id="btn-previous-month" class="btn btn-mini" href="<?php
                     if ($this->month == 1) {
                         echo $this->url(array('month' => 12, 'year' => $this->year - 1));
                     } else {
@@ -39,7 +39,7 @@
                     echo $this->formSelect('name',$val,array('class'=>'calendar-switcher'),$options);
                     ?>
 
-                    <a class="btn btn-mini" href="<?php
+                    <a id="btn-next-month" class="btn btn-mini" href="<?php
                     if ($this->month == 12) {
                         echo $this->url(array('month' => 1, 'year' => $this->year + 1));
                     } else {

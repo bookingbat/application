@@ -46,7 +46,6 @@ class FeatureContext extends MinkContext
         if(4==$event->getResult()) {
             //echo $this->getSession()->getPage()->getContent();
         }
-        $this->db()->query('truncate `user`');
     }
 
     /**
@@ -144,6 +143,28 @@ class FeatureContext extends MinkContext
         ));
 
         $userDataMapper->assign($service['id'],$staff['id']);
+    }
+
+    /**
+     * @Given /^the staff "([^"]*)" has the following availability:$/
+     */
+    public function theStaffHasTheFollowingAvailability($staff, TableNode $availability)
+    {
+        $userDataMapper = new User_DataMapper($this->db());
+        $staff = $userDataMapper->find(array(
+            'username'=>$staff
+        ));
+
+        $availability = $availability->getRowsHash();
+        foreach($availability as $day => $times) {
+            $availabilityDataMapper = new Availability_DataMapper($this->db());
+            $availabilityDataMapper->insert(array(
+                'staff_userid'=>$staff['id'],
+                'day_of_week'=>$day,
+                'start'=>$times[0],
+                'end'=>$times[1]
+            ));
+        }
     }
 
     /**
