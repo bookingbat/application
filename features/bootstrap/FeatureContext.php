@@ -4,7 +4,8 @@ use Behat\MinkExtension\Context\MinkContext,
     Behat\Behat\Event\ScenarioEvent,
     Behat\Behat\Event\SuiteEvent,
     Behat\Behat\Context\Step\Given,
-    Behat\Behat\Exception\PendingException;
+    Behat\Behat\Exception\PendingException,
+    Behat\Gherkin\Node\TableNode;
 
 class FeatureContext extends MinkContext
 {
@@ -92,6 +93,15 @@ class FeatureContext extends MinkContext
             'password' => '',
             'type'=>'staff'
         ));
+    }
+
+    /**
+     * @Given /^I have the following user:$/
+     */
+    public function iHaveTheFollowingUser(TableNode $table)
+    {
+        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper->insert($table->getRowsHash());
     }
 
     /**

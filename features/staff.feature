@@ -17,3 +17,31 @@ Feature: As an admin
     And I press "submit"
     Then I should be on "/user/manage"
     And I should see "Created user"
+
+  Scenario: I edit a staff
+    Given I am logged in as admin
+    And I have the following user:
+      | type        | staff               |
+      | username    | staff               |
+      | first_name  | john                |
+      | last_name   | doe                 |
+      | email       | staff@example.com   |
+      | phone       | 0000000000          |
+      | password    | staff123            |
+      | verifypassword |  staff123        |
+    And I am on "/user/manage"
+    When I follow "btn-edit" for "staff"
+    And I fill in the following:
+      | username    | staff2               |
+      | first_name  | john2                |
+      | last_name   | doe2                 |
+      | email       | staff2@example.com   |
+      | phone       | 0000000002           |
+    And I press "submit"
+    Then I should see "User Updated"
+    When I follow "btn-edit" for "staff2"
+    Then the response should contain "staff2"
+    And the response should contain "john2"
+    And the response should contain "doe2"
+    And the response should contain "staff2@example.com"
+    And the response should contain "0000000002"
