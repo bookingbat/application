@@ -16,4 +16,4 @@ Feature: As an admin
       | verifypassword |  staff123        |
     And I press "submit"
     Then I should be on "/user/manage"
-    Then I should see "Created user"
+    And I should see "Created user"
