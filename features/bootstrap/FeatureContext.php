@@ -1,6 +1,7 @@
 <?php
 
 use Behat\MinkExtension\Context\MinkContext,
+    Behat\Behat\Event\ScenarioEvent,
     Behat\Behat\Event\SuiteEvent,
     Behat\Behat\Context\Step\Given,
     Behat\Behat\Exception\PendingException;
@@ -11,9 +12,9 @@ class FeatureContext extends MinkContext
     static $pid;
 
     /**
-     * @BeforeSuite
+     * @BeforeScenario
      */
-    public static function prepare(SuiteEvent $event)
+    public static function prepare(ScenarioEvent $event)
     {
         `mysql --user=root -e "drop database IF EXISTS bookingbat_tests"`;
         `mysql --user=root -e "create database bookingbat_tests"`;
