@@ -25,13 +25,14 @@ class ServicesController extends Controller
 
     function editAction()
     {
-        $service = $this->serviceDataMapper()->find($this->getParam('id'));
+        $id = $this->getParam('id');
+        $service = $this->serviceDataMapper()->find($id);
 
         $form = $this->form();
         $form->populate($service);
 
         if($this->getRequest()->isPost() && $form->isValid($this->_getAllParams())) {
-            $this->serviceDataMapper()->update($this->getParam('id'), $form->getValues());
+            $this->serviceDataMapper()->update($id, $form->getValues());
 
             $this->_helper->FlashMessenger->addMessage('Service Updated');
             $url = $this->view->url(array('action'=>'manage'),'services',true);
