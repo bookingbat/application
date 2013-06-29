@@ -81,20 +81,15 @@ class ServicesController extends Controller
 
     function servicesForm()
     {
-        $form = new Zend_Form;
-
         $services = array();
         foreach($this->listServices() as $service) {
             $services[$service['id']] = $service['name'];
         }
 
-        $form->addElement('multiCheckbox','services',array(
-            'label'=>'Services',
-            'multiOptions'=>$services,
-            'separator'=>''
+        $form = new Service_Form($services);
+        $form->populate(array(
+            'services' => $this->servicesForStaff()
         ));
-
-        $form->populate(array('services' => $this->servicesForStaff()));
 
         return $form;
     }
