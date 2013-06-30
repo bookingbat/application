@@ -168,6 +168,22 @@ class FeatureContext extends MinkContext
     }
 
     /**
+     * @Given /^the service "([^"]*)" has the durations "([^"]*)"$/
+     */
+    public function theServiceHasTheDurations($service, $durations)
+    {
+        $serviceDataMapper = new Service_DataMapper($this->db());
+        $service = $serviceDataMapper->find(array(
+            'name' => $service
+        ));
+
+        $serviceDataMapper->update($service['id'], array(
+            'durations'=>$durations
+        ));
+    }
+
+
+    /**
      * @Then /^I dump the page$/
      */
     public function iDumpThePage()

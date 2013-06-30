@@ -91,14 +91,4 @@ class ServicesController extends Controller
         return $this->serviceDataMapper()->servicesForStaff($this->getParam('staff'));
     }
 
-    function serviceDataMapper()
-    {
-        return new Service_DataMapper($this->db());
-    }
-
-    function userDataMapper()
-    {
-        return new User_DataMapper($this->db());
-    }
-
 }

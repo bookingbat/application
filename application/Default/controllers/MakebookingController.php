@@ -1,6 +1,12 @@
 <?php
 class MakebookingController extends Controller
 {
+    protected $durationLabels = array(
+        '60' => '1 Hour',
+        '90' => '1.5 Hour',
+        '120' => '2 Hours',
+    );
+
     function preDispatch()
     {
         $user = bootstrap::getInstance()->getUser();
@@ -8,13 +14,17 @@ class MakebookingController extends Controller
 
     function bookingAction()
     {
+        $service = $this->serviceDataMapper()->find($this->getParam('service'));
+
+        $durations = array();
+        foreach($service['durations'] as $duration) {
+            $durations[$duration] = $this->durationLabels[$duration];
+        }
+
         $form = new Zend_Form;
         $form->addElement('select', 'appointment_duration', array(
             'label' => 'Appointment Duration',
-            'multiOptions' => array(
-                '60' => '1 Hour',
-                '90' => '1.5 Hour'
-            )
+            'multiOptions' => $durations
         ));
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {

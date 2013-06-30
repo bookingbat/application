@@ -71,6 +71,9 @@ class Service_DataMapper
     function durationsToString($parameters)
     {
         if(isset($parameters['durations'])) {
+            if(!is_array($parameters['durations'])) {
+                return $parameters;
+            }
             $parameters['durations'] = implode(',',$parameters['durations']);
         } else {
             $parameters['durations'] = '';

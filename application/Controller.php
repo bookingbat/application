@@ -193,4 +193,14 @@ abstract class Controller extends Zend_Controller_Action
             'data'=>serialize($mail)
         ));
     }
+
+    function serviceDataMapper()
+    {
+        return new Service_DataMapper($this->db());
+    }
+
+    function userDataMapper()
+    {
+        return new User_DataMapper($this->db());
+    }
 }
