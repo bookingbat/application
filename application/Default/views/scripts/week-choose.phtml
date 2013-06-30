@@ -67,6 +67,7 @@ $start = date('j',$start);
                         $url = $this->url(array(
                             'day' => date('Y-m-d', strtotime($dayString)),
                             'staff' => $this->staff,
+                            'service'=>$this->service
                         ), 'make-booking', true);
                         ?>
                         <li class="available {url:'<?=$url?>'}" style="<?=$style?>">
