@@ -26,7 +26,7 @@ class MakebookingController extends Controller
         }
 
         $form = new Zend_Form;
-        $form->addElement('select', 'appointment_duration', array(
+        $form->addElement('radio', 'appointment_duration', array(
             'label' => 'Appointment Duration',
             'multiOptions' => $durations
         ));

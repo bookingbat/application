@@ -25,11 +25,11 @@ Feature: As a client
     When I follow "Book an appointment!"
     Then the url should match "/make-booking/.*"
     And I should see "Appointment Duration"
-    And I should see 4 "#appointment_duration option" elements
-    And the "#appointment_duration" element should contain "30 Minutes"
-    And the "#appointment_duration" element should contain "1 Hour"
-    And the "#appointment_duration" element should contain "1.5 Hour"
-    And the "#appointment_duration" element should contain "2 Hours"
+    And I should see 4 "#appointment_duration-element input" elements
+    And the response should contain "appointment_duration-30"
+    And the response should contain "appointment_duration-60"
+    And the response should contain "appointment_duration-90"
+    And the response should contain "appointment_duration-120"
 
   #Scenario: It should disable durations that don't fit in the window
     #Given I have a staff "staff"
