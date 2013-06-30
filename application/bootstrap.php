@@ -57,8 +57,8 @@ class bootstrap
             'default',
             new Zend_Controller_Router_Route('/:controller/:action/*',
                 array(
-                    'controller' => 'calendar',
-                    'action'=>'index'
+                    'controller' => 'services',
+                    'action'=>'choose'
                 ))
         );
         $this->router->addRoute(
