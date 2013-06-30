@@ -18,7 +18,7 @@ Feature: As a client
     And I am on "/services"
     When I follow "training"
     And I follow "btn-next-month"
-    Then I should see "01:00 am to 02:00 am"
+    Then I should see "1am to 2am"
     And I should see "Book an appointment!"
 
   Scenario: When I pick a day off the calendar, I should see the choice of appointment duration(s)
@@ -45,4 +45,4 @@ Feature: As a client
     When I fill in "60" for "appointment_duration"
     When I press "Next"
     Then I should see 1 "#time option" elements
-    And the "#time" element should contain "01:00 am"
+    And the "#time" element should contain "1am"

@@ -124,7 +124,7 @@
                                     $start = new DateTime($availability['start']);
                                     $end = new DateTime($availability['end']);
                                     ?>
-                                    <?= $start->format('h:i a') ?> to <?= $end->format('h:i a') ?>
+                                    <?=$this->time($start->format('H:i'))?> to <?=$this->time($end->format('H:i')) ?>
                                     <br/>
                                     <?php
                                 }

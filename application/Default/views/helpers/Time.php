@@ -6,6 +6,6 @@ class Zend_View_Helper_Time
         if(date('i', strtotime($time)) == 0) {
             return date('ga', strtotime($time));
         }
-        return date('g:i a', strtotime($time));
+        return date('g:ia', strtotime($time));
     }
 }
