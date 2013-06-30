@@ -4,7 +4,6 @@ if ($this->paginator) {
         'Sliding',
         'pagination_control.phtml');
 }
-
 ?>
 <table class="table table-striped">
     <thead>
@@ -42,13 +41,20 @@ if ($this->paginator) {
             }
             ?>
             <td>
-                <?=$this->escape($appointment['first_name'] . ' ' . $appointment['last_name'])?>
+                <?=$this->escape($appointment['guest_name'])?>
                 <br />
-                <?=$this->email($appointment['email'])?><br />
-                <?=$this->phone($appointment['phone'])?><br />
+                <?=$this->email($appointment['guest_email'])?><br />
+                <?=$this->phone($appointment['guest_phone'])?><br />
             </td>
         </tr>
     <?php
     }
     ?>
 </table>
+<?php
+if ($this->paginator) {
+    echo $this->paginationControl($this->paginator,
+        'Sliding',
+        'pagination_control.phtml');
+}
+?>
