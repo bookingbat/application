@@ -2,6 +2,7 @@
 class MakebookingController extends Controller
 {
     protected $durationLabels = array(
+        '30' => '30 Minutes',
         '60' => '1 Hour',
         '90' => '1.5 Hour',
         '120' => '2 Hours',
