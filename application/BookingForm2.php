@@ -5,8 +5,9 @@ class BookingForm2 extends BookingForm
     {
         $this->setMethod('POST');
 
-        $this->addElement('select', 'time', array(
+        $this->addElement('radio', 'time', array(
             'label' => 'Appointment Start Time',
+            'separator'=>''
         ));
 
         $this->addElement('hidden', 'appointment_duration', array());

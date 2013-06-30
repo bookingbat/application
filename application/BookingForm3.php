@@ -5,9 +5,7 @@ class BookingForm3 extends BookingForm2
     {
         $this->setMethod('POST');
 
-        $this->addElement('select', 'time', array(
-            'label' => 'Time',
-            'disabled' => 'disabled'
+        $this->addElement('hidden', 'time', array(
         ));
 
         $this->addElement('select', 'staff', array(

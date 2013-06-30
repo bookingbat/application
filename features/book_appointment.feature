@@ -57,5 +57,5 @@ Feature: As a client
       | Mondays | 01:00 | 02:00 |
     When I fill in "60" for "appointment_duration"
     When I press "Next"
-    Then I should see 1 "#time option" elements
-    And the "#time" element should contain "1am"
+    Then I should see 1 "#time-element input" elements
+    And the "#time-element" element should contain "1am"

@@ -82,7 +82,7 @@ class MakebookingController extends Controller
         $availabilityArray = $this->selectAvailability($day, $this->getParam('service'), $this->_getParam('staff'));
         $availabilityModel = $this->removeBookingsFrom($availabilityArray, $this->_getParam('day'), $this->_getParam('staff'));
 
-        $form->setAvailability($availabilityModel->getAvailabilityTimes());
+
         $form->populate($this->getRequest()->getParams());
 
         $booking = new Booking(array(
