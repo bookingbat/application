@@ -1,0 +1,12 @@
+<?php
+if($this->mode == 'week') {
+    ?>
+    <a class="btn disabled">Week</a>
+    <a href="<?=$this->url(null,array(),null,true)?>?mode=calendar" class="btn">Calendar</a>
+<?php
+} else {
+    ?>
+    <a href="<?=$this->url(null,array(),null,true)?>?mode=week" class="btn">Week</a>
+    <a class="btn disabled">Calendar</a>
+<?php
+}

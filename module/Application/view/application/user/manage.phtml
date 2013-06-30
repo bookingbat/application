@@ -1,0 +1,50 @@
+<a id="btn-new-user" class="btn" href="<?=$this->url('manage-staff',array('action' => 'register'))?>">New User</a>
+<?php
+$view = new \Zend_View;
+$view->setScriptPath(__DIR__.'/../');
+
+$helper = new \Zend_View_Helper_PaginationControl();
+$helper->setView($view);
+echo $helper->paginationControl($this->paginator,
+    'Sliding',
+    'pagination_control.phtml');
+?>
+<table class="table table-striped">
+    <thead>
+        <th></th>
+        <th>Id</th>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>User Type</th>
+    </thead>
+    <?php
+    foreach ($this->paginator as $user) {
+        $edit_url = $this->url('manage-staff',array(
+            'action' => 'edit',
+            'id' => $user['id']));
+        ?>
+        <tr class="record-<?=$this->escapeHTML($user['username'])?>">
+            <td>
+                <a class="btn btn-edit" href="<?=$edit_url?>"><i class="icon-pencil"></i></i></a>
+                <a class="btn btn-availability" href="<?=$this->url('staff-availability',array('staff'=>$user['id']))?>">Availability</a>
+                <a class="btn btn-services" href="<?=$this->url('staff-services',array('action'=>'assign','staff'=>$user['id']))?>">Services</a>
+            </td>
+            <td><?=$this->escapeHTML($user['id'])?></td>
+            <td><?=$this->escapeHTML($user['username'])?></td>
+            <td><?=$this->escapeHTML($user['first_name'])?></td>
+            <td><?=$this->escapeHTML($user['last_name'])?></td>
+            <td><?=$this->escapeHTML($user['email'])?></td>
+            <td><div class="badge"><?=$this->escapeHTML($user['type'])?></div></td>
+
+        </tr>
+    <?php
+    }
+    ?>
+</table>
+<?php
+echo $helper->paginationControl($this->paginator,
+    'Sliding',
+    'pagination_control.phtml');
+?>
