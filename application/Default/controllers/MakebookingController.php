@@ -160,9 +160,9 @@ class MakebookingController extends Controller
             $mail->addTo($therapistData['email']);
             $mail->setBodyText($html);
             $this->queueMail($mail);
-            echo $html;
 
-            $this->_helper->viewRenderer->setNoRender(true);
+            $this->view->message = $html;
+            $this->render('booking-confirmation', null, true);
             return;
         }
 
