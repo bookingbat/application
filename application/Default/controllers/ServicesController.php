@@ -3,7 +3,7 @@ class ServicesController extends Controller
 {
     function chooseAction()
     {
-        $this->view->services = $this->listServices();
+        $this->view->services = $this->serviceDataMapper()->findValid();
     }
 
     function manageAction()

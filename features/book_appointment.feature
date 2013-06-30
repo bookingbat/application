@@ -2,13 +2,6 @@ Feature: As a client
   I need to book appointments
   So the business can provide some service for me
 
-  Scenario: I should see a list of services
-    Given I have a service "training"
-    And I have a service "massage"
-    When I go to "/services"
-    Then I should see "training"
-    And I should see "massage"
-
   Scenario: When I pick a service, it should show the availability on the calendar
     Given I have a staff "staff"
     And I have a service "training"
@@ -16,8 +9,7 @@ Feature: As a client
     And the staff "staff" has the following availability:
       | Mondays | 01:00 | 02:00 |
 
-    And I am on "/services"
-    When I follow "training"
+    And I am on "/calendar/service/1"
     And I follow "btn-next-month"
 
     Then I should see "1am to 2am"

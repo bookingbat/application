@@ -41,6 +41,14 @@ class Service_DataMapper
         return $select->query()->fetchAll();
     }
 
+    function findValid()
+    {
+        $select = $this->db->select()
+            ->from('services')
+            ->where('durations != ?','');
+        return $select->query()->fetchAll();
+    }
+
     function servicesForStaff($id)
     {
         $services_for_staff = $this->db->select()
