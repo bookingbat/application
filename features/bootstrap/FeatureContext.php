@@ -17,7 +17,7 @@ class FeatureContext extends MinkContext
      */
     public static function startServer()
     {
-        self::$pid = (int)`php --server=localhost:8000 --docroot="html" >> var/php-cli-server.log 2>&1 & echo $!`;
+        self::$pid = (int)`php --server=localhost:8000 --docroot="public" >> var/php-cli-server.log 2>&1 & echo $!`;
         sleep(1);
     }
 
