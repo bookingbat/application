@@ -126,12 +126,14 @@ class MakebookingController extends Controller
 
     function booking4Action()
     {
-        $this->view->step = 6;
-        $this->render('progress',null,true);
+
 
         $form = new BookingForm4;
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
+
+            $this->view->step = 999;
+            $this->render('progress',null,true);
 
             $db = Zend_Registry::get('db');
             $db->insert('appointments', array(
@@ -163,6 +165,9 @@ class MakebookingController extends Controller
             $this->_helper->viewRenderer->setNoRender(true);
             return;
         }
+
+        $this->view->step = 6;
+        $this->render('progress',null,true);
 
         $this->view->form = $form;
         $this->render('booking', null, true);
