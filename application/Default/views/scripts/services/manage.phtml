@@ -5,6 +5,7 @@
         <th>Action</th>
         <th>ID</th>
         <th>Service Name</th>
+        <th>Durations</th>
     </thead>
     <?php
     foreach($this->services as $service) {
@@ -21,6 +22,7 @@
             </td>
             <td><?=$this->escape($service['id'])?></td>
             <td><?=$this->escape($service['name'])?></td>
+            <td><?=$this->escape($service['durations'])?></td>
         </tr>
         <?php
     }
