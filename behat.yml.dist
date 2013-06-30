@@ -4,3 +4,5 @@ default:
         Behat\MinkExtension\Extension:
             base_url: "http://localhost:8000"
             goutte: ~
+    options:
+        stop_on_failure: ~
