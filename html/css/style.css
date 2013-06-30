@@ -227,3 +227,57 @@ h2 {
 
     }
 }
+ol.progressmeter {
+    margin:0;
+    padding:0;
+    margin-bottom:12px;
+}
+ol.progressmeter li {
+    display: inline-block;
+    text-align: center;
+    width:15%;
+    color:silver;
+    border-bottom: 4px solid silver;
+    line-height: 3em;
+    padding-right:15px;
+}
+
+ol.progressmeter li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+}
+ol.progressmeter li:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    font-size: 1.5em;
+    bottom: -1.6em;
+}
+ol.progressmeter li.done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    border: none;
+    border-radius: 1.2em;
+}
+
+ol.progressmeter li.done {
+    color:black;
+    border:1px solid rgb(227, 227, 227);
+    border-bottom:4px solid yellowgreen;
+    background-color:#f5f5f5;
+}
+ol.progressmeter li.done {
+    color:black;
+    border-bottom:4px solid yellowgreen;
+}
+
+ol.progressmeter li.current {
+    color:black;
+    border:1px solid rgb(227, 227, 227);
+    background-color:#f5f5f5;
+    border-bottom: 4px solid silver;
+}

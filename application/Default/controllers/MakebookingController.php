@@ -15,6 +15,9 @@ class MakebookingController extends Controller
 
     function bookingAction()
     {
+        $this->view->step = 3;
+        $this->render('progress',null,true);
+
         $service = $this->serviceDataMapper()->find($this->getParam('service'));
 
         $durations = array();
@@ -41,6 +44,9 @@ class MakebookingController extends Controller
 
     function booking2Action()
     {
+        $this->view->step = 4;
+        $this->render('progress',null,true);
+
         $form = new BookingForm2;
         $form->getElement('appointment_duration')->setValue($this->_getParam('appointment_duration'));
 
@@ -67,6 +73,9 @@ class MakebookingController extends Controller
 
     function booking3Action()
     {
+        $this->view->step = 5;
+        $this->render('progress',null,true);
+
         $form = new BookingForm3;
 
         $day = date('N', strtotime($this->_getParam('day')));
@@ -117,6 +126,9 @@ class MakebookingController extends Controller
 
     function booking4Action()
     {
+        $this->view->step = 6;
+        $this->render('progress',null,true);
+
         $form = new BookingForm4;
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {

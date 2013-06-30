@@ -5,6 +5,9 @@ class CalendarController extends AbstractCalendarController
 
     function indexAction()
     {
+        $this->view->step = 2;
+        $this->render('progress',null,true);
+
         $user = bootstrap::getInstance()->getUser();
 
         if(!$this->getParam('service')) {

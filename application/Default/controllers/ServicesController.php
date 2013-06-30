@@ -3,7 +3,11 @@ class ServicesController extends Controller
 {
     function chooseAction()
     {
+        $this->view->step = 1;
+        $this->render('progress',null,true);
+
         $this->view->services = $this->serviceDataMapper()->findValid();
+        $this->render('choose');
     }
 
     function manageAction()
