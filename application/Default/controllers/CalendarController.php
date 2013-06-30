@@ -7,6 +7,10 @@ class CalendarController extends AbstractCalendarController
     {
         $user = bootstrap::getInstance()->getUser();
 
+        if(!$this->getParam('service')) {
+            return $this->render('no-service-selected');
+        }
+
         $staffSelector = $this->staffSelector(true,$this->getParam('service'));
 
         if(!is_null($staffSelector->getValue('staff'))) {

@@ -148,3 +148,20 @@
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log('ready');
+        $('.calendar td.enabled').hover(function () {
+            $(this).addClass('calendar-hover');
+        }, function () {
+            $(this).removeClass('calendar-hover');
+        });
+        $('.calendar td.enabled').click(function () {
+            window.location.href = $(this).metadata().url;
+        });
+        $('.calendar-switcher').change(function(){
+            document.location = $(this).val();
+        });
+    });
+</script>
