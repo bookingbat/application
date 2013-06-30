@@ -106,11 +106,6 @@ $start = date('j',$start);
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.week-chooser .available').hover(function () {
-            $(this).addClass('calendar-hover');
-        }, function () {
-            $(this).removeClass('calendar-hover');
-        });
         $('.week-chooser .available').click(function () {
             window.location.href = $(this).metadata().url;
         });

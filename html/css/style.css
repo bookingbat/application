@@ -41,11 +41,15 @@
     background-image: url('/img/week-lines-white.png');
 }
 
+.week-chooser .available:hover {
+    background-image: url('/img/week-lines-green-bright.png');
+}
 .week-chooser .available {
     background-image: url('/img/week-lines-green.png');
 }
 
 .week-chooser .booked {
+    cursor: not-allowed;
     background-image: url('/img/week-lines-blue.png');
 }
 
