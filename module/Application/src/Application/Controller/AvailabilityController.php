@@ -26,15 +26,15 @@ class AvailabilityController extends \Application\Controller
 
         if ($this->params()->fromQuery('remove')) {
             $db->delete('availability', array(
-                'id = ' . (int)$this->_params('remove')
+                'id = ' . (int)$this->params()->fromQuery('remove')
             ));
             $this->flashMessenger()->addMessage('Deleted Availability');
-            return $this->_redirect($this->url(array(),'availability',true));
+            return $this->redirect()->toUrl($this->url()->fromRoute('staff-availability',array(), true));
         }
 
         $form = new \Application\AvailabilityForm;
 
-        if ($this->getRequest()->isPost() && $form->isValid($this->params())) {
+        if ($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
             $staff_userid = $user['type'] == 'admin' ?  $this->params('staff'): $user['id'];
             $parameters = array(
                 'staff_userid' => $staff_userid,
@@ -45,7 +45,7 @@ class AvailabilityController extends \Application\Controller
             $this->availabilityDataMapper()->insert($parameters);
 
             $this->flashMessenger()->addMessage('Added Availability');
-            return $this->_redirect($this->url(array(),'availability'));
+            return $this->redirect()->toUrl($this->url()->fromRoute('staff-availability',array(),true));
         }
         $this->viewParams['form'] = $form;
 

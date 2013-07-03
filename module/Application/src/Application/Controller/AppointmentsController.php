@@ -53,11 +53,11 @@ class AppointmentsController extends \Application\Controller
         $db = \Zend_Registry::get('db');
         $newValues = array('canceled' => 1);
 
-        $condition = 'id=' . (int)$this->_params('id');
+        $condition = 'id=' . (int)$this->params('id');
 
         $appointment_date = $db->select()
             ->from('appointments', array('date'))
-            ->where('id=?', $this->_params('id'))
+            ->where('id=?', $this->params('id'))
             ->query()->fetchColumn();
 
         if ($user['type'] == 'client') {
@@ -79,7 +79,7 @@ class AppointmentsController extends \Application\Controller
 
         $db->update('appointments', $newValues, $condition);
 
-        $logMessage = 'Therapist appointment #' . (int)$this->_params('id');
+        $logMessage = 'Therapist appointment #' . (int)$this->params('id');
         $logMessage .= ' cancelled by user #' . $user['id'];
         $this->cancelsLogger()->log($logMessage, Zend_Log::INFO);
 

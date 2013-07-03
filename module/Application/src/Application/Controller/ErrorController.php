@@ -10,7 +10,7 @@ class ErrorController extends Zend_Controller_Action
     function errorAction()
     {
         // Grab the error object from the request
-        $errors = $this->_params('error_handler');
+        $errors = $this->params('error_handler');
 
         // $errors will be an object set as a parameter of the request object,
         // type is a property

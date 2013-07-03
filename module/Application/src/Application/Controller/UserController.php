@@ -66,7 +66,7 @@ class UserController extends \Application\Controller
         $db = \Zend_Registry::get('db');
         $select = $db->select()
             ->from('user')
-            ->where('id=?', $this->_params('id'));
+            ->where('id=?', $this->params('id'));
         $userBeingEdited = $select->query()->fetch();
 
         $form = new \Application\UserForm;
@@ -86,7 +86,7 @@ class UserController extends \Application\Controller
                 'email' => $form->getValue('email'),
                 'type' => $form->getValue('type'),
                 'phone' => $form->getValue('phone'),
-            ), 'id=' . (int)$this->_params('id'));
+            ), 'id=' . (int)$this->params('id'));
 
             $this->flashMessenger()->addMessage('User Updated');
             return $this->redirect()->toRoute('manage-staff');

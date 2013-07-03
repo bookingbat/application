@@ -86,7 +86,7 @@ class FeatureContext extends MinkContext
      */
     public function iHaveAStaff($username)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $userDataMapper->insert(array(
             'username' => $username,
             'password' => '',
@@ -121,7 +121,7 @@ class FeatureContext extends MinkContext
      */
     public function iHaveAService($name)
     {
-        $serviceDataMapper = new Service_DataMapper($this->db());
+        $serviceDataMapper = new \Application\Service\DataMapper($this->db());
         $serviceDataMapper->insert(array(
             'name' => $name
         ));
@@ -132,12 +132,12 @@ class FeatureContext extends MinkContext
      */
     public function theServiceIsAssignedTo($service, $staff)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $staff = $userDataMapper->find(array(
             'username'=>$staff
         ));
 
-        $serviceDataMapper = new Service_DataMapper($this->db());
+        $serviceDataMapper = new \Application\Service\DataMapper($this->db());
         $service = $serviceDataMapper->find(array(
             'name' => $service
         ));
@@ -150,7 +150,7 @@ class FeatureContext extends MinkContext
      */
     public function theStaffHasTheFollowingAvailability($staff, TableNode $availability)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $staff = $userDataMapper->find(array(
             'username'=>$staff
         ));
@@ -172,7 +172,7 @@ class FeatureContext extends MinkContext
      */
     public function theServiceHasTheDurations($service, $durations)
     {
-        $serviceDataMapper = new Service_DataMapper($this->db());
+        $serviceDataMapper = new \Applicatin\Service\DataMapper($this->db());
         $service = $serviceDataMapper->find(array(
             'name' => $service
         ));

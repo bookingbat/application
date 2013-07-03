@@ -1,5 +1,6 @@
 <?php
-class Availability_DataMapper
+namespace Application\Availability;
+class DataMapper
 {
     protected $db;
 

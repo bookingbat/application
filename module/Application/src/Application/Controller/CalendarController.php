@@ -96,6 +96,6 @@ class CalendarController extends \Application\AbstractCalendarController
      */
     function removeBookingsFrom($availability, $dayString, $filterByTherapist=null)
     {
-        return parent::removeBookingsFrom($availability, $dayString, $this->_params('therapist'));
+        return parent::removeBookingsFrom($availability, $dayString, $this->params('therapist'));
     }
 }
