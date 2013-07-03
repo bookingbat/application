@@ -206,6 +206,6 @@ abstract class Controller extends AbstractActionController
 
     function userDataMapper()
     {
-        return new User_DataMapper($this->db());
+        return new \Application\User\DataMapper($this->db());
     }
 }

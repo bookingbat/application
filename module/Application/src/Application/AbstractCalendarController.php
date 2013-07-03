@@ -11,7 +11,7 @@ abstract class AbstractCalendarController extends Controller
         $user = \bootstrap::getInstance()->getUser();
 
         if ($this->requestedCalendarOutOfRange()) {
-            $this->view->limitMonths = $this->limitMonths;
+            $this->viewParams['limitMonths'] = $this->limitMonths;
             $this->render('limited', null, true);
             $month = date('m');
             $year = date('Y');

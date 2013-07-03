@@ -1,5 +1,6 @@
 <?php
-class AvailabilityForm extends Zend_Form
+namespace Application;
+class AvailabilityForm extends \Zend_Form
 {
     function init()
     {
@@ -33,11 +34,11 @@ class AvailabilityForm extends Zend_Form
 
     function times()
     {
-        $date = new DateTime('2011-06-28 00:00:00');
+        $date = new \DateTime('2011-06-28 00:00:00');
         $count = 24 * 60 / 30;
         $times = array();
         while ($count--) {
-            $interval = $date->add(new DateInterval("P0Y0DT0H30M"));
+            $interval = $date->add(new \DateInterval("P0Y0DT0H30M"));
             $format = $interval->format("H:i");
             $label = $interval->format("h:i a");
             $times[$format] = strtoupper($label);

@@ -10,7 +10,7 @@ class ErrorController extends Zend_Controller_Action
     function errorAction()
     {
         // Grab the error object from the request
-        $errors = $this->_getParam('error_handler');
+        $errors = $this->_params('error_handler');
 
         // $errors will be an object set as a parameter of the request object,
         // type is a property
@@ -19,24 +19,24 @@ class ErrorController extends Zend_Controller_Action
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
-                $this->view->message = 'Page not found';
+                $this->viewParams['message = 'Page not found';
                 break;
             default:
                 // application error 
                 $this->getResponse()->setHttpResponseCode(500);
-                $this->view->message = 'Application error';
+                $this->viewParams['message = 'Application error';
                 break;
         }
 
         // pass the environment to the view script so we can conditionally
         // display more/less information
-        $this->view->env = APPLICATION_ENVIRONMENT;
+        $this->viewParams['env = APPLICATION_ENVIRONMENT;
 
         // pass the actual exception object to the view
-        $this->view->exception = $errors->exception;
+        $this->viewParams['exception = $errors->exception;
 
         // pass the request to the view
-        $this->view->request = $errors->request;
+        $this->viewParams['request = $errors->request;
         $this->render('error', null, true);
 
     }
@@ -47,7 +47,7 @@ class ErrorController extends Zend_Controller_Action
         {
            return $this->_forward( 'index', 'Login', 'User' );
         } */
-        $this->view->user = $this->getUser();
+        $this->viewParams['user = $this->getUser();
     }
 
     function notfoundAction()

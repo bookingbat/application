@@ -1,5 +1,6 @@
 <?php
-class User_DataMapper
+namespace Application\User;
+class DataMapper
 {
     /** @var  Zend_Db_Adapter_Abstract */
     protected $db;

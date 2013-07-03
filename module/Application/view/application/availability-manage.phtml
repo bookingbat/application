@@ -30,7 +30,7 @@
                             ?>
                             <?= $start->format('h:ia') ?> to <?= $end->format('h:ia') ?>
                             <br />
-                            <a class="btn btn-mini btn-danger" href="<?= $this->url(array('remove' => $availability['id']), null) ?>">Remove</a>
+                            <a class="btn btn-mini btn-danger" href="?remove=<?=$availability['id']?>">Remove</a>
                             <hr />
                             <?php
                         }

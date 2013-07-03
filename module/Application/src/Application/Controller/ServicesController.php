@@ -19,42 +19,42 @@ class ServicesController extends \Application\Controller
 
     function manageAction()
     {
-        $this->view->services = $this->listServices();
+        $this->viewParams['services'] = $this->listServices();
     }
 
     function newAction()
     {
         $form = $this->form();
-        if($this->getRequest()->isPost() && $form->isValid($this->_getAllParams())) {
+        if($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
             $this->serviceDataMapper()->insert($form->getValues());
-            $this->_helper->FlashMessenger->addMessage('Service Created');
-            $url = $this->view->url(array('action'=>'manage'),'services',true);
+            $this->flashMessenger()->addMessage('Service Created');
+            $url = $this->url(array('action'=>'manage'),'services',true);
             return $this->_redirect($url);
         }
-        $this->view->form = $form;
+        $this->viewParams['form'] = $form;
     }
 
     function editAction()
     {
-        $id = $this->getParam('id');
+        $id = $this->params('id');
         $service = $this->serviceDataMapper()->find($id);
 
         $form = $this->form();
         $form->populate($service);
 
-        if($this->getRequest()->isPost() && $form->isValid($this->_getAllParams())) {
+        if($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
             $this->serviceDataMapper()->update($id, $form->getValues());
 
-            $this->_helper->FlashMessenger->addMessage('Service Updated');
-            $url = $this->view->url(array('action'=>'manage'),'services',true);
+            $this->flashMessenger()->addMessage('Service Updated');
+            $url = $this->url(array('action'=>'manage'),'services',true);
             return $this->_redirect($url);
         }
-        $this->view->form = $form;
+        $this->viewParams['form'] = $form;
     }
 
     function assignAction()
     {
-        $staff_id = $this->getParam('staff');
+        $staff_id = $this->params('staff');
         $staff = $this->userDataMapper()->find(array(
             'id'=>$staff_id,
             'type'=>'staff'
@@ -62,17 +62,18 @@ class ServicesController extends \Application\Controller
 
         $form = $this->servicesForm();
 
-        if($this->getRequest()->isPost() && $form->isValid($this->_getAllParams())) {
+        if($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
 
             $this->userDataMapper()->unassignServices($staff_id);
             $this->userDataMapper()->assignMultiple($form->getValue('services'), $staff_id);
 
-            $this->_helper->FlashMessenger->addMessage('Staff\'s Services Updated');
+            $this->flashMessenger()->addMessage('Staff\'s Services Updated');
             return $this->_redirect('/user/manage');
         }
 
-        $this->view->staff = $staff;
-        $this->view->form = $form;
+        $this->viewParams['staff'] = $staff;
+        $this->viewParams['form'] = $form;
+        return $this->viewParams;
     }
 
     function listServices()
@@ -87,7 +88,7 @@ class ServicesController extends \Application\Controller
 
     function servicesForm()
     {
-        $form = new Service_UserServicesForm();
+        $form = new \Application\Service\UserServicesForm();
         $form->setPossibleServices($this->listServices());
 
         $form->populate(array(
@@ -99,7 +100,7 @@ class ServicesController extends \Application\Controller
 
     function servicesForStaff()
     {
-        return $this->serviceDataMapper()->servicesForStaff($this->getParam('staff'));
+        return $this->serviceDataMapper()->servicesForStaff($this->params('staff'));
     }
 
 }

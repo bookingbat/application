@@ -10,14 +10,14 @@ class UserController extends \Application\Controller
     {
         $user = \bootstrap::getInstance()->getUser();
         if ($user) {
-            $url = $this->view->url(array(),'calendar',true);
+            $url = $this->url(array(),'calendar',true);
             return $this->_redirect($url);
         }
 
         $form = new LoginForm;
 
-        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
-            $db = Zend_Registry::get('db');
+        if ($this->getRequest()->isPost() && $form->isValid($this->paramss())) {
+            $db = \Zend_Registry::get('db');
             $select = $db->select()
                 ->from('user')
                 ->where('username=?', $this->params('username'));
@@ -26,14 +26,14 @@ class UserController extends \Application\Controller
 
             if (sha1($form->getValue('password')) == $user['password']) {
                 $this->updateUserDataIntoSession($user['username']);
-                $url = $this->view->url(array(),'calendar',true);
+                $url = $this->url(array(),'calendar',true);
                 return $this->_redirect($url);
             } else {
                 $form->getElement('password')->markAsError()->addError('Invalid password or username not found');
             }
         }
 
-        $this->view->form = $form;
+        $this->viewParams['form'] = $form;
         return new ViewModel;
     }
 
@@ -99,13 +99,13 @@ class UserController extends \Application\Controller
     {
         $user = \bootstrap::getInstance()->getUser();
         $form = new UserForm;
-        $this->view->form = $form;
+        $this->viewParams['form'] = $form;
 
         if($user['type']!='admin') {
             $form->removeElement('type');
         }
 
-        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
+        if ($this->getRequest()->isPost() && $form->isValid($this->paramss())) {
             $db = \Zend_Registry::get('db');
             $data = array(
                 'username' => $form->getValue('username'),
@@ -118,9 +118,9 @@ class UserController extends \Application\Controller
             );
             $db->insert('user', $data);
 
-            $this->view->email = $form->getValue('email');
-            $this->view->username = $form->getValue('username');
-            $this->_helper->FlashMessenger->addMessage('Created User');
+            $this->viewParams['email'] = $form->getValue('email');
+            $this->viewParams['username'] = $form->getValue('username');
+            $this->flashMessenger()->addMessage('Created User');
             return $this->_redirect('/user/manage');
         }
     }

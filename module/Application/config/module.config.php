@@ -87,10 +87,10 @@ return array(
             'staff-availability' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route'    => '/manage-staff-availability/',
+                    'route'    => '/manage-staff-availability/:staff',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\User',
-                        'action'     => 'manage',
+                        'controller' => 'Application\Controller\Availability',
+                        'action'     => 'index',
                     ),
                 ),
             ),
@@ -99,10 +99,10 @@ return array(
             'staff-services' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route'    => '/manage-staff-services/',
+                    'route'    => '/manage-staff-services/:staff',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\User',
-                        'action'     => 'manage',
+                        'controller' => 'Application\Controller\Services',
+                        'action'     => 'assign',
                     ),
                 ),
             ),
@@ -169,6 +169,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
+            'Application\Controller\Availability' => 'Application\Controller\AvailabilityController',
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Calendar' => 'Application\Controller\CalendarController',
             'Application\Controller\Makebooking' => 'Application\Controller\MakebookingController',

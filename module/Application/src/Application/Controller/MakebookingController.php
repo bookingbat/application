@@ -14,7 +14,7 @@ class MakebookingController extends \Application\AbstractCalendarController
 
     function preDispatch()
     {
-        $user = bootstrap::getInstance()->getUser();
+        $user = \bootstrap::getInstance()->getUser();
     }
 
     /** THis is where they pick the duration */

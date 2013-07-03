@@ -3,32 +3,32 @@ class BookingsController extends CalendarController
 {
     function servicesAction()
     {
-        $user = bootstrap::getInstance()->getUser();
+        $user = \bootstrap::getInstance()->getUser();
         if (!$user['id']) {
             return $this->_redirect('/');
         }
 
-        $this->view->user = $this->userObjectForBillingCalculations();
-        $this->view->trainer_appointments_total_duration = $this->trainingAppointmentsTotalDuration($user['id']);
-        $this->view->massage_appointments_total_duration = $this->massageAppointmentsTotalDuration($user['id']);
+        $this->viewParams['user = $this->userObjectForBillingCalculations();
+        $this->viewParams['trainer_appointments_total_duration = $this->trainingAppointmentsTotalDuration($user['id']);
+        $this->viewParams['massage_appointments_total_duration = $this->massageAppointmentsTotalDuration($user['id']);
     }
 
     function indexAction()
     {
-        $user = bootstrap::getInstance()->getUser();
+        $user = \bootstrap::getInstance()->getUser();
         if (!$user['id']) {
             return $this->render('index');
         }
 
-        $this->view->trainer_appointments = $this->lister($user['id'])->trainerAppointments();
-        $this->view->massage_appointments = $this->lister($user['id'])->massageAppointments();
-        $this->view->class_enrollment = $this->lister($user['id'])->classEnrollments('user');
+        $this->viewParams['trainer_appointments = $this->lister($user['id'])->trainerAppointments();
+        $this->viewParams['massage_appointments = $this->lister($user['id'])->massageAppointments();
+        $this->viewParams['class_enrollment = $this->lister($user['id'])->classEnrollments('user');
 
         switch ($user['type']) {
             case 'client':
-                $this->view->mode = $this->getParam('mode');
+                $this->viewParams['mode = $this->params('mode');
                 $this->render('client-view');
-                if($this->getParam('mode')=='list') {
+                if($this->params('mode')=='list') {
                     $this->render('index-client-list');
                 } else {
                     $this->render('index-client-calendar');

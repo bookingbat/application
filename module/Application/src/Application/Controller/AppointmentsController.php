@@ -3,12 +3,12 @@ class AppointmentsController extends Controller
 {
     function indexAction()
     {
-        $user = bootstrap::getInstance()->getUser();
+        $user = \bootstrap::getInstance()->getUser();
         if (!$user['id'] || ($user['type'] != 'staff' && $user['type'] != 'admin')) {
             return $this->_redirect('/');
         }
 
-        $db = Zend_Registry::get('db');
+        $db = \Zend_Registry::get('db');
         $select = $db->select()
             ->from('appointments')
             ->joinLeft('user', 'user.id=appointments.user_id', array(
@@ -29,29 +29,29 @@ class AppointmentsController extends Controller
 
         $paginationAdapter = new Zend_Paginator_Adapter_DbSelect($select);
 
-        $this->view->show_delete_button = true;
-        $this->view->user_type = $user['type'];
-        $this->view->paginator = new Zend_Paginator($paginationAdapter);
-        $this->view->paginator->setCurrentPageNumber($this->getParam('page'));
+        $this->viewParams['show_delete_button'] = true;
+        $this->viewParams['user_type'] = $user['type'];
+        $this->viewParams['paginator'] = new Zend_Paginator($paginationAdapter);
+        $this->viewParams['paginator']->setCurrentPageNumber($this->params('page'));
 
         $this->render('appointments-staff');
     }
 
     function cancelAction()
     {
-        $user = bootstrap::getInstance()->getUser();
+        $user = \bootstrap::getInstance()->getUser();
         if (!$user['id']) {
             return $this->_redirect('/');
         }
 
-        $db = Zend_Registry::get('db');
+        $db = \Zend_Registry::get('db');
         $newValues = array('canceled' => 1);
 
-        $condition = 'id=' . (int)$this->_getParam('id');
+        $condition = 'id=' . (int)$this->_params('id');
 
         $appointment_date = $db->select()
             ->from('appointments', array('date'))
-            ->where('id=?', $this->_getParam('id'))
+            ->where('id=?', $this->_params('id'))
             ->query()->fetchColumn();
 
         if ($user['type'] == 'client') {
@@ -73,13 +73,13 @@ class AppointmentsController extends Controller
 
         $db->update('appointments', $newValues, $condition);
 
-        $logMessage = 'Therapist appointment #' . (int)$this->_getParam('id');
+        $logMessage = 'Therapist appointment #' . (int)$this->_params('id');
         $logMessage .= ' cancelled by user #' . $user['id'];
         $this->cancelsLogger()->log($logMessage, Zend_Log::INFO);
 
-        $this->view->date = $appointment_date;
+        $this->viewParams['date = $appointment_date;
 
-        $html = $this->view->render('appointments/cancel.phtml');
+        $html = $this->viewParams['render('appointments/cancel.phtml');
 
         $mail = new Zend_Mail;
         $mail->addTo($user['email']);
