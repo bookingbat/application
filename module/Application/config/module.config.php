@@ -107,13 +107,25 @@ return array(
                 ),
             ),
 
+            // manage services
+            'manage-services' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/manage-services',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Services',
+                        'action'     => 'manage',
+                    ),
+                ),
+            ),
+
             'appointments' => array(
                 'type' => 'segment',
                 'options' => array(
                     'route'    => '/appointments/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Makebooking',
-                        'action'     => 'booking',
+                        'controller' => 'Application\Controller\Bookings',
+                        'action'     => 'index',
                     ),
                 ),
             ),
@@ -170,6 +182,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Availability' => 'Application\Controller\AvailabilityController',
+            'Application\Controller\Bookings' => 'Application\Controller\BookingsController',
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Calendar' => 'Application\Controller\CalendarController',
             'Application\Controller\Makebooking' => 'Application\Controller\MakebookingController',

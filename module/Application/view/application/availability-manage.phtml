@@ -1,7 +1,10 @@
 <div class="row-fluid">
     <div class="span4 well">
         <h2>Add Availability</h2>
-        <?= $this->form ?>
+        <?php
+        $this->form->setView(new \Zend_View);
+        echo $this->form;
+        ?>
     </div>
     <div class="span8">
         <table class="table table-striped table-bordered">

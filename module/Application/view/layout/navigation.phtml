@@ -5,7 +5,7 @@ $user = bootstrap::getInstance()->getUser();
 if('admin'==$user['type']) {
     ?>
     <li><a id="btn-manage-staff" href="<?= $this->url('manage-staff')?>">Manage Staff</a></li>
-    <li><a href="<?= $this->url('services',array('action' => 'manage'))?>">Manage Services</a></li>
+    <li><a href="<?= $this->url('manage-services',array('action' => 'manage'))?>">Manage Services</a></li>
     <?php
 }
 
@@ -17,6 +17,6 @@ if($user['id'] && $user['type'] != 'client') {
 
 if('staff'==$user['type']) {
     ?>
-    <li><a href="<?= $this->url('availability')?>">My Availability</a></li>
+    <li><a href="<?= $this->url('staff-availability')?>">My Availability</a></li>
     <?php
 }
