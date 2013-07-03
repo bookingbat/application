@@ -1,6 +1,6 @@
 <?php
-$this->placeholder('calendar_sidebar')->captureStart();
 $this->staffSelector->setAction('?');
+$this->staffSelector->setView(new \Zend_View);
 echo $this->staffSelector;
 ?>
 <script type="text/javascript">
@@ -12,5 +12,3 @@ echo $this->staffSelector;
         });
     });
 </script>
-<?php
-$this->placeholder('calendar_sidebar')->captureEnd();

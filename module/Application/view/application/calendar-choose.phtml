@@ -1,6 +1,8 @@
 <div class="row-fluid">
     <div class="span2  well well-small">
-        <?=$this->placeholder('calendar_sidebar')?>
+        <?php
+        echo $this->partial('application/calendar/staff-selector.phtml');
+        ?>
         <h2>Legend</h2>
         <ul class="legend">
             <li><span class="indicator available">&nbsp;</span> Available</li>

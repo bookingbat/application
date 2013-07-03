@@ -60,13 +60,13 @@ abstract class Controller extends AbstractActionController
             $form->addElement('select', 'staff', array(
                 'label' => 'Staff',
                 'multiOptions' => array('All' => 'All') + $staff,
-                'value' => $this->params('staff') == 'All' ? null : $this->params('staff')
+                'value' => $this->params()->fromQuery('staff') == 'All' ? null : $this->params()->fromQuery('staff')
             ));
         } else {
             $form->addElement('select', 'staff', array(
                 'label' => 'Staff',
                 'multiOptions' => $staff,
-                'value' => $this->params('staff')
+                'value' => $this->params()->fromQuery('staff')
             ));
         }
         $form->addElement('submit', 'submitbutton', array(

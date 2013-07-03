@@ -28,12 +28,12 @@ class CalendarController extends \Application\AbstractCalendarController
         if(!is_null($staffSelector->getValue('staff'))) {
             $this->staff_selection = $staffSelector->getValue('staff');
         } else {
-            $this->staff_selection = $this->listStaff($this->params('service'));
+            $this->staff_selection = $this->listStaff($this->params()->fromQuery('service'));
         }
 
         $this->viewParams = $this->viewParams + [
             'staffSelector'=>$staffSelector,
-            'therapist_id'=>$this->params('staff'),
+            'therapist_id'=>$this->params()->fromQuery('staff'),
             'service'=>$this->params('service'),
         ];
 
