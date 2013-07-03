@@ -17,7 +17,7 @@ class FeatureContext extends MinkContext
      */
     public static function startServer()
     {
-        self::$pid = (int)`php --server=localhost:8000 --docroot="html" >> var/php-cli-server.log 2>&1 & echo $!`;
+        self::$pid = (int)`php --server=localhost:8000 --docroot="public" >> var/php-cli-server.log 2>&1 & echo $!`;
         sleep(1);
     }
 
@@ -157,7 +157,7 @@ class FeatureContext extends MinkContext
 
         $availability = $availability->getRowsHash();
         foreach($availability as $day => $times) {
-            $availabilityDataMapper = new Availability_DataMapper($this->db());
+            $availabilityDataMapper = new \Application\Availability\DataMapper($this->db());
             $availabilityDataMapper->insert(array(
                 'staff_userid'=>$staff['id'],
                 'day_of_week'=>$day,
@@ -172,7 +172,7 @@ class FeatureContext extends MinkContext
      */
     public function theServiceHasTheDurations($service, $durations)
     {
-        $serviceDataMapper = new \Applicatin\Service\DataMapper($this->db());
+        $serviceDataMapper = new \Application\Service\DataMapper($this->db());
         $service = $serviceDataMapper->find(array(
             'name' => $service
         ));

@@ -1,4 +1,3 @@
 <?php
 ini_set('display_errors', 'on');
-
-require_once('vendor/autoload.php');
+require 'module/Application/src/Application/bootstrap.php';

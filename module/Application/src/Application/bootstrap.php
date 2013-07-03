@@ -26,7 +26,6 @@ class bootstrap
     {
         $this->setTimezone();
         $this->setIncludePath();
-        $this->setupAutoloading();
 
         $this->frontController = Zend_Controller_Front::getInstance();
         $this->getRouter();
@@ -160,13 +159,6 @@ class bootstrap
                 FAMEFIT_BASE_PATH . '/application/' . PATH_SEPARATOR .
                 get_include_path()
         );
-    }
-
-    function setupAutoloading()
-    {
-        require_once 'Zend/Loader/Autoloader.php';
-        $autoloader = Zend_Loader_Autoloader::getInstance();
-        $autoloader->setFallbackAutoloader(true);
     }
 
     function setupDatabaseConfig()
