@@ -32,7 +32,7 @@ if ($this->paginator) {
                 if ($booking->allowCancelByUser()) {
                     ?>
                     <td>
-                        <a href="<?= $this->url(array('controller' => 'massage', 'action' => 'cancel', 'id' => $appointment['id'])) ?>">Cancel</a>
+                        <a href="<?= $this->url(null,array('controller' => 'massage', 'action' => 'cancel', 'id' => $appointment['id'])) ?>">Cancel</a>
                     </td>
                 <?php
                 } else {
@@ -44,7 +44,7 @@ if ($this->paginator) {
             <td><?=$this->datetime($appointment['date'], $appointment['time'])?></td>
             <td><?=$this->duration($appointment['duration'])?></td>
             <td>
-                <?=$this->escape($appointment['first_name'] . ' ' . $appointment['last_name'])?>
+                <?=$this->escapeHTML($appointment['first_name'] . ' ' . $appointment['last_name'])?>
                 <br />
                 <?=$this->email($appointment['email'])?>
                 <br /d>

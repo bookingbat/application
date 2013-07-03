@@ -10,19 +10,19 @@
     <?php
     foreach($this->services as $service) {
         ?>
-        <tr class="record-<?=$this->escape($service['name'])?>">
+        <tr class="record-<?=$this->escapeHTML($service['name'])?>">
             <td>
                 <?php
-                $url = $this->url(array(
+                $url = $this->url(null,array(
                     'action'=>'edit',
                     'id'=>$service['id']
                 ));
                 ?>
                 <a class="btn btn-edit" href="<?=$url?>"><i class="icon-pencil"></i></td>
             </td>
-            <td><?=$this->escape($service['id'])?></td>
-            <td><?=$this->escape($service['name'])?></td>
-            <td><?=$this->escape($service['durations'])?></td>
+            <td><?=$this->escapeHTML($service['id'])?></td>
+            <td><?=$this->escapeHTML($service['name'])?></td>
+            <td><?=$this->escapeHTML($service['durations'])?></td>
         </tr>
         <?php
     }

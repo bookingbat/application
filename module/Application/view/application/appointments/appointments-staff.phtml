@@ -1,9 +1,12 @@
 <?php
-if ($this->paginator) {
-    echo $this->paginationControl($this->paginator,
-        'Sliding',
-        'pagination_control.phtml');
-}
+$view = new \Zend_View;
+$view->setScriptPath(__DIR__.'/../');
+
+$helper = new \Zend_View_Helper_PaginationControl();
+$helper->setView($view);
+echo $helper->paginationControl($this->paginator,
+    'Sliding',
+    'pagination_control.phtml');
 ?>
 <table class="table table-striped">
     <thead>
@@ -27,7 +30,7 @@ if ($this->paginator) {
             } else {
                 ?>
                 <td>
-                    <a class="btn btn-warning" href="<?= $this->url(array('action' => 'cancel', 'id' => $appointment['id'])) ?>">Cancel</a>
+                    <a class="btn btn-warning" href="<?= $this->url(null,array('action' => 'cancel', 'id' => $appointment['id'])) ?>">Cancel</a>
                 </td>
             <?php
             }
@@ -37,11 +40,11 @@ if ($this->paginator) {
             <td><?=$this->duration($appointment['duration'])?></td>
             <?php
             if($this->user_type=='admin') {
-                ?><td><?=$this->escape($appointment['staff_first_name'] . ' ' . $appointment['staff_last_name'])?></td><?php
+                ?><td><?=$this->escapeHTML($appointment['staff_first_name'] . ' ' . $appointment['staff_last_name'])?></td><?php
             }
             ?>
             <td>
-                <?=$this->escape($appointment['guest_name'])?>
+                <?=$this->escapeHTML($appointment['guest_name'])?>
                 <br />
                 <?=$this->email($appointment['guest_email'])?><br />
                 <?=$this->phone($appointment['guest_phone'])?><br />
@@ -52,9 +55,11 @@ if ($this->paginator) {
     ?>
 </table>
 <?php
-if ($this->paginator) {
-    echo $this->paginationControl($this->paginator,
-        'Sliding',
-        'pagination_control.phtml');
-}
-?>
+$view = new \Zend_View;
+$view->setScriptPath(__DIR__.'/../');
+
+$helper = new \Zend_View_Helper_PaginationControl();
+$helper->setView($view);
+echo $helper->paginationControl($this->paginator,
+    'Sliding',
+    'pagination_control.phtml');

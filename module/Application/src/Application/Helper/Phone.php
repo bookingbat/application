@@ -1,7 +1,9 @@
 <?php
-class Zend_View_Helper_Phone
+namespace Application\Helper;
+use Zend\View\Helper\AbstractHelper;
+class Phone extends AbstractHelper
 {
-    public function phone($number)
+    public function __invoke($number)
     {
         if(ctype_digit($number) && strlen($number) == 10) {
             $number = '('.substr($number, 0, 3) .') '.

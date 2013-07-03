@@ -124,7 +124,7 @@ return array(
                 'options' => array(
                     'route'    => '/appointments/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Bookings',
+                        'controller' => 'Application\Controller\Appointments',
                         'action'     => 'index',
                     ),
                 ),
@@ -182,7 +182,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Availability' => 'Application\Controller\AvailabilityController',
-            'Application\Controller\Bookings' => 'Application\Controller\BookingsController',
+            'Application\Controller\Appointments' => 'Application\Controller\AppointmentsController',
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Calendar' => 'Application\Controller\CalendarController',
             'Application\Controller\Makebooking' => 'Application\Controller\MakebookingController',
@@ -210,6 +210,9 @@ return array(
         'invokables'=>array(
             'time'=>'\Application\Helper\Time',
             'datetime'=>'\Application\Helper\Datetime',
+            'duration'=>'\Application\Helper\Duration',
+            'email'=>'\Application\Helper\Email',
+            'phone'=>'\Application\Helper\Phone',
         )
     )
 );

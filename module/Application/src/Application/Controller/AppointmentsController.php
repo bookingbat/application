@@ -1,5 +1,9 @@
 <?php
-class AppointmentsController extends Controller
+namespace Application\Controller;
+
+use Zend\View\Model\ViewModel;
+
+class AppointmentsController extends \Application\Controller
 {
     function indexAction()
     {
@@ -27,14 +31,16 @@ class AppointmentsController extends Controller
             $select->where('staff_userid=?', $user['id']);
         }
 
-        $paginationAdapter = new Zend_Paginator_Adapter_DbSelect($select);
+        $paginationAdapter = new \Zend_Paginator_Adapter_DbSelect($select);
 
         $this->viewParams['show_delete_button'] = true;
         $this->viewParams['user_type'] = $user['type'];
-        $this->viewParams['paginator'] = new Zend_Paginator($paginationAdapter);
+        $this->viewParams['paginator'] = new \Zend_Paginator($paginationAdapter);
         $this->viewParams['paginator']->setCurrentPageNumber($this->params('page'));
 
-        $this->render('appointments-staff');
+        $viewModel = new ViewModel($this->viewParams);
+        $viewModel->setTemplate('application/appointments/appointments-staff.phtml');
+        return $viewModel;
     }
 
     function cancelAction()
@@ -77,15 +83,19 @@ class AppointmentsController extends Controller
         $logMessage .= ' cancelled by user #' . $user['id'];
         $this->cancelsLogger()->log($logMessage, Zend_Log::INFO);
 
-        $this->viewParams['date = $appointment_date;
+        $this->viewParams['date'] = $appointment_date;
 
-        $html = $this->viewParams['render('appointments/cancel.phtml');
+        $viewModel = new ViewModel($this->viewParams);
+        $viewModel->setTemplate('appointments/cancel.phtml');
+        $htmlOutput = $this->getServiceLocator()
+                ->get('viewrenderer')
+                ->render($viewModel);
 
         $mail = new Zend_Mail;
         $mail->addTo($user['email']);
-        $mail->setBodyText($html);
+        $mail->setBodyText($htmlOutput);
         $this->queueMail($mail);
-        echo $html;
+        echo $htmlOutput;
         $this->_helper->viewRenderer->setNoRender(true);
     }
 

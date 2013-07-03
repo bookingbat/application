@@ -20,6 +20,7 @@ class ServicesController extends \Application\Controller
     function manageAction()
     {
         $this->viewParams['services'] = $this->listServices();
+        return $this->viewParams;
     }
 
     function newAction()

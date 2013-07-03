@@ -1,8 +1,10 @@
 <?php
-class Zend_View_Helper_Email extends Zend_View_Helper_Abstract
+namespace Application\Helper;
+use Zend\View\Helper\AbstractHelper;
+class Email extends AbstractHelper
 {
-    public function email($email)
+    public function __invoke($email)
     {
-        return '<a href="mailto:'.$this->viewParams['escape($email).'">'.$this->viewParams['escape($email).'</a>';
+        return '<a href="mailto:'.$this->getView()->escapeHTML($email).'">'.$this->getView()->escapeHTML($email).'</a>';
     }
 }

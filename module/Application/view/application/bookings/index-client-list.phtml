@@ -24,8 +24,8 @@
         foreach ($this->class_enrollment as $appointment) {
             ?>
             <tr>
-                <td><?=$this->escape($appointment['name'])?></td>
-                <td><?=$this->escape($appointment['date'])?></td>
+                <td><?=$this->escapeHTML($appointment['name'])?></td>
+                <td><?=$this->escapeHTML($appointment['date'])?></td>
             </tr>
         <?php
         }

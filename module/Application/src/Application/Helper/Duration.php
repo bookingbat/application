@@ -1,7 +1,9 @@
 <?php
-class Zend_View_Helper_Duration
+namespace Application\Helper;
+use Zend\View\Helper\AbstractHelper;
+class Duration extends AbstractHelper
 {
-    public function duration($appointmentDurationInMinutes)
+    public function __invoke($appointmentDurationInMinutes)
     {
         return '<div class="label label-inverse">'.$appointmentDurationInMinutes / 60 . 'hr</div>';
     }

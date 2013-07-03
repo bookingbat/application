@@ -12,7 +12,7 @@ abstract class AbstractCalendarController extends Controller
 
         if ($this->requestedCalendarOutOfRange()) {
             $this->viewParams['limitMonths'] = $this->limitMonths;
-            $this->render('limited', null, true);
+            $viewModel->setTemplate('limited', null, true);
             $month = date('m');
             $year = date('Y');
         } else {

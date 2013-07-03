@@ -37,7 +37,7 @@ class ErrorController extends Zend_Controller_Action
 
         // pass the request to the view
         $this->viewParams['request = $errors->request;
-        $this->render('error', null, true);
+        $viewModel->setTemplate('error', null, true);
 
     }
 
