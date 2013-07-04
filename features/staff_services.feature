@@ -47,5 +47,6 @@ Feature: As an admin
     Then the "services-1" checkbox should be checked
     When I uncheck "services-1"
     And I press "save"
+    And I dump the page
     And I follow "btn-services" for "staff"
     Then the "services-1" checkbox should not be checked
