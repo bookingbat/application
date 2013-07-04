@@ -29,10 +29,10 @@ class ServicesController extends \Application\Controller
         if($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
             $this->serviceDataMapper()->insert($form->getValues());
             $this->flashMessenger()->addMessage('Service Created');
-            $url = $this->url(array('action'=>'manage'),'services',true);
-            return $this->_redirect($url);
+            return $this->redirect()->toRoute('manage-services');
         }
         $this->viewParams['form'] = $form;
+        return $this->viewParams;
     }
 
     function editAction()

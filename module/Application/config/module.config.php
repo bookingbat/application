@@ -143,6 +143,18 @@ return array(
                 ),
             ),
 
+            // new service
+            'new-service' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/new-service',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Services',
+                        'action'     => 'new',
+                    ),
+                ),
+            ),
+
             // edit service
             'edit-service' => array(
                 'type' => 'segment',

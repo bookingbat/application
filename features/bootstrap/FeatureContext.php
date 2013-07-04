@@ -55,7 +55,7 @@ class FeatureContext extends MinkContext
     {
         return array(
             new Given('I have an admin "admin" with password "admin123"'),
-            new Given('I am on "/user/login"'),
+            new Given('I am on "/login"'),
             new Given('I fill in "username" with "admin"'),
             new Given('I fill in "password" with "admin123"'),
             new Given('I press "login"')
@@ -99,7 +99,7 @@ class FeatureContext extends MinkContext
      */
     public function iHaveTheFollowingUser(TableNode $table)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $userDataMapper->insert($table->getRowsHash());
     }
 
@@ -108,7 +108,7 @@ class FeatureContext extends MinkContext
      */
     public function iHaveAnAdminWithPassword($username, $password)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $userDataMapper->insert(array(
             'username' => $username,
             'password' => $password,
