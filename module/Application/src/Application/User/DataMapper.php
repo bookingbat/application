@@ -31,6 +31,9 @@ class DataMapper
 
     function assignMultiple($services,$userID)
     {
+        if(!is_array($services)) {
+            return;
+        }
         foreach($services as $serviceID) {
             $this->assign($serviceID,$userID);
         }
