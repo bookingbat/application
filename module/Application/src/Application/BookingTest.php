@@ -1,5 +1,6 @@
 <?php
 require_once('Booking.php');
+use Application\Booking;
 class BookingTest extends PHPUnit_Framework_TestCase
 {
     function testShouldNotAllowCancelByClientWithin24Hours()

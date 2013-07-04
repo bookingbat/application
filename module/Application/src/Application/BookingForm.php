@@ -27,7 +27,7 @@ class BookingForm extends \Zend_Form
         $incrementDuration = $this->getElement('appointment_duration')->getValue();
         $availabilityTimes = $availability->incrementize($availabilityTimes, $incrementDuration);
         foreach ($availabilityTimes as $time) {
-            $start = new DateTime('2013-03-21 ' . $time);
+            $start = new \DateTime('2013-03-21 ' . $time);
             $start = $start->format('h:i a');
 
             $label = sprintf('%s', $start);

@@ -22,7 +22,7 @@ class BookingFormTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $form = new BookingForm;
+        $form = new \Application\BookingForm;
         $form->setAvailability($input);
         $values = $form->getElement('time')->getMultiOptions();
 
