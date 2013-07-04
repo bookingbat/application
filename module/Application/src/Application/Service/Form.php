@@ -1,5 +1,6 @@
 <?php
-class Service_Form extends Zend_Form
+namespace Application\Service;
+class Form extends \Zend_Form
 {
     function init()
     {

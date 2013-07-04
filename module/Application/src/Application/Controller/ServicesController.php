@@ -47,10 +47,10 @@ class ServicesController extends \Application\Controller
             $this->serviceDataMapper()->update($id, $form->getValues());
 
             $this->flashMessenger()->addMessage('Service Updated');
-            $url = $this->url(array('action'=>'manage'),'services',true);
-            return $this->_redirect($url);
+            return $this->redirect()->toRoute('manage-services');
         }
         $this->viewParams['form'] = $form;
+        return $this->viewParams;
     }
 
     function assignAction()
@@ -84,7 +84,7 @@ class ServicesController extends \Application\Controller
 
     function form()
     {
-        return new Service_Form;
+        return new \Application\Service\Form;
     }
 
     function servicesForm()

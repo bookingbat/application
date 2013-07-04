@@ -13,7 +13,7 @@
         <tr class="record-<?=$this->escapeHTML($service['name'])?>">
             <td>
                 <?php
-                $url = $this->url(null,array(
+                $url = $this->url('edit-service',array(
                     'action'=>'edit',
                     'id'=>$service['id']
                 ));

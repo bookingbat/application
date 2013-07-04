@@ -36,7 +36,7 @@ class AppointmentsController extends \Application\Controller
         $this->viewParams['show_delete_button'] = true;
         $this->viewParams['user_type'] = $user['type'];
         $this->viewParams['paginator'] = new \Zend_Paginator($paginationAdapter);
-        $this->viewParams['paginator']->setCurrentPageNumber($this->params('page'));
+        $this->viewParams['paginator']->setCurrentPageNumber($this->params()->fromQuery('page'));
 
         $viewModel = new ViewModel($this->viewParams);
         $viewModel->setTemplate('application/appointments/appointments-staff.phtml');

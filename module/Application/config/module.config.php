@@ -143,6 +143,18 @@ return array(
                 ),
             ),
 
+            // edit service
+            'edit-service' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/edit-service/:id',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Services',
+                        'action'     => 'edit',
+                    ),
+                ),
+            ),
+
             'appointments' => array(
                 'type' => 'segment',
                 'options' => array(
