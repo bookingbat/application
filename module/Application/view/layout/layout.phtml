@@ -39,7 +39,8 @@
 
 <div class="container-fluid">
     <?php
-    $flashMessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+    use \Zend\Mvc\Controller\Plugin\FlashMessenger;
+    $flashMessenger = new FlashMessenger();
 
     if ($flashMessenger->hasMessages()) {
         ?>
