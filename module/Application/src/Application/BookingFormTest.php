@@ -23,13 +23,13 @@ class BookingFormTest extends PHPUnit_Framework_TestCase
         );
 
         $form = new \Application\BookingForm;
-        $form->setAvailability($input);
+        $form->setAvailability($input,30);
         $values = $form->getElement('time')->getMultiOptions();
 
         $expected = array(
-            '01:00:00' => '01:00 am',
-            '01:30:00' => '01:30 am',
-            '02:00:00' => '02:00 am',
+            '01:00:00' => '1am',
+            '01:30:00' => '1:30am',
+            '02:00:00' => '2am',
         );
         $this->assertEquals($expected, $values, 'should not skip ahead on DST');
     }

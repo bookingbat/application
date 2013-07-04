@@ -76,7 +76,6 @@ class MakebookingController extends \Application\AbstractCalendarController
         $layoutViewModel->addChild($progress, 'progress');
 
         $form = new \Application\BookingForm2;
-        $form->getElement('appointment_duration')->setValue($this->params('duration'));
 
         $day = date('N', strtotime($this->params('day')));
         $availability = $this->selectAvailability($day, $this->params('service'), $this->params('staff'));
@@ -84,7 +83,7 @@ class MakebookingController extends \Application\AbstractCalendarController
         $availabilityModel = $this->removeBookingsFrom($availability, $this->params('day'), $this->params('staff'));
         $availabilityModel->mergeOverlappingRanges();
 
-        $form->setAvailability($availabilityModel->getAvailabilityTimes());
+        $form->setAvailability($availabilityModel->getAvailabilityTimes(), $this->params('duration'));
 
         if ($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
             $url = $this->url()->fromRoute('make-booking',array(
