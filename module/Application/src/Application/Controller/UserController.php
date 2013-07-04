@@ -14,33 +14,33 @@ class UserController extends \Application\Controller
             return $this->_redirect($url);
         }
 
-        $form = new LoginForm;
+        $form = new \Application\LoginForm;
 
-        if ($this->getRequest()->isPost() && $form->isValid($this->paramss())) {
+        if ($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
             $db = \Zend_Registry::get('db');
             $select = $db->select()
                 ->from('user')
-                ->where('username=?', $this->params('username'));
+                ->where('username=?', $this->params()->fromPost('username'));
 
             $user = $select->query()->fetch();
 
             if (sha1($form->getValue('password')) == $user['password']) {
                 $this->updateUserDataIntoSession($user['username']);
-                $url = $this->url(array(),'calendar',true);
-                return $this->_redirect($url);
+                return $this->redirect()->toRoute('home');
             } else {
                 $form->getElement('password')->markAsError()->addError('Invalid password or username not found');
             }
         }
 
         $this->viewParams['form'] = $form;
-        return new ViewModel;
+        return $this->viewParams;
     }
 
     function logoutAction()
     {
         \bootstrap::getInstance()->userLogout();
-        $this->_redirect('/');
+        $this->redirect()->toRoute('home');
+        return false;
     }
 
     function manageAction()

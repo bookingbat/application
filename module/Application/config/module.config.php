@@ -23,7 +23,31 @@ return array(
                 ),
             ),
 
-            // home page route
+            // login
+            'login' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/login',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\User',
+                        'action'     => 'login',
+                    ),
+                ),
+            ),
+
+            // logout
+            'logout' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/logout',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\User',
+                        'action'     => 'logout',
+                    ),
+                ),
+            ),
+
+            // choose services route
             'services' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
