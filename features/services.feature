@@ -18,7 +18,7 @@ Feature: As an admin
     Given I have a service "training"
     And I am on "/manage-services"
     Then I follow "btn-edit" for "training"
-    Then the url should match "/services/edit/id/[0-9]+"
+    Then the url should match "/edit-service/[0-9]+"
     When I fill in "name" with "training-renamed"
     Then press "save"
     Then I should be on "/manage-services"

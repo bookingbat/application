@@ -1,4 +1,4 @@
-<a id="btn-new-user" class="btn" href="<?=$this->url('manage-staff',array('action' => 'register'))?>">New User</a>
+<a id="btn-new-user" class="btn" href="<?=$this->url('new-staff')?>">New User</a>
 <?php
 $view = new \Zend_View;
 $view->setScriptPath(__DIR__.'/../');
@@ -21,9 +21,9 @@ echo $helper->paginationControl($this->paginator,
     </thead>
     <?php
     foreach ($this->paginator as $user) {
-        $edit_url = $this->url('manage-staff',array(
-            'action' => 'edit',
-            'id' => $user['id']));
+        $edit_url = $this->url('edit-staff',array(
+            'id' => $user['id']
+        ));
         ?>
         <tr class="record-<?=$this->escapeHTML($user['username'])?>">
             <td>

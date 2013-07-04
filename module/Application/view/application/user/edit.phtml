@@ -1,6 +1,4 @@
 <h1>Edit User</h1>
 <?php
-$view = new \Zend_View;
-$view->setScriptPath(__DIR__.'/../');
-$this->form->setView($view);
+$this->form->setView(new \Zend_View);
 echo $this->form;

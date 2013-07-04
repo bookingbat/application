@@ -69,7 +69,7 @@ class ServicesController extends \Application\Controller
             $this->userDataMapper()->assignMultiple($form->getValue('services'), $staff_id);
 
             $this->flashMessenger()->addMessage('Staff\'s Services Updated');
-            return $this->_redirect('/user/manage');
+            return $this->redirect()->toRoute('manage-staff');
         }
 
         $this->viewParams['staff'] = $staff;

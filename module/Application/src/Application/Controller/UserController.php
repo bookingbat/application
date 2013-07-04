@@ -98,14 +98,14 @@ class UserController extends \Application\Controller
     function registerAction()
     {
         $user = \bootstrap::getInstance()->getUser();
-        $form = new UserForm;
+        $form = new \Application\UserForm;
         $this->viewParams['form'] = $form;
 
         if($user['type']!='admin') {
             $form->removeElement('type');
         }
 
-        if ($this->getRequest()->isPost() && $form->isValid($this->paramss())) {
+        if ($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
             $db = \Zend_Registry::get('db');
             $data = array(
                 'username' => $form->getValue('username'),
@@ -121,8 +121,9 @@ class UserController extends \Application\Controller
             $this->viewParams['email'] = $form->getValue('email');
             $this->viewParams['username'] = $form->getValue('username');
             $this->flashMessenger()->addMessage('Created User');
-            return $this->_redirect('/user/manage');
+            return $this->redirect()->toUrl('manage-staff');
         }
+        return $this->viewParams;
     }
 
     function selectUsers()

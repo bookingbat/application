@@ -99,10 +99,34 @@ return array(
             'manage-staff' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route'    => '/manage-staff[/:action][/:id]',
+                    'route'    => '/manage-staff',
                     'defaults' => array(
                         'controller' => 'Application\Controller\User',
                         'action'     => 'manage',
+                    ),
+                ),
+            ),
+
+            // edit staff route
+            'edit-staff' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/edit-staff/:id',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\User',
+                        'action'     => 'edit',
+                    ),
+                ),
+            ),
+
+            // new staff route
+            'new-staff' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/new-staff',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\User',
+                        'action'     => 'register',
                     ),
                 ),
             ),
