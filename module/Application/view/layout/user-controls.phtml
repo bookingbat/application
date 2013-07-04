@@ -1,0 +1,11 @@
+<?php
+$user = bootstrap::getInstance()->getUser();
+if ($user) {
+    ?>
+    <a class="btn btn-primary" href="<?= $this->url('logout')?>">Log Out</a>
+<?php
+} else {
+    ?>
+    <a id="btn-login" class="btn" href="<?= $this->url('login')?>">Log In</a>
+<?php
+}

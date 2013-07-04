@@ -1,24 +1,17 @@
 <?php
-ini_set('display_errors', 'on');
-chdir('..');
-try {
-    require 'application/bootstrap.php';
-    Zend_Controller_Front::getInstance()->dispatch();
-} catch (Exception $e) {
+/**
+ * This makes our life easier when dealing with paths. Everything is relative
+ * to the application root now.
+ */
+chdir(dirname(__DIR__));
 
-    if (defined('APPLICATION_ENVIRONMENT') && APPLICATION_ENVIRONMENT != 'production'  )
-    {
-        $message = 'Unexpected exception of type [' . get_class($e) .
-            '] with message [' . $e->getMessage() .
-            '] in [' . $e->getFile() .
-            ' line ' . $e->getLine() . ']';
-        echo '<html><body><center>' . $message;
-
-        echo '<br /><br />' . $e->getMessage() . '<br />' . '<div align="left">Stack Trace:' . '<pre>' . $e->getTraceAsString() . '</pre></div>';
-    } else {
-        echo 'An exception occurred';
-    }
-    echo '</body></html>';
-    exit(1);
+// Decline static file requests back to the PHP built-in webserver
+if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
+    return false;
 }
 
+// Setup autoloading
+require 'vendor/autoload.php';
+
+// Run the application!
+Zend\Mvc\Application::init(require 'config/application.config.php')->run();

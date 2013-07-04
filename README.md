@@ -27,5 +27,15 @@ The application sends emails for appointment confirmations & reminders. These ar
 
 To run the unit tests simply run
 ````
-vendor/bin/phpunit
+./test
+````
+
+Ensure xdebug is enabled for your CLI webserver. With xdebug present, ZF2 redirects do not run if a PHP warning was generated earlier. Without xdebug they do work. Therefore there may be a test failure in Travis CI (which uses xdebug) that you don't see locally, if you don't do this:
+
+````
+php --server=localhost:8000 --docroot="public" &
+echo '<?php phpinfo();' > public/phpinfo.php
+#find the php.ini path and load xdebug like you normally do
+ps aux | grep php
+# (find the PID of the webserver & kill it, then restart it)
 ````

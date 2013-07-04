@@ -1,0 +1,7 @@
+<?php
+$this->form->setView(new \Zend_View);
+$this->form->addElement('submit','save',array(
+    'label'=>'Add Service',
+    'class'=>'btn'
+));
+echo $this->form;

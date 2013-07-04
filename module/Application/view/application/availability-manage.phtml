@@ -1,0 +1,48 @@
+<div class="row-fluid">
+    <div class="span4 well">
+        <h2>Add Availability</h2>
+        <?php
+        $this->form->setView(new \Zend_View);
+        echo $this->form;
+        ?>
+    </div>
+    <div class="span8">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>Mondays</th>
+                <th>Tuesdays</th>
+                <th>Wednesdays</th>
+                <th>Thursdays</th>
+                <th>Fridays</th>
+                <th>Saturdays</th>
+                <th>Sundays</th>
+            </thead>
+            <tr>
+                <?php
+                for ($day = 1; $day <= 7; $day++) {
+                    ?>
+                    <td>
+                        <?php
+                        if (!count($this->availability[$day])) {
+                            echo 'Not Available';
+                        }
+
+                        foreach ($this->availability[$day] as $availability) {
+                            $start = new DateTime($availability['start']);
+                            $end = new DateTime($availability['end']);
+                            ?>
+                            <?= $start->format('h:ia') ?> to <?= $end->format('h:ia') ?>
+                            <br />
+                            <a class="btn btn-mini btn-danger" href="?remove=<?=$availability['id']?>">Remove</a>
+                            <hr />
+                            <?php
+                        }
+                        ?>
+                    </td>
+                <?php
+                }
+                ?>
+            </tr>
+        </table>
+    </div>
+</div>

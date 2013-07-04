@@ -4,5 +4,4 @@ Feature: As a client
 
   Scenario: I visit the calendar URL without selecting a service
     Given I am on "/calendar"
-    Then I should see "You must pick a service first"
-    And the response should not contain "calendar"
+    Then I should see "Page not found"

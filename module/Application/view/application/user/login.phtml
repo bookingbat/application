@@ -1,0 +1,10 @@
+<?php
+$this->form->setAction($this->url('login'));
+$this->form->setView(new \Zend_View);
+echo $this->form;
+?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#username').focus();
+    });
+</script>

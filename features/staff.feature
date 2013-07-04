@@ -15,7 +15,7 @@ Feature: As an admin
       | password    | staff123            |
       | verifypassword |  staff123        |
     And I press "submit"
-    Then I should be on "/user/manage"
+    Then I should be on "/manage-staff"
     And I should see "Created user"
 
   Scenario: I edit a staff
@@ -29,7 +29,7 @@ Feature: As an admin
       | phone       | 0000000000          |
       | password    | staff123            |
       | verifypassword |  staff123        |
-    And I am on "/user/manage"
+    And I am on "/manage-staff"
     When I follow "btn-edit" for "staff"
     And I fill in the following:
       | username    | staff2               |

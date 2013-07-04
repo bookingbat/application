@@ -55,7 +55,7 @@ class FeatureContext extends MinkContext
     {
         return array(
             new Given('I have an admin "admin" with password "admin123"'),
-            new Given('I am on "/user/login"'),
+            new Given('I am on "/login"'),
             new Given('I fill in "username" with "admin"'),
             new Given('I fill in "password" with "admin123"'),
             new Given('I press "login"')
@@ -86,7 +86,7 @@ class FeatureContext extends MinkContext
      */
     public function iHaveAStaff($username)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $userDataMapper->insert(array(
             'username' => $username,
             'password' => '',
@@ -99,7 +99,7 @@ class FeatureContext extends MinkContext
      */
     public function iHaveTheFollowingUser(TableNode $table)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $userDataMapper->insert($table->getRowsHash());
     }
 
@@ -108,7 +108,7 @@ class FeatureContext extends MinkContext
      */
     public function iHaveAnAdminWithPassword($username, $password)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $userDataMapper->insert(array(
             'username' => $username,
             'password' => $password,
@@ -121,7 +121,7 @@ class FeatureContext extends MinkContext
      */
     public function iHaveAService($name)
     {
-        $serviceDataMapper = new Service_DataMapper($this->db());
+        $serviceDataMapper = new \Application\Service\DataMapper($this->db());
         $serviceDataMapper->insert(array(
             'name' => $name
         ));
@@ -132,12 +132,12 @@ class FeatureContext extends MinkContext
      */
     public function theServiceIsAssignedTo($service, $staff)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $staff = $userDataMapper->find(array(
             'username'=>$staff
         ));
 
-        $serviceDataMapper = new Service_DataMapper($this->db());
+        $serviceDataMapper = new \Application\Service\DataMapper($this->db());
         $service = $serviceDataMapper->find(array(
             'name' => $service
         ));
@@ -150,14 +150,14 @@ class FeatureContext extends MinkContext
      */
     public function theStaffHasTheFollowingAvailability($staff, TableNode $availability)
     {
-        $userDataMapper = new User_DataMapper($this->db());
+        $userDataMapper = new \Application\User\DataMapper($this->db());
         $staff = $userDataMapper->find(array(
             'username'=>$staff
         ));
 
         $availability = $availability->getRowsHash();
         foreach($availability as $day => $times) {
-            $availabilityDataMapper = new Availability_DataMapper($this->db());
+            $availabilityDataMapper = new \Application\Availability\DataMapper($this->db());
             $availabilityDataMapper->insert(array(
                 'staff_userid'=>$staff['id'],
                 'day_of_week'=>$day,
@@ -172,7 +172,7 @@ class FeatureContext extends MinkContext
      */
     public function theServiceHasTheDurations($service, $durations)
     {
-        $serviceDataMapper = new Service_DataMapper($this->db());
+        $serviceDataMapper = new \Application\Service\DataMapper($this->db());
         $service = $serviceDataMapper->find(array(
             'name' => $service
         ));
