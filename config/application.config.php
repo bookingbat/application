@@ -1,9 +1,8 @@
 <?php
-return array(
+$config = array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-        'Application',
-        'ZendDeveloperTools'
+        'Application'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
@@ -63,3 +62,9 @@ return array(
    // Should be compatible with Zend\ServiceManager\Config.
    // 'service_manager' => array(),
 );
+
+
+if(file_exists('vendor/zendframework/zend-developer-tools')) {
+    $config['modules'][] = 'ZendDeveloperTools';
+}
+return $config;
