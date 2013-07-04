@@ -1,22 +1,15 @@
-<li><a href="<?=$this->url('services')?>">Book An Appointment</a></li>
-<?php
-$user = bootstrap::getInstance()->getUser();
-
-if('admin'==$user['type']) {
-    ?>
-    <li><a id="btn-manage-staff" href="<?= $this->url('manage-staff')?>">Manage Staff</a></li>
-    <li><a href="<?= $this->url('manage-services',array('action' => 'manage'))?>">Manage Services</a></li>
-    <?php
-}
-
-if($user['id'] && $user['type'] != 'client') {
-    ?>
-    <li><a href="<?= $this->url('appointments')?>"><?=$user['type']=='admin'?'':'My'?> Appointments</a></li>
-    <?php
-}
-
-if('staff'==$user['type']) {
-    ?>
-    <li><a href="<?= $this->url('staff-availability')?>">My Availability</a></li>
-    <?php
-}
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="/">Booking Bat</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav nav-pills">
+                    <?=$this->partial('layout/navigation-links.phtml')?>
+                </ul>
+                <p class="pull-right">
+                    <?=$this->partial('layout/user-controls.phtml')?>
+                </p>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>

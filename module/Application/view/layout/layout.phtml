@@ -1,8 +1,11 @@
-<!doctype html>
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Booking Bat</title>
+    <?php echo $this->headTitle($this->translate('Booking Bat'))->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.css">
@@ -18,41 +21,10 @@
 
 <body>
 
-
-
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="brand" href="/">Booking Bat</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav nav-pills">
-                    <?=$this->partial('layout/navigation.phtml')?>
-                </ul>
-                <p class="pull-right">
-                    <?=$this->partial('layout/user-controls.phtml')?>
-                </p>
-            </div><!--/.nav-collapse -->
-        </div>
-    </div>
-</div>
-
+<?=$this->partial('layout/navigation.phtml')?>
 
 <div class="container-fluid">
-    <?php
-    use \Zend\Mvc\Controller\Plugin\FlashMessenger;
-    $flashMessenger = new FlashMessenger();
-
-    if ($flashMessenger->hasMessages()) {
-        ?>
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php foreach ($flashMessenger->getMessages() as $msg): ?>
-                <?php echo $msg ?>
-            <?php endforeach; ?>
-        </div>
-    <?php
-    }
-    ?>
+    <?=$this->partial('layout/messages.phtml')?>
     <?php echo $this->progress; ?>
     <?php echo $this->content; ?>
     <script src="/js/bootstrap.js"></script>
