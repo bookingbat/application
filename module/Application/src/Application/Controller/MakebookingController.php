@@ -20,6 +20,8 @@ class MakebookingController extends \Application\AbstractCalendarController
     /** THis is where they pick the duration */
     function bookingAction()
     {
+        $this->layout('layout/layout-appointment-summary');
+
         $layoutViewModel = $this->layout();
 
         $progress = new ViewModel(['step'=>3]);
@@ -53,6 +55,10 @@ class MakebookingController extends \Application\AbstractCalendarController
 
         $this->viewParams['form'] = $form;
 
+        $summary = new ViewModel($this->params()->fromRoute());
+        $summary->setTemplate('application/summary');
+        $layoutViewModel->addChild($summary, 'appointment_summary');
+
         $viewModel = new ViewModel($this->viewParams);
         $viewModel->setTemplate('application/booking');
         return $viewModel;
@@ -61,6 +67,8 @@ class MakebookingController extends \Application\AbstractCalendarController
     /** This is where they pick the time */
     function booking2Action()
     {
+        $this->layout('layout/layout-appointment-summary');
+
         $layoutViewModel = $this->layout();
 
         $progress = new ViewModel(['step'=>4]);
@@ -93,6 +101,10 @@ class MakebookingController extends \Application\AbstractCalendarController
 
         $this->viewParams['form'] = $form;
 
+        $summary = new ViewModel($this->params()->fromRoute());
+        $summary->setTemplate('application/summary');
+        $layoutViewModel->addChild($summary, 'appointment_summary');
+
         $viewModel = new ViewModel($this->viewParams);
         $viewModel->setTemplate('application/booking');
         return $viewModel;
@@ -101,6 +113,8 @@ class MakebookingController extends \Application\AbstractCalendarController
     /** This is where they pick the staff */
     function booking3Action()
     {
+        $this->layout('layout/layout-appointment-summary');
+
         $layoutViewModel = $this->layout();
 
         $progress = new ViewModel(['step'=>5]);
@@ -157,6 +171,10 @@ class MakebookingController extends \Application\AbstractCalendarController
             return $this->redirect()->toUrl($url);
         }
 
+        $summary = new ViewModel($this->params()->fromRoute());
+        $summary->setTemplate('application/summary');
+        $layoutViewModel->addChild($summary, 'appointment_summary');
+
         $this->viewParams['form'] = $form;
 
         $viewModel = new ViewModel($this->viewParams);
@@ -166,7 +184,7 @@ class MakebookingController extends \Application\AbstractCalendarController
 
     function booking4Action()
     {
-
+        $this->layout('layout/layout-appointment-summary');
 
         $form = new \Application\BookingForm4;
 
@@ -223,6 +241,10 @@ class MakebookingController extends \Application\AbstractCalendarController
         $progress = new ViewModel(['step'=>6]);
         $progress->setTemplate('application/progress');
         $layoutViewModel->addChild($progress, 'progress');
+
+        $summary = new ViewModel($this->params()->fromRoute());
+        $summary->setTemplate('application/summary');
+        $layoutViewModel->addChild($summary, 'appointment_summary');
 
         $this->viewParams['form'] = $form;
 

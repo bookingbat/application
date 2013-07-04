@@ -26,7 +26,16 @@
 <div class="container-fluid">
     <?=$this->partial('layout/messages.phtml')?>
     <?php echo $this->progress; ?>
-    <?php echo $this->content; ?>
+    <div class="row-fluid">
+        <div class="span8"
+            <?php echo $this->content; ?>
+        </div>
+        <div class="span4 well well-small">
+            <h2>Appointment Summary</h2>
+            <?php echo $this->appointment_summary; ?>
+        </div>
+    </div>
+
 </div>
 
 <footer>
