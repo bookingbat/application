@@ -4,7 +4,7 @@ Feature: As an admin
 
   Scenario: I add a service with no padding
     Given I am logged in as admin
-    And I am on "/services/manage"
+    And I am on "/manage-services"
     When I follow "New Service"
     And I fill in "name" with "training"
     And I fill in "padding" with "0"
@@ -14,7 +14,7 @@ Feature: As an admin
 
   Scenario: I add a service with 30m padding
     Given I am logged in as admin
-    And I am on "/services/manage"
+    And I am on "/manage-services"
     When I follow "New Service"
     And I fill in "name" with "training"
     And I fill in "padding" with "30"
@@ -24,7 +24,7 @@ Feature: As an admin
 
   Scenario: I add a service with 1hr padding
     Given I am logged in as admin
-    And I am on "/services/manage"
+    And I am on "/manage-services"
     When I follow "New Service"
     And I fill in "name" with "training"
     And I fill in "padding" with "60"
@@ -34,7 +34,7 @@ Feature: As an admin
 
   Scenario: I edit a service's padding from 30 to 60
     Given I am logged in as admin
-    And I am on "/services/manage"
+    And I am on "/manage-services"
     When I follow "New Service"
     And I fill in "name" with "training"
     And I fill in "padding" with "30"

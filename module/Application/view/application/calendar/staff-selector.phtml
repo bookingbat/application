@@ -1,0 +1,14 @@
+<?php
+$this->staffSelector->setAction('?');
+$this->staffSelector->setView(new \Zend_View);
+echo $this->staffSelector;
+?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#staff').change(function () {
+            $(this).closest('form')
+                .trigger('submit')
+
+        });
+    });
+</script>

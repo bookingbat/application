@@ -5,7 +5,7 @@ Feature: As an admin
   Scenario: I assign the staff's availability
     Given I have a staff "staff"
     And I am logged in as admin
-    And I am on "/user/manage"
+    And I am on "/manage-staff"
     When I follow "btn-availability" for "staff"
     And I fill in the following:
       |day  |7    |

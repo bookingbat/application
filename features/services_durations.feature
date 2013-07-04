@@ -4,7 +4,7 @@ Feature: As an admin
 
   Scenario: I add a service with 30m duration only
     Given I am logged in as admin
-    And I am on "/services/manage"
+    And I am on "/manage-services"
     When I follow "New Service"
     And I fill in "name" with "training"
     And I check "durations-30"
@@ -14,7 +14,7 @@ Feature: As an admin
 
   Scenario: I update an existing service and add 1hr duration
     Given I am logged in as admin
-    And I am on "/services/manage"
+    And I am on "/manage-services"
     When I follow "New Service"
     And I fill in "name" with "training"
     And I check "durations-30"
