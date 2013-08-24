@@ -29,6 +29,7 @@ class FeatureContext extends MinkContext
         `mysql --user=root -e "drop database IF EXISTS bookingbat_tests"`;
         `mysql --user=root -e "create database bookingbat_tests"`;
         `mysql --user=root bookingbat_tests < install.sql`;
+        `vendor/bin/phinx migrate -e testing`;
     }
 
     /**
