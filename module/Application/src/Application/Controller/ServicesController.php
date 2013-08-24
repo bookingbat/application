@@ -6,7 +6,11 @@ class ServicesController extends \Application\Controller
 {
     function chooseAction()
     {
+        $user = \bootstrap::getInstance()->getUser();
         $services = $this->serviceDataMapper()->findValid();
+        if($user['type'] == 'admin' && !count($services)) {
+            return $this->redirect()->toRoute('admin_tutorial');
+        }
 
         $layoutViewModel = $this->layout();
 
@@ -100,8 +104,7 @@ class ServicesController extends \Application\Controller
 
         $staff_id = $this->params('staff');
         $staff = $this->userDataMapper()->find(array(
-            'id'=>$staff_id,
-            'type'=>'staff'
+            'id'=>$staff_id
         ));
 
         $form = $this->servicesForm();

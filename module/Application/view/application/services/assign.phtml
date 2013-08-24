@@ -1,6 +1,16 @@
 <div class="row-fluid">
     <div class="span<?=isset($admin_setup)?6:12?>">
-        <h1>Services for <small><?=$this->escapeHTML($this->staff['first_name'] . ' ' . $this->staff['last_name'])?></small></h1>
+        <?php
+        if($this->staff['first_name'] || $this->staff['last_name']) {
+            ?>
+            <h1>Services for <small><?=$this->escapeHTML($this->staff['first_name'] . ' ' . $this->staff['last_name'])?></small></h1>
+            <?php
+        } else {
+            ?>
+            <h1>Services for <small><?=$this->escapeHTML($this->staff['username'])?></small></h1>
+            <?php
+        }
+        ?>
         <?php
         $this->form->setView(new \Zend_View);
         $this->form->addElement('submit','save',array(
