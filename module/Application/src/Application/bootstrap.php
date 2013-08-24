@@ -163,7 +163,7 @@ class bootstrap
 
     function setupDatabaseConfig()
     {
-        if(!isset($_SERVER['HTTP_HOST']) || $_SERVER['HTTP_HOST'] == 'localhost:8000') {
+        if(!isset($_SERVER['HTTP_HOST']) || ($_SERVER['HTTP_HOST'] == 'localhost' && $_SERVER['SERVER_PORT']=8000)) {
             // If being run from tests, use the database for testing
             define('APPLICATION_ENVIRONMENT','tests');
             $file = 'database-config.ini';
