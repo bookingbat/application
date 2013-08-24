@@ -13,7 +13,7 @@ class CalendarController extends \Application\AbstractCalendarController
 
         $layoutViewModel = $this->layout();
 
-        $progress = new ViewModel(['step'=>1]);
+        $progress = new ViewModel(['step'=>2]);
         $progress->setTemplate('application/progress');
         $layoutViewModel->addChild($progress, 'progress');
 
