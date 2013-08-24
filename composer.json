@@ -4,12 +4,13 @@
     "require":{
         "bookingbat/engine":"0.2.0",
         "zendframework/zendframework1":"1.12.*",
-        "zendframework/zendframework":"2.*"
+        "zendframework/zendframework":"2.*",
+        "robmorgan/phinx":"*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.19",
-        "behat/behat": "2.4.*@stable",
-        "behat/mink": "1.4@stable",
+        "behat/behat": "2.5.*@stable",
+        "behat/mink": "1.5@stable",
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
         "zendframework/zend-developer-tools": "dev-master"
