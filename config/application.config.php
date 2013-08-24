@@ -65,6 +65,6 @@ $config = array(
 
 
 if(file_exists('vendor/zendframework/zend-developer-tools')) {
-    $config['modules'][] = 'ZendDeveloperTools';
+    //$config['modules'][] = 'ZendDeveloperTools';
 }
 return $config;
