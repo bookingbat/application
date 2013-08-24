@@ -146,7 +146,7 @@ class MakebookingController extends \Application\AbstractCalendarController
 
         $stafResult = $db->select()
             ->from('user')
-            ->where('type=?', 'staff')
+            ->where('type IN ("staff","admin")')
             ->where('id IN(' . implode(',', $possibleUserIdsForBooking) . ')')
             ->query()->fetchAll();
 

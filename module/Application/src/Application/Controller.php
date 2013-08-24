@@ -81,7 +81,8 @@ abstract class Controller extends AbstractActionController
         $db = \Zend_Registry::get('db');
         $select = $db->select()
             ->from('user')
-            ->where('type=?', 'staff');
+            ->where('type=?', 'staff')
+            ->orWhere('type=?', 'admin');
 
         if($serviceId) {
             $condition = 'staff_services.staff_user_id = user.id && staff_services.service_id = '.(int)$serviceId;

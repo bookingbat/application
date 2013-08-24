@@ -1,15 +1,30 @@
-<h1>Pick A Service</h1>
-<ul>
-<?php
-foreach($this->services as $service) {
-    $url = $this->url('calendar',array(
-        'service'=>$service['id']
-    ),null,false);
-    ?>
-    <li>
-        <a href="<?=$url?>"><?=$this->escapeHTML($service['name'])?></a>
-    </li>
+<div class="row-fluid">
+    <div class="span<?=isset($admin_setup)?6:12?>">
+        <h1>Pick A Service</h1>
+        <ul>
+        <?php
+        foreach($this->services as $service) {
+            $url = $this->url('calendar',array(
+                'service'=>$service['id']
+            ),null,false);
+            ?>
+            <li>
+                <a href="<?=$url?>"><?=$this->escapeHTML($service['name'])?></a>
+            </li>
+            <?php
+        }
+        ?>
+        </ul>
+    </div>
     <?php
-}
-?>
-</ul>
+    if(isset($admin_setup)) {
+        ?>
+        <div class="span6">
+            <div class="bubble bubble-left">
+                <p><strong>All Done!</strong><br /> We have created a service, assigned it to you, and set your availability. Here is where your customers can now book appointments!
+            </div>
+        </div>
+        <?php
+    }
+    ?>
+</div>

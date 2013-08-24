@@ -14,30 +14,43 @@ class ServicesController extends \Application\Controller
         $progress->setTemplate('application/progress');
         $layoutViewModel->addChild($progress, 'progress');
 
-        return new ViewModel([
-            'services'=>$services
-        ]);
+        if(isset($_SESSION['admin_setup'])) {
+            $this->viewParams['admin_setup'] = 1;
+            unset($_SESSION['admin_setup']);
+        }
+        $this->viewParams['services'] = $services;
+        return $this->viewParams;
     }
 
     function manageAction()
     {
+        $user = \bootstrap::getInstance()->getUser();
+        if (!$user['id'] || $user['type'] != 'admin') {
+            return $this->_redirect('/');
+        }
+
         $this->viewParams['services'] = $this->listServices();
         return $this->viewParams;
     }
 
     function newAction()
     {
+        $user = \bootstrap::getInstance()->getUser();
+        if (!$user['id'] || $user['type'] != 'admin') {
+            return $this->_redirect('/');
+        }
+
         $form = $this->form();
         if($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
             $this->serviceDataMapper()->insert($form->getValues());
             $this->flashMessenger()->addMessage('Service Created');
-            if($_SESSION['admin_setup']) {
-                return $this->redirect()->toRoute('staff-services');
+            if(isset($_SESSION['admin_setup'])) {
+                return $this->redirect()->toRoute('staff-services', ['staff'=>$user['id']]);
             }
             return $this->redirect()->toRoute('manage-services');
         }
         $this->viewParams['form'] = $form;
-        if($_SESSION['admin_setup']) {
+        if(isset($_SESSION['admin_setup'])) {
             $this->viewParams['admin_setup'] = 1;
         }
         return $this->viewParams;
@@ -45,6 +58,11 @@ class ServicesController extends \Application\Controller
 
     function editAction()
     {
+        $user = \bootstrap::getInstance()->getUser();
+        if (!$user['id'] || $user['type'] != 'admin') {
+            return $this->_redirect('/');
+        }
+
         $id = $this->params('id');
         $service = $this->serviceDataMapper()->find($id);
 
@@ -63,6 +81,11 @@ class ServicesController extends \Application\Controller
 
     function deleteAction()
     {
+        $user = \bootstrap::getInstance()->getUser();
+        if (!$user['id'] || $user['type'] != 'admin') {
+            return $this->_redirect('/');
+        }
+
         $this->serviceDataMapper()->update($this->params('id'), ['active'=>0]);
         $this->flashMessenger()->addMessage('Service Deleted');
         return $this->redirect()->toRoute('manage-services');
@@ -70,6 +93,11 @@ class ServicesController extends \Application\Controller
 
     function assignAction()
     {
+        $user = \bootstrap::getInstance()->getUser();
+        if (!$user['id'] || $user['type'] != 'admin') {
+            return $this->_redirect('/');
+        }
+
         $staff_id = $this->params('staff');
         $staff = $this->userDataMapper()->find(array(
             'id'=>$staff_id,
@@ -84,11 +112,19 @@ class ServicesController extends \Application\Controller
             $this->userDataMapper()->assignMultiple($form->getValue('services'), $staff_id);
 
             $this->flashMessenger()->addMessage('Staff\'s Services Updated');
+            if(isset($_SESSION['admin_setup'])) {
+                return $this->redirect()->toRoute('staff-availability', ['staff'=>$user['id']]);
+            }
             return $this->redirect()->toRoute('manage-staff');
         }
 
         $this->viewParams['staff'] = $staff;
         $this->viewParams['form'] = $form;
+
+        if(isset($_SESSION['admin_setup'])) {
+            $this->viewParams['admin_setup'] = 1;
+        }
+
         return $this->viewParams;
     }
 

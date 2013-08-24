@@ -1,5 +1,5 @@
 <div class="row-fluid">
-    <div class="span<?=$admin_setup?6:12?>">
+    <div class="span<?=isset($admin_setup)?6:12?>">
         <?php
         $this->form->setView(new \Zend_View);
         $this->form->addElement('submit','save',array(
@@ -10,7 +10,7 @@
         ?>
     </div>
     <?php
-    if($admin_setup) {
+    if(isset($admin_setup)) {
         ?>
         <div class="span6">
             <div class="bubble bubble-left">

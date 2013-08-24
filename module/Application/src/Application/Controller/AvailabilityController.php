@@ -45,12 +45,21 @@ class AvailabilityController extends \Application\Controller
             $this->availabilityDataMapper()->insert($parameters);
 
             $this->flashMessenger()->addMessage('Added Availability');
+
+            if(isset($_SESSION['admin_setup'])) {
+                return $this->redirect()->toRoute('home');
+            }
             return $this->redirect()->toUrl($this->url()->fromRoute('staff-availability',array(),true));
         }
         $this->viewParams['form'] = $form;
 
+        if(isset($_SESSION['admin_setup'])) {
+            $this->viewParams['admin_setup'] = 1;
+        }
+
         $viewModel = new ViewModel($this->viewParams);
         $viewModel->setTemplate('application/availability-manage.phtml');
+
         return $viewModel;
     }
 

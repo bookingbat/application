@@ -1,8 +1,35 @@
-<h1>Services for <small><?=$this->escapeHTML($this->staff['first_name'] . ' ' . $this->staff['last_name'])?></small></h1>
-<?php
-$this->form->setView(new \Zend_View);
-$this->form->addElement('submit','save',array(
-    'label'=>'Update Services',
-    'class'=>'btn'
-));
-echo $this->form;
+<div class="row-fluid">
+    <div class="span<?=isset($admin_setup)?6:12?>">
+        <h1>Services for <small><?=$this->escapeHTML($this->staff['first_name'] . ' ' . $this->staff['last_name'])?></small></h1>
+        <?php
+        $this->form->setView(new \Zend_View);
+        $this->form->addElement('submit','save',array(
+            'label'=>'Update Services',
+            'class'=>'btn'
+        ));
+        echo $this->form;
+        ?>
+    </div>
+    <?php
+    if(isset($admin_setup)) {
+        ?>
+        <div class="span6">
+            <div class="bubble bubble-left">
+                <p><strong>Ok,</strong><br /> After creating a service, you'll need to assign a staff member to handle that service.
+                    <br /><br />
+                    You can assign as many staff members as you want by going to <strong>Manage Staff</strong>:
+                    <br />
+                    <img src="/img/tutorial/manage-staff.png" />
+                    <br />
+                    <br />
+                    and then clicking on <strong>Services</strong> for any staff member:
+                    <img src="/img/tutorial/assign-services.png" />
+                    <br />
+                    <br />
+                    Go ahead & assign the service to yourself.
+            </div>
+        </div>
+    <?php
+    }
+    ?>
+</div>
