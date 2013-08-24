@@ -1,7 +1,24 @@
-<?php
-$this->form->setView(new \Zend_View);
-$this->form->addElement('submit','save',array(
-    'label'=>'Add Service',
-    'class'=>'btn'
-));
-echo $this->form;
+<div class="row-fluid">
+    <div class="span<?=$admin_setup?6:12?>">
+        <?php
+        $this->form->setView(new \Zend_View);
+        $this->form->addElement('submit','save',array(
+            'label'=>'Add Service',
+            'class'=>'btn'
+        ));
+        echo $this->form;
+        ?>
+    </div>
+    <?php
+    if($admin_setup) {
+        ?>
+        <div class="span6">
+            <div class="bubble bubble-left">
+                <p><strong>Welcome,</strong><br /> First set up a service (example: massage). Check off at least one allowed duration.</p>
+                <p><i>Tip:</i> If you cannot do back-to-back appointments, feel free to set an optional "padding" between appointments.</p>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
+</div>
