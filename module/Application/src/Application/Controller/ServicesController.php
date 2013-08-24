@@ -8,12 +8,6 @@ class ServicesController extends \Application\Controller
     {
         $services = $this->serviceDataMapper()->findValid();
 
-        $user = \bootstrap::getInstance()->getUser();
-        if($user['type'] == 'admin' && !count($services)) {
-            $_SESSION['admin_setup'] = 1;
-            return $this->redirect()->toRoute('new-service');
-        }
-
         $layoutViewModel = $this->layout();
 
         $progress = new ViewModel(['step'=>1]);
@@ -38,7 +32,7 @@ class ServicesController extends \Application\Controller
             $this->serviceDataMapper()->insert($form->getValues());
             $this->flashMessenger()->addMessage('Service Created');
             if($_SESSION['admin_setup']) {
-                return $this->redirect()->toRoute('new-staff');
+                return $this->redirect()->toRoute('staff-services');
             }
             return $this->redirect()->toRoute('manage-services');
         }

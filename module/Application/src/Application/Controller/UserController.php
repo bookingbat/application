@@ -126,12 +126,22 @@ class UserController extends \Application\Controller
         return $this->viewParams;
     }
 
+    function admintutorialAction()
+    {
+        $user = \bootstrap::getInstance()->getUser();
+        if($user['type'] == 'admin') {
+            $_SESSION['admin_setup'] = 1;
+            return $this->redirect()->toRoute('new-service');
+        }
+    }
+
     function selectUsers()
     {
         $db = \Zend_Registry::get('db');
         $select = $db->select()
             ->from('user')
-            ->where('type=?','staff');
+            ->where('type=?','staff')
+            ->orWhere('type=?', 'admin');
 
         return $select;
     }

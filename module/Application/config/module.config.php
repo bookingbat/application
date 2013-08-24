@@ -47,6 +47,18 @@ return array(
                 ),
             ),
 
+            // admin tutorial
+            'admin_tutorial' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin_tutorial',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\User',
+                        'action'     => 'admintutorial',
+                    ),
+                ),
+            ),
+
             // choose services route
             'services' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',

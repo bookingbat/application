@@ -9,6 +9,7 @@ Feature: As an admin
     Then I should be on "/new-service"
     And I should see "Service Name"
     When I fill in "name" with "training"
+    And I check "durations-30"
     And press "save"
     Then I should be on "/manage-services"
     And I should see "Service Created"
@@ -16,6 +17,7 @@ Feature: As an admin
 
   Scenario:  I edit a service's name
     Given I have a service "training"
+    And the service "training" has the durations "30"
     And I am on "/manage-services"
     Then I follow "btn-edit" for "training"
     Then the url should match "/edit-service/[0-9]+"
