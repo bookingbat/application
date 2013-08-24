@@ -8,12 +8,28 @@ class UserController extends \Application\Controller
 
     function loginAction()
     {
-        $user = \bootstrap::getInstance()->getUser();
-        if ($user) {
-            $url = $this->url(array(),'calendar',true);
-            return $this->_redirect($url);
+        /**
+         * Single Sign on
+         */
+        if($this->params()->fromQuery('sso') && $this->params()->fromQuery('username')) {
+            $db = \Zend_Registry::get('db');
+            $select = $db->select()
+                ->from('user')
+                ->where('username=?', $this->params()->fromQuery('username'));
+
+            $user = $select->query()->fetch();
+
+            if (sha1($user['username'].$user['password'].'secret123') == $this->params()->fromQuery('sso')) {
+                $this->updateUserDataIntoSession($user['username']);
+                return $this->redirect()->toRoute('admin_tutorial');
+            } else {
+                throw new \Exception('Invalid SSO credentials');
+            }
         }
 
+        /**
+         * Login Form
+         */
         $form = new \Application\LoginForm;
 
         if ($this->getRequest()->isPost() && $form->isValid($this->params()->fromPost())) {
