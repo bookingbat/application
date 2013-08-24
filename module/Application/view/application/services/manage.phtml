@@ -18,7 +18,14 @@
                     'id'=>$service['id']
                 ));
                 ?>
-                <a class="btn btn-edit" href="<?=$url?>"><i class="icon-pencil"></i></td>
+                <a class="btn btn-edit" href="<?=$url?>"><i class="icon-pencil"></i>
+            <?php
+            $url = $this->url('delete-service',array(
+                'action'=>'delete',
+                'id'=>$service['id']
+            ));
+            ?>
+            <a class="btn btn-delete" href="<?=$url?>"><i class="icon-minus-sign"></i>
             </td>
             <td><?=$this->escapeHTML($service['id'])?></td>
             <td><?=$this->escapeHTML($service['name'])?></td>

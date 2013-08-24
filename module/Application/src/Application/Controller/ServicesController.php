@@ -53,6 +53,13 @@ class ServicesController extends \Application\Controller
         return $this->viewParams;
     }
 
+    function deleteAction()
+    {
+        $this->serviceDataMapper()->update($this->params('id'), ['active'=>0]);
+        $this->flashMessenger()->addMessage('Service Deleted');
+        return $this->redirect()->toRoute('manage-services');
+    }
+
     function assignAction()
     {
         $staff_id = $this->params('staff');

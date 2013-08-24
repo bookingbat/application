@@ -38,7 +38,8 @@ class DataMapper
     function findAll()
     {
         $select = $this->db->select()
-            ->from('services');
+            ->from('services')
+            ->where('active=1');
         return $select->query()->fetchAll();
     }
 
@@ -46,7 +47,8 @@ class DataMapper
     {
         $select = $this->db->select()
             ->from('services')
-            ->where('durations != ?','');
+            ->where('durations != ?','')
+            ->where('active=1');
         return $select->query()->fetchAll();
     }
 
@@ -55,7 +57,8 @@ class DataMapper
         $services_for_staff = $this->db->select()
             ->from('staff_services')
             ->where('staff_user_id=?',$id)
-            ->query()->fetchAll();
+            ->query()
+            ->fetchAll();
 
         $services = array();
         foreach($services_for_staff as $service) {

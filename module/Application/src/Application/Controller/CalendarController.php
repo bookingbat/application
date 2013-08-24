@@ -19,10 +19,6 @@ class CalendarController extends \Application\AbstractCalendarController
 
         $user = \bootstrap::getInstance()->getUser();
 
-        if(!$this->params('service')) {
-            return $viewModel->setTemplate('no-service-selected');
-        }
-
         $staffSelector = $this->staffSelector(true,$this->params('service'));
 
         if(!is_null($staffSelector->getValue('staff'))) {

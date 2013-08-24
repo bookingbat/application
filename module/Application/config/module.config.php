@@ -191,6 +191,18 @@ return array(
                 ),
             ),
 
+            // delete service
+            'delete-service' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/delete-service/:id',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Services',
+                        'action'     => 'delete',
+                    ),
+                ),
+            ),
+
             'appointments' => array(
                 'type' => 'segment',
                 'options' => array(
