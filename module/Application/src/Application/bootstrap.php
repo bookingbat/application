@@ -167,7 +167,7 @@ class bootstrap
             // If being run from tests, use the database for testing
             define('APPLICATION_ENVIRONMENT','tests');
             $file = 'database-config.ini';
-        } elseif(preg_match('#^([0-9]+)\.bookingbat#',$_SERVER['HTTP_HOST'],$matches)) {
+        } elseif(preg_match('#^([0-9]+)\.bookingbat#',$_SERVER['HTTP_X_FORWARDED_HOST'],$matches)) {
             // If being run from sub-domain, load the hosted client's config
             $id = $matches[1];
             $file = '../website/var/website_configs/'.$id;
